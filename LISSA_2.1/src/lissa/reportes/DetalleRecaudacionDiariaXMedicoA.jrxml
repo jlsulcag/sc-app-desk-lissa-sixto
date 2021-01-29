@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DetalleRecudacionDiariaXMedicoA" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="02b09c7d-bb7d-4795-82ff-ce9d1e58f33d">
+	<property name="ireport.zoom" value="1.1000000000000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_MEDICO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select com.fecha_boleta, ic.concepto, count(ic.concepto), ic.monto_pagado
+from items_comprobante ic inner join comprobante com
+on ic.id_boleta = com.id_comprobante inner join medico ma
+on ic.id_medico_atiende = ma.id_medico
+where ma.id_medico = $P{ID_MEDICO}
+group by com.fecha_boleta, ic.concepto, ic.monto_pagado, com.numero_boleta]]>
+	</queryString>
+	<field name="fecha_boleta" class="java.sql.Date"/>
+	<field name="concepto" class="java.lang.String"/>
+	<field name="count" class="java.lang.Long"/>
+	<field name="monto_pagado" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[almacena el monto que pagara el usuario, luego de descontar lo que cubre el seguro]]></fieldDescription>
+	</field>
+	<variable name="SUM_MEDICO" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{count}*$F{monto_pagado}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="4"/>
+	</title>
+	<pageHeader>
+		<band height="5"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25">
+			<line>
+				<reportElement uuid="3ca2b3d0-0961-4d94-9f84-3a9c7cb4d841" x="0" y="20" width="532" height="1" forecolor="#666666"/>
+			</line>
+			<staticText>
+				<reportElement uuid="62880eb3-8b63-4b4c-8051-66da3b096ccb" mode="Opaque" x="332" y="0" width="77" height="20" forecolor="#006699" backcolor="#94D5FF"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1a7adf7-4194-4a7d-ad8c-f31c04e4cea3" mode="Opaque" x="409" y="0" width="57" height="20" forecolor="#006699" backcolor="#94D5FF"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Atenciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="12f8233f-7e78-417f-9ac4-7b9cf0078f8a" mode="Opaque" x="67" y="0" width="265" height="20" forecolor="#006699" backcolor="#94D5FF"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b0b6734f-f6c8-4936-a484-fec1a92b86c4" mode="Opaque" x="0" y="0" width="67" height="20" forecolor="#006699" backcolor="#94D5FF"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b4ee501e-bcb5-4638-bf33-982b97a0ad13" mode="Opaque" x="466" y="0" width="66" height="20" forecolor="#006699" backcolor="#94D5FF"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="200659c2-48c0-4fec-99f2-1b06b9c6356a" x="332" y="0" width="77" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_pagado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="58d18c97-5705-41fc-82c7-9378cefcb7eb" x="409" y="0" width="57" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="9d947d68-c700-44a6-a77c-6e98752fb16a" x="0" y="0" width="67" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_boleta}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5f062012-3fd2-4a11-bdd4-afd4934e5f6b" x="466" y="0" width="66" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{count}*$F{monto_pagado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="df10e934-6c9b-4835-853a-3f06ac78f2fa" x="67" y="0" width="265" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22">
+			<staticText>
+				<reportElement uuid="c0b01cab-9d07-40e9-ab70-96cb8c7c4a41" x="409" y="0" width="57" height="20" forecolor="#0033FF"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total S/.]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9eeaa52e-e21b-4d25-9334-8568acead64b" x="466" y="0" width="66" height="20" forecolor="#0033CC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_MEDICO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="3"/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/09/2018 05:49:13 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Persona" table="persona" schema="public" optimistic-lock="version">
+        <id name="idpersona" type="long">
+            <column name="idpersona" />
+            <generator class="sequence">
+                <param name="sequence">persona_idpersona_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="estadoCivil" class="lissa.be.EstadoCivil" fetch="select">
+            <column name="id_estadocivil" />
+        </many-to-one>
+        <many-to-one name="tipoDocidentidad" class="lissa.be.TipoDocidentidad" fetch="select">
+            <column name="id_tipodocidentidad" />
+        </many-to-one>
+        <many-to-one name="tipoPersona" class="lissa.be.TipoPersona" fetch="select">
+            <column name="id_tipopersona" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" />
+        </property>
+        <property name="apellidoPaterno" type="string">
+            <column name="apellido_paterno" length="100" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="13" />
+        </property>
+        <property name="numeroDocumento" type="string">
+            <column name="numero_documento" length="20" unique="true" />
+        </property>
+        <property name="apellidoMaterno" type="string">
+            <column name="apellido_materno" length="30" />
+        </property>
+        <property name="fechaReg" type="timestamp">
+            <column name="fecha_reg" length="29" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="50" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="30" />
+        </property>
+        <property name="gradoInstruccion" type="string">
+            <column name="grado_instruccion" length="80" />
+        </property>
+        <property name="lugarNacimiento" type="string">
+            <column name="lugar_nacimiento" length="80" />
+        </property>
+        <property name="lugarProcedencia" type="string">
+            <column name="lugar_procedencia" length="80" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="30" />
+        </property>
+        <property name="ocupacion" type="string">
+            <column name="ocupacion" length="80" />
+        </property>
+        <property name="idUbigeo" type="java.lang.Integer">
+            <column name="id_ubigeo" />
+        </property>
+        <property name="correoElectronico" type="string">
+            <column name="correo_electronico" length="60" />
+        </property>
+        <property name="foto" type="binary">
+            <column name="foto" />
+        </property>
+        <property name="autorizaUsoDatos" type="string">
+            <column name="autoriza_uso_datos" length="30" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+        <property name="razonSocial" type="string">
+            <column name="razon_social" length="80" not-null="true"/>
+        </property>
+        <property name="ruc" type="string">
+            <column name="ruc" length="15" not-null="true"/>
+        </property>
+        <property name="esproveedor" type="int">
+            <column name="esproveedor" />
+        </property>
+        <set name="historiaClinicas" table="historia_clinica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.HistoriaClinica" />
+        </set>
+        <set name="personaEmpresas" table="persona_empresa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.PersonaEmpresa" />
+        </set>
+        <set name="atencions" table="atencion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Atencion" />
+        </set>
+        <set name="fondoSolidaridads" table="fondo_solidaridad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" />
+            </key>
+            <one-to-many class="lissa.be.FondoSolidaridad" />
+        </set>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" />
+            </key>
+            <one-to-many class="lissa.be.Usuario" />
+        </set>
+        <set name="citas" table="cita" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_paciente" />
+            </key>
+            <one-to-many class="lissa.be.Cita" />
+        </set>
+        <set name="medicos" table="medico" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Medico" />
+        </set>
+        <set name="seguroVidaUsaPersonas" table="seguro_vida_usa_persona" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" />
+            </key>
+            <one-to-many class="lissa.be.SeguroVidaUsaPersona" />
+        </set>
+    </class>
+</hibernate-mapping>

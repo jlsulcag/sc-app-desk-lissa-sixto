@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/06/2017 06:34:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Cuentaxcobrar" optimistic-lock="version" schema="farmacia" table="cuentaxcobrar">
+        <id name="idcuentaxcobrar" type="long">
+            <column name="idcuentaxcobrar"/>
+            <generator class="sequence">
+                <param name="sequence">cuentaxcobrar_idcuentaxcobrar_seq01</param>
+            </generator>
+        </id>
+        <many-to-one class="lissa.be.Venta" fetch="select" name="venta">
+            <column name="id_venta" not-null="true"/>
+        </many-to-one> 
+        <many-to-one class="lissa.be.Beneficio" fetch="select" name="beneficio">
+            <column name="id_beneficio"/>
+        </many-to-one> 
+        <many-to-one class="lissa.be.FondoSolidaridad" fetch="select" name="fondoSolidaridad">
+            <column name="id_fondops"/>
+        </many-to-one> 
+        <many-to-one class="lissa.be.Usuario" fetch="select" name="usuario">
+            <column name="id_usuario"/>
+        </many-to-one> 
+        <property name="estado" type="string">
+            <column length="30" name="estado" not-null="true"/>
+        </property>
+        <property name="fechaPago" type="date">
+            <column length="13" name="fecha_pago"/>
+        </property>
+        <property name="montoPagado" type="big_decimal">
+            <column name="monto_pagado" not-null="true" precision="18"/>
+        </property>    
+        <property name="total" type="big_decimal">
+            <column name="total" not-null="true" precision="18"/>
+        </property>
+        <property name="porcDesc" type="double">
+            <column name="porc_desc" not-null="true"/>
+        </property>
+        <property name="montoDesc" type="big_decimal">
+            <column name="monto_desc" not-null="true" precision="18"/>
+        </property>
+        <property name="porcCopago" type="double">
+            <column name="porc_copago" not-null="true"/>
+        </property>
+        <property name="montoCopago" type="big_decimal">
+            <column name="monto_copago" not-null="true" precision="18"/>
+        </property>
+        <property name="cuentaXCobrar" type="big_decimal">
+            <column name="cuenta_x_cobrar" not-null="true" precision="18"/>
+        </property>
+        <property name="montoPagofps" type="big_decimal">
+            <column name="monto_pagofps" not-null="true" precision="18"/>
+        </property>
+    </class>
+</hibernate-mapping>

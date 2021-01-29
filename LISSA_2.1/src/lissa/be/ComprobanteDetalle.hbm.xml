@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/09/2018 03:23:00 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="lissa.be.ComprobanteDetalle" optimistic-lock="version" schema="public" table="comprobante_detalle">
+    <id name="idcomprobantedetalle" type="long">
+      <column name="idcomprobantedetalle"/>
+      <generator class="sequence">
+        <param name="sequence">items_boleta_id_item_boleta_seq</param>
+      </generator>
+    </id>
+    <many-to-one class="lissa.be.Comprobante" fetch="select" name="comprobante">
+      <column name="id_comprobante" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="lissa.be.Medico" fetch="select" name="medicoByIdMedicoDeriva">
+      <column name="id_medico_deriva"/>
+    </many-to-one>
+    <many-to-one class="lissa.be.Medico" fetch="select" name="medicoByIdMedicoAtiende">
+      <column name="id_medico_atiende"/>
+    </many-to-one>
+    <many-to-one class="lissa.be.Medico" fetch="select" name="medicoatiendereal">
+      <column name="id_medicoatiendereal"/>
+    </many-to-one>
+    <many-to-one class="lissa.be.ProcedimientoTarifario" fetch="select" name="procedimientoTarifario">
+      <column name="id_procedimientotarifario"/>
+    </many-to-one>
+    <property name="montoProcedimiento" type="big_decimal">
+      <column name="monto_procedimiento" precision="10"/>
+    </property>
+    <property name="concepto" type="string">
+      <column length="250" name="concepto"/>
+    </property>
+    <property name="fechaReg" type="date">
+      <column length="13" name="fecha_reg" not-null="true"/>
+    </property>
+    <property name="fechaAtencion" type="date">
+      <column length="13" name="fecha_atencion" not-null="true"/>
+    </property>
+    <property name="montoAtencion" type="big_decimal">
+      <column name="monto_atencion" precision="10"/>
+    </property>
+    <property name="montoDerivacion" type="big_decimal">
+      <column name="monto_derivacion" precision="10"/>
+    </property>
+    <property name="montoPagado" type="big_decimal">
+      <column name="monto_pagado" precision="10">
+        <comment>almacena el monto que pagara el usuario, luego de descontar lo que cubre el seguro</comment>
+      </column>
+    </property>
+    <property name="importeAdicional" type="big_decimal">
+      <column name="importe_adicional" precision="10"/>
+    </property>
+    <property name="porcCubierto" type="int">
+      <column name="porc_cubierto" not-null="true"/>
+    </property>
+    <property name="montoCubierto" type="big_decimal">
+      <column name="monto_cubierto" not-null="true" precision="10"/>
+    </property>
+    <property name="montoCubiertoSoles" type="big_decimal">
+      <column name="monto_cubierto_soles" precision="10"/>
+    </property>
+    <property name="observacion" type="string">
+      <column length="300" name="observacion"/>
+    </property>
+    <property name="observacionTriaje" type="string">
+      <column length="300" name="observacion_triaje"/>
+    </property>
+    <property name="estado" type="string">
+      <column length="10" name="estado"/>
+    </property>
+    <property name="unidadMedida" type="string">
+      <column length="15" name="unidad_medida" not-null="true"/>
+    </property>
+    <property name="cantidad" type="big_decimal">
+      <column name="cantidad" not-null="true" precision="10"/>
+    </property>
+    <property name="idTipoigv" type="long">
+      <column name="id_tipoigv" not-null="true"/>
+    </property>
+    <property name="valorUnitarioItem" type="big_decimal">
+      <column name="valor_unitario_item" precision="10"/>
+    </property>
+    <property name="precioUnitarioItem" type="big_decimal">
+      <column name="precio_unitario_item" precision="10"/>
+    </property>
+    <property name="subTotal" type="big_decimal">
+      <column name="sub_total" precision="12"/>
+    </property>
+    <property name="montoIgvItem" type="big_decimal">
+      <column name="monto_igv_item" precision="10"/>
+    </property>
+    <property name="montoTotal" type="big_decimal">
+      <column name="monto_total" precision="10"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="medicoDerivaAtiendes" table="medico_deriva_atiende">
+      <key>
+        <column name="id_itemcomprobante" not-null="true"/>
+      </key>
+      <one-to-many class="lissa.be.MedicoDerivaAtiende"/>
+    </set>
+  </class>
+</hibernate-mapping>

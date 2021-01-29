@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-sep-2016 17:52:03 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Proveedor" table="proveedor" schema="farmacia" optimistic-lock="version">
+        <id name="idproveedor" type="long">
+            <column name="idproveedor" />
+            <generator class="increment" />
+        </id>
+        <property name="estado" type="string">
+            <column length="10" name="estado" />
+        </property>
+        <many-to-one name="personaJuridica" class="lissa.be.PersonaJuridica" fetch="select">
+            <column name="id_persona_juridica" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

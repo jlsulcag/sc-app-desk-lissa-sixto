@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Cita" optimistic-lock="version" schema="public" table="cita">
+        <id name="idcita" type="long">
+            <column name="idcita"/>
+            <generator class="sequence">
+                <param name="sequence">cita_idcita_seq </param>
+            </generator>
+        </id>
+        <many-to-one name="persona" class="lissa.be.Persona" fetch="select">
+            <column name="id_paciente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="beneficio" class="lissa.be.Beneficio" fetch="select">
+            <column name="id_beneficio"/>
+        </many-to-one>
+        <property name="idUsuario" type="long">
+            <column name="id_usuario" not-null="true" />
+        </property>
+        <property name="fechaReg" type="date">
+            <column name="fecha_reg" length="13" not-null="true" />
+        </property>
+        <property name="horaInicio" type="string">
+            <column name="hora_inicio" length="15" />
+        </property>
+        <property name="horaFin" type="string">
+            <column name="hora_fin" length="15" />
+        </property>
+        <property name="fechaCita" type="date">
+            <column name="fecha_cita" length="13" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="15" />
+        </property>
+        <property name="numeroCarta" type="string">
+            <column name="numero_carta" length="15" />
+        </property>
+        <property name="cobertura" type="big_decimal">
+            <column name="cobertura" precision="10" />
+        </property>
+        <property name="fechaVencimiento" type="date">
+            <column name="fecha_vencimiento" length="13" />
+        </property>
+        <property name="numero" type="int">
+            <column name="numero" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

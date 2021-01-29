@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AntOcupacionales" language="groovy" pageWidth="552" pageHeight="842" columnWidth="552" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6e32818c-18a8-48ad-9b11-0c162d3d0e53">
+	<property name="ireport.zoom" value="1.331000000000012"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_HC" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select ant.empresa, ant.area_trabajo, ant.ocupacion, ant.fecha_ingreso, ant.fecha_salida, ant.tiempo, ant.epp
+from so_fmo_antecedentes_ocupacionales ant inner join historia_clinica hc
+on ant.id_historiaclinica = hc.idhistoriaclinica
+where hc.idhistoriaclinica = $P{ID_HC}]]>
+	</queryString>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="area_trabajo" class="java.lang.String"/>
+	<field name="ocupacion" class="java.lang.String"/>
+	<field name="fecha_ingreso" class="java.sql.Date"/>
+	<field name="fecha_salida" class="java.sql.Date"/>
+	<field name="tiempo" class="java.lang.String"/>
+	<field name="epp" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="15">
+			<rectangle>
+				<reportElement uuid="77dcd4d4-dd98-4035-93a3-1f639b4efcaa" x="0" y="0" width="552" height="15"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="2f608299-6923-4c60-895e-8ad73de719b4" mode="Opaque" x="0" y="0" width="146" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre de la empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="61a18697-e8ea-4131-a15c-65f79047bbc6" mode="Opaque" x="237" y="0" width="109" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ocupación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="39e279a5-35ae-4373-8645-c60bbbbbbe46" mode="Opaque" x="146" y="0" width="91" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area de trabajo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1e11c259-8cdf-42ee-bf23-02f5241fca46" mode="Opaque" x="516" y="0" width="36" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Epp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="da6fe7e4-cb84-4eec-9d4e-03b31919091b" mode="Opaque" x="346" y="0" width="65" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Ingreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2c803f4f-aa29-479a-8878-e211b4ad5b9f" mode="Opaque" x="411" y="0" width="65" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="573b0365-012e-4ccc-b7fb-6657000231c2" mode="Opaque" x="476" y="0" width="40" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiempo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15">
+			<rectangle>
+				<reportElement uuid="e83ad33b-9849-4a79-975e-32696c94df02" x="0" y="0" width="166" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="177eddc2-fe82-44cf-9c61-748ff78e4285" x="146" y="0" width="91" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6044b6c3-743f-4d94-9632-8cc537cb6048" x="237" y="0" width="109" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d563e700-5cf2-4c54-930d-755c27c29fc1" x="346" y="0" width="65" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="ed0cfa90-866b-4ac5-9446-175ba44b3ec0" x="411" y="0" width="65" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7130a45f-a29c-4314-bccf-acf615bc755d" x="476" y="0" width="40" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="4e313da2-f836-4691-b90b-6903d1cbfea6" x="516" y="0" width="36" height="15"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="63c5899a-663b-49ea-99f2-cd3fc6f5fee2" x="0" y="0" width="146" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="bdb09965-9b0b-4bfa-bb16-8e0962fee90c" x="146" y="0" width="91" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{area_trabajo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="11d76da9-cda0-46fa-86b6-f9c8efd0935c" x="237" y="0" width="109" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ocupacion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="7bbc5836-3e3d-4212-9684-152850aed2b3" x="346" y="0" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_ingreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="9fa87ef0-b4d3-442f-9b67-7c8f740e34d9" x="411" y="0" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_salida}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="247040b2-a4d4-426f-aa2e-f3f34a04f1c9" x="476" y="0" width="40" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tiempo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f0713612-1e21-4e9d-8e52-ea33d729f988" x="516" y="0" width="36" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{epp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

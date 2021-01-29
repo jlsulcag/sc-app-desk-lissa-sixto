@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.HistoriaClinica" optimistic-lock="version" schema="public" table="historia_clinica">
+        <id name="idhistoriaclinica" type="long">
+            <column name="idhistoriaclinica"/>
+            <generator class="sequence">
+                <param name="sequence">historia_clinica_idhistoriaclinica_seq</param>
+            </generator>
+        </id>
+        <many-to-one class="lissa.be.Persona" fetch="select" name="persona">
+            <column name="id_persona" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.TipoHistoriaClinica" fetch="select" name="tipoHistoriaClinica">
+            <column name="id_tipohc"/>
+        </many-to-one>
+        <property name="numerohc" type="java.lang.Integer">
+            <column name="numerohc"/>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column length="13" name="fecha_registro"/>
+        </property>
+        <property name="estado" type="int">
+            <column name="estado"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="atencionhcs" table="atencionhc">
+            <key>
+                <column name="id_hc" not-null="true"/>
+            </key>
+            <one-to-many class="lissa.be.Atencionhc"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="atencions" table="atencion">
+            <key>
+                <column name="id_historiaclinica"/>
+            </key>
+            <one-to-many class="lissa.be.Atencion"/>
+        </set>
+    </class>
+</hibernate-mapping>

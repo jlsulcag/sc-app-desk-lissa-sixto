@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/06/2017 04:06:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.PaqueteFondoDetalle" table="paquete_fondo_detalle" schema="public" optimistic-lock="version">
+        <id name="idpaquetefondo" type="int">
+            <column name="idpaquetefondo" />
+            <generator class="sequence">
+                <param name="sequence">paquete_fondo_detalle_idpaquetefondo_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="paqueteFondoSolidaridad" class="lissa.be.PaqueteFondoSolidaridad" fetch="select">
+            <column name="id_paquetefondosolidaridad" not-null="true" />
+        </many-to-one>
+        <property name="beneficio" type="string">
+            <column name="beneficio" length="30" not-null="true" />
+        </property>
+        <property name="importeCubierto" type="big_decimal">
+            <column name="importe_cubierto" precision="18" not-null="true" />
+        </property>
+        <property name="cantAtenciones" type="int">
+            <column name="cant_atenciones" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

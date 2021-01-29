@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07/06/2018 05:59:47 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.FondoPrevisionTemp" table="fondo_prevision_temp" schema="public" optimistic-lock="version">
+        <id name="idFondoprevtemp" type="int">
+            <column name="id_fondoprevtemp" />
+            <generator class="increment" />
+        </id>
+        <property name="nombres" type="string">
+            <column name="nombres" length="50" />
+        </property>
+        <property name="apePaterno" type="string">
+            <column name="ape_paterno" length="30" />
+        </property>
+        <property name="apeMaterno" type="string">
+            <column name="ape_materno" length="30" />
+        </property>
+        <property name="numDoc" type="string">
+            <column name="num_doc" length="12" />
+        </property>
+        <property name="codSocio" type="string">
+            <column name="cod_socio" length="30" />
+        </property>
+        <property name="fechaUltimoPago" type="date">
+            <column name="fecha_ultimo_pago" length="13" />
+        </property>
+        <property name="importePago" type="big_decimal">
+            <column name="importe_pago" precision="16" />
+        </property>
+    </class>
+</hibernate-mapping>

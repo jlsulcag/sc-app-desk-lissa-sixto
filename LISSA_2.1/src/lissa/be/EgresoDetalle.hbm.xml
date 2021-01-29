@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/10/2018 06:05:36 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.EgresoDetalle" table="egreso_detalle" schema="public" optimistic-lock="version">
+        <id name="idegresodetalle" type="long">
+            <column name="idegresodetalle" />
+            <generator class="sequence">
+                <param name="sequence">egreso_detalle_idegresodetalle_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="egreso" class="lissa.be.Egreso" fetch="select">
+            <column name="id_egreso" not-null="true" />
+        </many-to-one>
+        <many-to-one name="medicoDerivaAtiende" class="lissa.be.MedicoDerivaAtiende" fetch="select">
+            <column name="id_medicoderivaatiende" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="80" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="monto" type="big_decimal">
+            <column name="monto" precision="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

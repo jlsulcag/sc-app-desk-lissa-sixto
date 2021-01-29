@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/03/2017 09:10:11 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.MedicoDerivaAtiende" optimistic-lock="version" schema="public" table="medico_deriva_atiende">
+        <id name="idmedicoderivaatiende" type="int">
+            <column name="idmedicoderivaatiende"/>
+            <generator class="sequence">
+                <param name="sequence">medico_deriva_atiende_idmedicoderivaatiende_seq01</param>
+            </generator>
+        </id>
+        <many-to-one class="lissa.be.ComprobanteDetalle" fetch="select" name="comprobanteDetalle">
+            <column name="id_comprobantedetalle"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.Medico" fetch="select" name="medico">
+            <column name="id_medico" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.Usuario" fetch="select" name="usuarioreg">
+            <column name="id_usuarioreg"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.Usuario" fetch="select" name="usuariopago">
+            <column name="id_usuariopago"/>
+        </many-to-one>
+        <property name="monto" type="big_decimal">
+            <column name="monto" not-null="true" precision="10"/>
+        </property>
+        <property name="estadoPago" type="string">
+            <column length="10" name="estado_pago" not-null="true">
+                <comment>PAGADO, DEBE</comment>
+            </column>
+        </property>
+        <property name="motivo" type="string">
+            <column length="20" name="motivo" not-null="true">
+            </column>
+        </property>
+        <property name="idCajaafecto" type="java.lang.Integer">
+            <column name="id_cajaafecto"/>
+        </property>
+        <property name="fechaReg" type="date">
+            <column name="fecha_reg" length="13" not-null="true" />
+        </property>
+        <property name="fechaPago" type="date">
+            <column name="fecha_pago" length="13" />
+        </property>
+        <set name="egresoDetalles" table="egreso_detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_medicoderivaatiende" />
+            </key>
+            <one-to-many class="lissa.be.EgresoDetalle" />
+        </set>
+    </class>
+</hibernate-mapping>

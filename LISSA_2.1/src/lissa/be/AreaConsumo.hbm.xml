@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-dic-2016 10:56:27 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.AreaConsumo" table="area_consumo" schema="farmacia" optimistic-lock="version">
+        <id name="idareaconsumo" type="long">
+            <column name="idareaconsumo" />
+            <generator class="increment" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" not-null="true" />
+        </property>
+        
+        <set name="ventas" table="venta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_farcomprobante" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Venta" />
+        </set>
+        
+    </class>
+</hibernate-mapping>

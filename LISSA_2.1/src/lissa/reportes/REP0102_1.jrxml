@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REP0102_1" language="groovy" pageWidth="510" pageHeight="842" columnWidth="510" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="776583af-9ff4-4250-be94-876b4886ed6a">
+	<property name="ireport.zoom" value="1.4641000000000062"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_SERVICIO" class="java.lang.Long"/>
+	<parameter name="FECHA_DESDE" class="java.util.Date"/>
+	<parameter name="FECHA_HASTA" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select
+row_number() OVER () as NumeroIncre,
+(h.nombre ||' '|| h.apellido_paterno ||' '|| h.apellido_materno) as paciente,
+f.denominacion as serv,
+e.denominacion as proc,
+c.fecha_comprobante
+from comprobante_detalle b inner join comprobante c
+on b.id_comprobante = c.idcomprobante inner join procedimiento_tarifario d
+on b.id_procedimientotarifario = d.idprocedimientotarifario inner join procedimiento e
+on d.id_procedimiento = e.idprocedimiento inner join servicio f
+on e.id_servicio = f.idservicio inner join atencion g
+on c.id_atencion = g.idatencion inner join persona h
+on g.id_persona = h.idpersona
+where  f.idservicio =  $P{ID_SERVICIO}
+and c.fecha_comprobante between $P{FECHA_DESDE} and $P{FECHA_HASTA}
+and c.estado = 'ACT'
+order by c.fecha_comprobante desc]]>
+	</queryString>
+	<field name="numeroincre" class="java.lang.Long"/>
+	<field name="paciente" class="java.lang.String"/>
+	<field name="serv" class="java.lang.String"/>
+	<field name="proc" class="java.lang.String"/>
+	<field name="fecha_comprobante" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="254400bc-371e-41f9-8b71-ad3d8409460a" x="0" y="0" width="510" height="20" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="ee9b272f-d369-4492-a659-01311dfabcfd" x="100" y="0" width="204" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Procedimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="90731f0c-01ae-459c-beb5-09c0e00f1089" x="31" y="0" width="69" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7daee74a-8e0c-43df-bfff-e45aafde947a" x="304" y="0" width="207" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18905ff5-20ab-4d49-befc-3fed7a2d4152" x="0" y="0" width="31" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[N°]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="75686be2-46ce-4588-a79c-5fd99fe292ce" x="31" y="0" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement uuid="9f6252d1-0ecb-440c-a03a-df15678d1a7e" x="99" y="0" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement uuid="a1de3866-b04c-4efb-8967-3cea49a9d0d1" x="303" y="0" width="1" height="20"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0d30354a-23b8-4177-a5b2-90aa8b9c0b75" x="100" y="-1" width="204" height="15"/>
+				<textElement>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2195ab80-78cd-45e7-bef2-ee1b3d9dc0e8" x="304" y="-1" width="207" height="15"/>
+				<textElement>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paciente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="646d7b38-4435-42e5-bca5-796d01c66d6f" x="31" y="-1" width="69" height="15"/>
+				<textElement>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_comprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b0dc8d3f-ca0f-46ad-ade3-a8a32ae867dc" x="0" y="-1" width="31" height="15"/>
+				<textElement>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroincre}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="eb6c5c2b-f4b9-4db1-8a4f-66baf6da0e8c" x="0" y="13" width="510" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="5ae3d562-3046-4b80-b103-972ba689a1d6" x="0" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="ff66b92f-cfc3-4ed6-9276-34abb9718405" x="31" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="16b34df5-96ca-43a6-a8c0-8c6530c8fee2" x="99" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="5fb60381-a4f6-4013-8091-3182de264928" x="303" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="8ebff4b6-d220-40e8-a96a-0f0e3e2488ca" x="509" y="0" width="1" height="13"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

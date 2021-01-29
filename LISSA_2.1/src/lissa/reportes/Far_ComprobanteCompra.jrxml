@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Far_ComprobanteCompra" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="260351bd-d6da-421d-a0a6-b107246f63f6">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_COMPRA" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select
+a.idcompra,
+b.razon_social,
+b.ruc,
+b.direccion,
+d.comprobante,
+a.serie,
+a.numero_comprobante,
+a.fecha_compra,
+a.valor_neto,
+a.valor_descuento,
+a.valor_bruto,
+a.valor_igv,
+a.valor_total
+from compra a left join persona b
+on a.id_personaproveedor = b.idpersona inner join far_comprobante d
+on a.id_farcomprobante = d.idfarcomprobante
+where a.idcompra = $P{ID_COMPRA}]]>
+	</queryString>
+	<field name="idcompra" class="java.lang.Long"/>
+	<field name="razon_social" class="java.lang.String"/>
+	<field name="ruc" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="comprobante" class="java.lang.String"/>
+	<field name="serie" class="java.lang.String"/>
+	<field name="numero_comprobante" class="java.lang.String"/>
+	<field name="fecha_compra" class="java.sql.Date"/>
+	<field name="valor_neto" class="java.math.BigDecimal"/>
+	<field name="valor_descuento" class="java.math.BigDecimal"/>
+	<field name="valor_bruto" class="java.math.BigDecimal"/>
+	<field name="valor_igv" class="java.math.BigDecimal"/>
+	<field name="valor_total" class="java.math.BigDecimal"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="51">
+			<staticText>
+				<reportElement uuid="87fda8f2-e49c-41c8-bb95-aae7c5f5eee1" x="0" y="25" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[	REGISTRO DE COMPROBANTE DE COMPRA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="103">
+			<rectangle radius="10">
+				<reportElement uuid="a6d377a1-5818-42df-9657-84fbfd1e7970" x="5" y="4" width="342" height="93"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement uuid="7f5a5647-c921-46b7-a738-66d9ed2e30e5" x="357" y="4" width="194" height="93"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="fe7bbf0d-13a2-4168-8ca4-8df712fd922e" x="11" y="13" width="108" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAZON SOCIAL :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="0803b422-7e72-4ce1-95e8-2669c743a606" x="367" y="69" width="68" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="95700932-6ba1-4e1b-808e-e467028bbe4a" x="438" y="69" width="29" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a3c96ae0-0ebb-4b79-ac57-64f96a741fff" x="11" y="42" width="108" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCIÓN :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6672cf36-60e4-42f9-836e-783b315bf5fd" x="367" y="13" width="66" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R.U.C. N° ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a856814-e956-4c6c-a2a3-bae9b06716c0" x="12" y="69" width="107" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b2949627-b761-4be4-b95c-54e739ecc0b1" x="367" y="39" width="179" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[F A C T U R A]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="dd207d99-f098-47b0-9c74-3b3372796036" x="470" y="69" width="76" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_comprobante}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="71184790-f26b-4129-b758-a592feabb8df" x="119" y="42" width="218" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2e3360ac-fc9a-48f8-a065-b6cea580105c" x="119" y="13" width="218" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7c5f66d2-ef50-422a-a2e1-e0cf22833079" x="435" y="13" width="111" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="da6fee46-13ab-4c6e-9a1d-d7c327f76968" x="119" y="69" width="218" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_compra}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="120">
+			<subreport>
+				<reportElement uuid="0a1f285c-3ec8-4750-a71f-f4f340c90a85" x="5" y="15" width="546" height="100"/>
+				<subreportParameter name="ID_COMPRA">
+					<subreportParameterExpression><![CDATA[$F{idcompra}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["V:\\REP\\Far_comprobantecompradetalle.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="52f9408e-774f-4c26-aa04-7138652a7012" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="1a6dbf79-da84-4315-8f01-444ec84b6147" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="bedb21a5-ff74-43a8-840f-6ba5918a5d18" x="0" y="4" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

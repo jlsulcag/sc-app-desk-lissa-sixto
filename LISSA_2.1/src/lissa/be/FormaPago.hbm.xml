@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.FormaPago" table="forma_pago" schema="public" optimistic-lock="version">
+        <id name="idformapago" type="int">
+            <column name="idformapago" />
+            <generator class="sequence">
+                <param name="sequence">forma_pago_idformapago_seq</param>
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="60" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="160" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="pagos" table="pago" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_forma_pago" />
+            </key>
+            <one-to-many class="lissa.be.Pago" />
+        </set>
+    </class>
+</hibernate-mapping>

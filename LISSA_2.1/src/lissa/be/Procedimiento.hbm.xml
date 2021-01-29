@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/09/2018 03:23:00 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Procedimiento" table="procedimiento" schema="public" optimistic-lock="version">
+        <id name="idprocedimiento" type="long">
+            <column name="idprocedimiento" />
+            <generator class="sequence">
+                <param name="sequence">procedimiento_idprocedimiento_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="servicio" class="lissa.be.Servicio" fetch="select">
+            <column name="id_servicio" not-null="true" />
+        </many-to-one>
+        <property name="denominacion" type="string">
+            <column name="denominacion" length="120" not-null="true" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="codigo" type="string">
+            <column name="codigo" length="20" />
+        </property>
+        <set name="procedimientoTarifarios" table="procedimiento_tarifario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_procedimiento" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.ProcedimientoTarifario" />
+        </set>
+        <set name="comprobanteDetalles" table="comprobante_detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_procedimiento" />
+            </key>
+            <one-to-many class="lissa.be.ComprobanteDetalle" />
+        </set>
+    </class>
+</hibernate-mapping>

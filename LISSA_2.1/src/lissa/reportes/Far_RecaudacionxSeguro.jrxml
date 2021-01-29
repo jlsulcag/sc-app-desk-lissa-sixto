@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Far_RecaudacionxSeguro" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32d83c73-bc89-48a1-97c9-383caef50c26">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     detalle_venta."cantidad_venta" AS detalle_venta_cantidad_venta,
+     detalle_venta."lote_vendido" AS detalle_venta_lote_vendido,
+     venta."idventa" AS venta_idventa,
+     venta."id_cliente" AS venta_id_cliente,
+     venta."id_usuario" AS venta_id_usuario,
+     venta."fecha_venta" AS venta_fecha_venta,
+     venta."num_comprobante" AS venta_num_comprobante,
+     venta."sub_total" AS venta_sub_total,
+     venta."monto_igv" AS venta_monto_igv,
+     venta."total" AS venta_total,
+     producto."nombre" AS producto_nombre,
+     cuentaxcobrar."fecha_pago" AS cuentaxcobrar_fecha_pago,
+     cuentaxcobrar."monto_pagado" AS cuentaxcobrar_monto_pagado,
+     cuentaxcobrar."porc_copago" AS cuentaxcobrar_porc_copago,
+     cuentaxcobrar."monto_copago" AS cuentaxcobrar_monto_copago,
+     cuentaxcobrar."cuenta_x_cobrar" AS cuentaxcobrar_cuenta_x_cobrar,
+     cuentaxcobrar."monto_pagofps" AS cuentaxcobrar_monto_pagofps,
+     persona."nombre" AS persona_nombre,
+     persona."apellido_paterno" AS persona_apellido_paterno,
+     persona."apellido_materno" AS persona_apellido_materno,
+     seguro_vida."descripcion" AS seguro_vida_descripcion,
+     beneficio."nombre_beneficio" AS beneficio_nombre_beneficio,
+     venta."hora_venta" AS venta_hora_venta,
+     cuentaxcobrar."total" AS cuentaxcobrar_total,
+     cuentaxcobrar."porc_desc" AS cuentaxcobrar_porc_desc,
+     cuentaxcobrar."monto_desc" AS cuentaxcobrar_monto_desc,
+     far_comprobante."comprobante" AS far_comprobante_comprobante
+FROM
+     "farmacia"."venta" venta INNER JOIN "farmacia"."detalle_venta" detalle_venta ON venta."idventa" = detalle_venta."id_venta"
+     INNER JOIN "farmacia"."producto" producto ON detalle_venta."id_producto" = producto."idproducto"
+     INNER JOIN "farmacia"."cuentaxcobrar" cuentaxcobrar ON venta."idventa" = cuentaxcobrar."id_venta"
+     INNER JOIN "public"."persona" persona ON venta."id_cliente" = persona."id_persona"
+     INNER JOIN "farmacia"."far_comprobante" far_comprobante ON venta."id_farcomprobante" = far_comprobante."idfarcomprobante"
+     INNER JOIN "public"."seguro_vida" seguro_vida ON cuentaxcobrar."id_seguro" = seguro_vida."id_seguro_vida"
+     INNER JOIN "public"."beneficio" beneficio ON seguro_vida."id_seguro_vida" = beneficio."id_seguro"]]>
+	</queryString>
+	<field name="detalle_venta_cantidad_venta" class="java.lang.Integer"/>
+	<field name="detalle_venta_lote_vendido" class="java.lang.String"/>
+	<field name="venta_idventa" class="java.lang.Integer"/>
+	<field name="venta_id_cliente" class="java.lang.Integer"/>
+	<field name="venta_id_usuario" class="java.lang.Integer"/>
+	<field name="venta_fecha_venta" class="java.sql.Date"/>
+	<field name="venta_num_comprobante" class="java.lang.Long"/>
+	<field name="venta_sub_total" class="java.math.BigDecimal"/>
+	<field name="venta_monto_igv" class="java.math.BigDecimal"/>
+	<field name="venta_total" class="java.math.BigDecimal"/>
+	<field name="producto_nombre" class="java.lang.String"/>
+	<field name="cuentaxcobrar_fecha_pago" class="java.sql.Date"/>
+	<field name="cuentaxcobrar_monto_pagado" class="java.math.BigDecimal"/>
+	<field name="cuentaxcobrar_porc_copago" class="java.lang.Integer"/>
+	<field name="cuentaxcobrar_monto_copago" class="java.math.BigDecimal"/>
+	<field name="cuentaxcobrar_cuenta_x_cobrar" class="java.math.BigDecimal"/>
+	<field name="cuentaxcobrar_monto_pagofps" class="java.math.BigDecimal"/>
+	<field name="persona_nombre" class="java.lang.String"/>
+	<field name="persona_apellido_paterno" class="java.lang.String"/>
+	<field name="persona_apellido_materno" class="java.lang.String"/>
+	<field name="seguro_vida_descripcion" class="java.lang.String"/>
+	<field name="beneficio_nombre_beneficio" class="java.lang.String"/>
+	<field name="venta_hora_venta" class="java.lang.String"/>
+	<field name="cuentaxcobrar_total" class="java.math.BigDecimal"/>
+	<field name="cuentaxcobrar_porc_desc" class="java.lang.Integer"/>
+	<field name="cuentaxcobrar_monto_desc" class="java.math.BigDecimal"/>
+	<field name="far_comprobante_comprobante" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9c9e6285-d7d6-4dd5-9e31-39466f37cd08" x="213" y="13" width="359" height="30" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Ventas por seguro]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

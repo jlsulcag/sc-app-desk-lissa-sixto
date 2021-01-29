@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/10/2018 06:05:36 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Egreso" table="egreso" schema="public" optimistic-lock="version">
+        <id name="idegreso" type="long">
+            <column name="idegreso" />
+            <generator class="sequence">
+                <param name="sequence">egreso_idegreso_seq</param>
+            </generator>
+        </id>
+        <property name="numero" type="long">
+            <column name="numero" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" not-null="true" />
+        </property>
+        <property name="motivo" type="string">
+            <column name="motivo" length="50" not-null="true" />
+        </property>
+        <property name="motivoOtros" type="string">
+            <column name="motivo_otros" length="80" />
+        </property>
+        <property name="idPersona" type="java.lang.Long">
+            <column name="id_persona" />
+        </property>
+        <property name="nroComprobante" type="string">
+            <column name="nro_comprobante" length="30" />
+        </property>
+        <property name="tipoComprobante" type="string">
+            <column name="tipo_comprobante" length="30" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="201" />
+        </property>
+        <property name="idUsuario" type="long">
+            <column name="id_usuario" not-null="true" />
+        </property>
+        <property name="idCajaafecto" type="java.lang.Long">
+            <column name="id_cajaafecto" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="monto" type="big_decimal">
+            <column name="monto" precision="10" />
+        </property>
+        <set name="egresoDetalles" table="egreso_detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_egreso" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.EgresoDetalle" />
+        </set>
+    </class>
+</hibernate-mapping>

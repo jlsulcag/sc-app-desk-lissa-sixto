@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23-sep-2016 12:44:09 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Almacen" table="almacen" schema="farmacia" optimistic-lock="version">
+        <id name="idalmacen" type="long">
+            <column name="idalmacen" />
+            <generator class="increment" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" not-null="true" />
+        </property>
+        <set name="almacenProductos" table="almacen_producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_almacen" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.AlmacenProducto" />
+        </set>
+        <set name="kardexesForIdOrigen" table="kardex" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_origen" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Kardex" />
+        </set>
+        <set name="kardexesForIdDestino" table="kardex" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_destino" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Kardex" />
+        </set>
+    </class>
+</hibernate-mapping>

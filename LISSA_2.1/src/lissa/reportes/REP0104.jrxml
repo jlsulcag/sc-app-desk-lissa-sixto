@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REP0104" language="groovy" pageWidth="595" pageHeight="842" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="42" bottomMargin="42" uuid="9db8387b-5916-4736-be6d-9d726eb56e7a">
+	<property name="ireport.zoom" value="1.2100000000000186"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FECHA_DESDE" class="java.util.Date"/>
+	<parameter name="FECHA_HASTA" class="java.util.Date"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["V:\\REP\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+d.denominacion as serv,
+count(d.denominacion) as "cant",
+sum(a.monto_pagado) monto,
+d.idservicio
+from comprobante_detalle a inner join procedimiento_tarifario b
+on a.id_procedimientotarifario = b.idprocedimientotarifario inner join procedimiento c
+on b.id_procedimiento = c.idprocedimiento inner join servicio d
+on c.id_servicio = d.idservicio inner join comprobante e
+on a.id_comprobante = e.idcomprobante
+where e.estado = 'ACT'
+and e.fecha_comprobante between '2018-10-01' and '2018-10-22'
+group by d.denominacion, d.idservicio
+order by d.denominacion asc]]>
+	</queryString>
+	<field name="serv" class="java.lang.String"/>
+	<field name="cant" class="java.lang.Long"/>
+	<field name="monto" class="java.math.BigDecimal"/>
+	<field name="idservicio" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="51" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement uuid="eeec9608-2f41-4183-a413-2d82695807d5" x="0" y="0" width="511" height="50" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="af7a243f-6bca-494c-903b-023a346771bb" x="0" y="2" width="511" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECAUDACIÓN POR SERVICIO Y PROCEDIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="90d7b1f7-8b2e-4658-a59d-29dd56eb1e4b" x="170" y="32" width="38" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESDE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="19aac60d-477c-4099-aa6e-c72fe06969d7" x="258" y="32" width="39" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HASTA :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="40627901-4370-4408-9515-4dadb40b5aad" x="208" y="32" width="50" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA_DESDE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="a3d53e82-8968-407e-95ff-08c8a16e59c4" x="297" y="32" width="50" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA_HASTA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="3" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle radius="0">
+				<reportElement uuid="d09c4268-8f8b-4ec8-b7a4-463f630f789c" x="0" y="1" width="511" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="86e3aa2f-07b6-49ba-9f27-40206680c90b" x="0" y="0" width="388" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b2b4e9ee-d50d-42a1-a310-89bc7b7139f2" x="389" y="1" width="59" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e4d61f53-90a1-4472-b73b-90dcefa2ccd8" x="449" y="1" width="62" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="fd8c9af9-5bfa-496f-8376-8dd75737f082" x="388" y="1" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement uuid="c40d42d3-270f-408b-80f3-4a9a815b88a8" x="448" y="1" width="1" height="20"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="80" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="07d1a2b7-fecb-46af-9479-744282ec12e6" x="0" y="0" width="511" height="20" backcolor="#CCFFFF"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="31492bbe-0a29-4c00-9e35-ea439db5cf04" x="0" y="0" width="388" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4a623f7a-1e0a-4f5c-8ba6-f63390773201" x="389" y="0" width="59" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ca897a82-6009-4376-8b4c-24b3ea6324b7" x="449" y="0" width="62" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement uuid="a9ad8a9f-6b6d-4837-afb1-ec5b780baea4" x="0" y="20" width="511" height="58"/>
+				<subreportParameter name="ID_SERVICIO">
+					<subreportParameterExpression><![CDATA[$F{idservicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FECHA_DESDE">
+					<subreportParameterExpression><![CDATA[$P{FECHA_DESDE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FECHA_HASTA">
+					<subreportParameterExpression><![CDATA[$P{FECHA_HASTA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "REP0104_1.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement uuid="065eab36-142d-4cc4-856e-0a48b74beb75" x="388" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="359c1696-246a-4e3d-aa86-aa298f4dae76" x="448" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="44265c97-c0e7-44f9-9b06-cc375695887d" x="411" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="24696a7b-ea78-4a45-a3c8-47b8220a04bf" x="0" y="0" width="411" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

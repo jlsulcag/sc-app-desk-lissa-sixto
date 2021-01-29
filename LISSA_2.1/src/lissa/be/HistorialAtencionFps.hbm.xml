@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/06/2017 06:04:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.HistorialAtencionFps" table="historial_atencion_fps" schema="public" optimistic-lock="version">
+        <id name="idhistorialatencionfps" type="long">
+            <column name="idhistorialatencionfps" />
+            <generator class="sequence">
+                <param name="sequence">historial_atencion_fps_idhistorialatencionfps_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="fondoSolidaridad" class="lissa.be.FondoSolidaridad" fetch="select">
+            <column name="id_fps" not-null="true" />
+        </many-to-one>
+        <property name="idPaqueteFps" type="int">
+            <column name="id_paquete_fps" not-null="true" />
+        </property>
+        <property name="idServicioFps" type="int">
+            <column name="id_servicio_fps" not-null="true" />
+        </property>
+        <property name="idVenta" type="long">
+            <column name="id_venta" not-null="true" />
+        </property>
+        <property name="montoDisponible" type="big_decimal">
+            <column name="monto_disponible" precision="18" not-null="true" />
+        </property>
+        <property name="cantDisponible" type="int">
+            <column name="cant_disponible" not-null="true" />
+        </property>
+        <property name="montoUtilizado" type="big_decimal">
+            <column name="monto_utilizado" precision="18" not-null="true" />
+        </property>
+        <property name="saldo" type="big_decimal">
+            <column name="saldo" precision="18" not-null="true" />
+        </property>
+        <property name="numRegistro" type="long">
+            <column name="num_registro" not-null="true" />
+        </property>
+        <property name="fechaAtencion" type="date">
+            <column name="fecha_atencion" length="13" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PruebasPsicologicas" language="groovy" pageWidth="295" pageHeight="576" columnWidth="295" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="81884e3f-1b00-49cf-a5c3-18f09ba2a7fd">
+	<property name="ireport.zoom" value="2.593742460100012"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_FICHA" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select prueba.ptje, prueba.prueba
+from paciente_prueba prueba inner join ficha_psicologica fp
+on prueba.id_fichapsicologica = fp.idfichapsicologica
+where fp.idfichapsicologica = $P{ID_FICHA}]]>
+	</queryString>
+	<field name="ptje" class="java.lang.String"/>
+	<field name="prueba" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="15">
+			<rectangle>
+				<reportElement uuid="dcc3f811-d499-4f75-9a65-a01c85ca380d" x="0" y="0" width="100" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="fd37430e-18fc-45d6-b18d-73ec7b0136f1" x="73" y="0" width="212" height="15"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="f19e5b34-af79-409b-89ff-adf36c024246" mode="Opaque" x="0" y="0" width="73" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PTJE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="224e9745-aafb-4cba-8ed9-e3cd41e05b96" mode="Opaque" x="73" y="0" width="212" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pruebas Psicológicas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13">
+			<rectangle>
+				<reportElement uuid="5754f9a4-0515-489d-a18c-dc8b3faa1249" x="0" y="0" width="73" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="db3e18dc-795d-4d60-9ea7-24b118070452" x="73" y="0" width="212" height="13"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="325d8476-97fd-4668-ba0d-47bea23d63d7" x="0" y="-1" width="73" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ptje}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="a1994847-04c4-4307-830d-e6dff023f567" x="73" y="-1" width="212" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prueba}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

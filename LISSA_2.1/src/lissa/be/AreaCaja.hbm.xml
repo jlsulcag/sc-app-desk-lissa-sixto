@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07-dic-2016 10:43:53 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.AreaCaja" table="area_caja" schema="public" optimistic-lock="version">
+        <id name="idareacaja" type="long">
+            <column name="idareacaja" />
+            <generator class="sequence">
+                <param name="sequence">area_caja_idareacaja_seq</param>
+            </generator> 
+        </id>
+        <property name="modulo" type="string">
+            <column name="modulo" length="30" not-null="true" />
+        </property>
+        <property name="estado" type="boolean">
+            <column name="estado" not-null="true" />
+        </property>
+        <set name="cajas" table="caja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_areacaja" />
+            </key>
+            <one-to-many class="lissa.be.Caja" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Medico" optimistic-lock="version" schema="public" table="medico">
+        <id name="idMedico" type="int">
+            <column name="id_medico"/>
+            <generator class="sequence">
+                <param name="sequence">medico_id_medico_seq</param>
+            </generator>
+        </id>
+        <many-to-one class="lissa.be.Persona" fetch="select" name="persona">
+            <column name="id_persona" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.TipoMedico" fetch="select" name="tipoMedico">
+            <column name="id_tipo_medico" not-null="true"/>
+        </many-to-one>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado"/>
+        </property>
+        <property name="fechaReg" type="timestamp">
+            <column length="29" name="fecha_reg"/>
+        </property>
+        <property name="codigoColegiatura" type="string">
+            <column length="50" name="codigo_colegiatura"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="medicoEspecialidads" table="medico_especialidad">
+            <key>
+                <column name="id_medico" not-null="true"/>
+            </key>
+            <one-to-many class="lissa.be.MedicoEspecialidad"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="itemsComprobantesForIdMedicoDeriva" table="comprobante_detalle">
+            <key>
+                <column name="id_medico_deriva"/>
+            </key>
+            <one-to-many class="lissa.be.ComprobanteDetalle"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="itemsComprobantesForIdMedicoAtiende" table="comprobante_detalle">
+            <key>
+                <column name="id_medico_atiende"/>
+            </key>
+            <one-to-many class="lissa.be.ComprobanteDetalle"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="itemsComprobantesForIdMedicoAtiendeReal" table="comprobante_detalle">
+            <key>
+                <column name="id_medicoatiendereal"/>
+            </key>
+            <one-to-many class="lissa.be.ComprobanteDetalle"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="citas" table="cita">
+            <key>
+                <column name="id_medico"/>
+            </key>
+            <one-to-many class="lissa.be.Cita"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="medicoDerivaAtiendes" table="medico_deriva_atiende">
+            <key>
+                <column name="id_medico" not-null="true"/>
+            </key>
+            <one-to-many class="lissa.be.MedicoDerivaAtiende"/>
+        </set>
+    </class>
+</hibernate-mapping>

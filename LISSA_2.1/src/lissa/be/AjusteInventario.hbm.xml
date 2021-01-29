@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/06/2018 10:45:37 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.AjusteInventario" table="ajuste_inventario" schema="farmacia" optimistic-lock="version">
+        <id name="idajusteinventario" type="long">
+            <column name="idajusteinventario" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="almacenProducto" class="lissa.be.AlmacenProducto" fetch="select">
+            <column name="id_almacenproducto" not-null="true" />
+        </many-to-one>
+        <property name="motivoAjuste" type="string">
+            <column name="motivo_ajuste" length="80" not-null="true" />
+        </property>
+        <property name="stockActual" type="double">
+            <column name="stock_actual" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="stockFisico" type="double">
+            <column name="stock_fisico" precision="17" scale="17" not-null="true" />
+        </property>
+        <property name="fechaAjuste" type="date">
+            <column name="fecha_ajuste" length="13" not-null="true" />
+        </property>
+        <property name="idUser" type="java.lang.Long">
+            <column name="id_user" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="diagnosticos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ca43006d-b3ba-4fe3-951a-06d9511be064">
+	<property name="ireport.zoom" value="1.6105100000000023"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_ATENCION" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select dx.diagnostico, cie.descripcion, cie.codigo
+from diagnostico dx inner join atencion at
+on dx.id_atencion = at.id_atencion inner join cie10 cie
+on dx.id_cie10 = cie.id_cie10
+where at.id_atencion = $P{ID_ATENCION}]]>
+	</queryString>
+	<field name="diagnostico" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="1"/>
+	</columnHeader>
+	<detail>
+		<band height="16">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="f01bc3d1-be78-47b1-958f-678a1488f6ee" x="0" y="0" width="419" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diagnostico}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="f55bbff7-fcd6-4f95-9a5d-595eff70093d" positionType="FixRelativeToBottom" x="0" y="14" width="536" height="1"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f1cb85f4-dde2-4bf6-b610-3c12a03c05a1" x="419" y="0" width="117" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

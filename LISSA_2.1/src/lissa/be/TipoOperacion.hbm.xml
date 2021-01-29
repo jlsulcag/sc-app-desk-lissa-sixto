@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-nov-2016 12:57:37 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.TipoOperacion" table="tipo_operacion" schema="farmacia" optimistic-lock="version">
+        <id name="idtipooperacion" type="long">
+            <column name="idtipooperacion" />
+            <generator class="increment" />
+        </id>
+        <property name="operacion" type="string">
+            <column name="operacion" length="15" not-null="true" />
+        </property>
+        <property name="estado" type="boolean">
+            <column name="estado" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

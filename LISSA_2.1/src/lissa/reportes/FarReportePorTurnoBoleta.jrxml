@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="48dc8260-97e3-4f93-928c-be20e3f6a138">
+	<property name="ireport.zoom" value="1.4641000000000017"/>
+	<property name="ireport.x" value="10"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Fri Jan 13 17:35:59 COT 2017"/>
+	<parameter name="ID_CAJA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+concat(per.nombre || ' ' || per.apellido_paterno || ' ' || per.apellido_materno) as cliente,
+fc.comprobante,
+vt.num_comprobante,
+vt.fecha_venta,
+vt.total_valor_venta_op_gravadas,
+vt.total_sumatoria_descuentos,
+vt.total_sumatoria_igv,
+vt.total_importe_venta,
+vt.idventa
+from venta vt left join persona per
+on vt.id_clientepersonanatural = per.idpersona inner join far_comprobante fc
+on vt.id_farcomprobante = fc.idfarcomprobante inner join caja ca
+on vt.id_caja = ca.idcaja
+where  ca.idcaja = $P{ID_CAJA} and (fc.idfarcomprobante = 4 OR fc.idfarcomprobante = 10) AND vt.estado = 'ACT']]>
+	</queryString>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="comprobante" class="java.lang.String"/>
+	<field name="num_comprobante" class="java.lang.Long"/>
+	<field name="fecha_venta" class="java.sql.Date"/>
+	<field name="total_valor_venta_op_gravadas" class="java.math.BigDecimal"/>
+	<field name="total_sumatoria_descuentos" class="java.math.BigDecimal"/>
+	<field name="total_sumatoria_igv" class="java.math.BigDecimal"/>
+	<field name="total_importe_venta" class="java.math.BigDecimal"/>
+	<field name="idventa" class="java.lang.Long"/>
+	<variable name="SUM" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_importe_venta}]]></variableExpression>
+	</variable>
+	<variable name="PRUEBA" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[$V{SUM}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="17a63972-33d2-4a73-ae55-2217fcb6c023" mode="Opaque" x="234" y="2" width="81" height="15" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Comprobante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5677d080-9a69-496c-bb10-1787edc68c63" mode="Opaque" x="485" y="2" width="70" height="15" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8e81b436-5caf-4ebd-9116-f1b7eb4ffa87" mode="Opaque" x="380" y="2" width="51" height="15" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub tot]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3cdc5f4b-0c5c-4567-b79f-e682b784301e" mode="Opaque" x="431" y="2" width="54" height="15" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IGV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="846f787b-4821-4689-9cfb-6d0956e0937d" mode="Opaque" x="0" y="2" width="161" height="15" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos y Nombres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c5c41810-19b8-4d20-9db2-8740424934dd" mode="Opaque" x="315" y="2" width="65" height="15" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d01fb916-df12-4ab5-8277-901c1535c712" mode="Opaque" x="161" y="2" width="73" height="15" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprobante]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="298c1ef0-5646-42c8-b501-903e232fbe07" x="0" y="0" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="641ad7f2-d6af-43ef-87df-a2ed6dbfb304" x="0" y="17" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="cb2eecbc-faef-4030-b167-cc355add0e3b" x="0" y="1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement uuid="89fb0db5-521f-4e49-9914-cff0ab34eb1d" x="160" y="1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement uuid="d5ff4066-1a05-4a8b-8a56-9fbfb58d87ce" x="233" y="1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement uuid="b18a4781-59d8-444a-a209-b91cbde845a8" x="316" y="1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement uuid="af6d05ec-379a-416c-a124-a7f346b0da85" x="379" y="1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement uuid="ae0e38ea-0bd9-4f31-bef7-b3214ed5a408" x="431" y="1" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement uuid="19cdee07-35c1-40e4-a948-26ae95a6c61e" x="485" y="1" width="1" height="16"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7d44f7bb-6cfa-4809-b06a-435f3e480359" x="233" y="0" width="84" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{num_comprobante}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="dda08f27-92f2-4154-8ea8-9f5acae2099b" x="316" y="0" width="64" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_venta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0cfb2f27-6414-4bb7-beb2-b6ef34c57cbf" x="485" y="0" width="70" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_importe_venta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3072f772-abbc-479b-a1b4-3570b0d7b696" x="0" y="0" width="161" height="15"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="73b8347a-7dc0-4d47-b2c9-8fc58751fd61" x="160" y="0" width="74" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6be51f86-9282-4285-bcc8-0d87d4762976" x="430" y="0" width="56" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_sumatoria_igv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="16ba3a98-663e-4697-9bd8-21cb10ddd615" x="379" y="0" width="52" height="15"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_valor_venta_op_gravadas}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement uuid="7d255041-1d25-472c-af44-58ef5c2014aa" x="55" y="15" width="500" height="39"/>
+				<subreportParameter name="ID_VENTA">
+					<subreportParameterExpression><![CDATA[$F{idventa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["V:\\REP\\FarReportePorTurnoDetalle.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement uuid="15a04d44-6ee0-45ae-bf7f-d3b4c1575f05" x="0" y="-1" width="555" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="9701b17c-93c0-467f-967d-b36f96f5343e" x="0" y="14" width="555" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="067b0ef7-82e1-45b9-8c63-2d950fb43110" x="485" y="0" width="70" height="20" forecolor="#0000FF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8d820c78-8b36-4991-a82b-4a2d4d9a6011" x="417" y="0" width="68" height="20" forecolor="#0000FF"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Total Boleta :]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

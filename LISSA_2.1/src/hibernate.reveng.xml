@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Namespace obsoleto
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+-->
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://www.hibernate.org/dtd/">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="clinicadb"/>
+  <table-filter match-name="atencionhc"/>
+  <table-filter match-name="seguro_vida_usa_persona"/>
+  <table-filter match-name="medico_especialidad"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="tipo_historia_clinica"/>
+  <table-filter match-name="cie10"/>
+  <table-filter match-name="estado_civil"/>
+  <table-filter match-name="persona_empresa"/>
+  <table-filter match-name="comprobante"/>
+  <table-filter match-name="tipo_comprobante"/>
+  <table-filter match-name="tipo_docidentidad"/>
+  <table-filter match-name="servicio"/>
+  <table-filter match-name="ficha_osteomuscular"/>
+  <table-filter match-name="pago"/>
+  <table-filter match-name="medico"/>
+  <table-filter match-name="tarifario"/>
+  <table-filter match-name="antecedente"/>
+  <table-filter match-name="caja"/>
+  <table-filter match-name="evaluacion_ocupacional"/>
+  <table-filter match-name="beneficio"/>
+  <table-filter match-name="persona"/>
+  <table-filter match-name="tratamiento"/>
+  <table-filter match-name="cita"/>
+  <table-filter match-name="fondo_solidaridad"/>
+  <table-filter match-name="persona_juridica"/>
+  <table-filter match-name="tipo_medico"/>
+  <table-filter match-name="atencion"/>
+  <table-filter match-name="forma_pago"/>
+  <table-filter match-name="funcion_vital"/>
+  <table-filter match-name="seguro_vida"/>
+  <table-filter match-name="comprobante_detalle"/>
+  <table-filter match-name="historia_clinica"/>
+  <table-filter match-name="especialidad"/>
+  <table-filter match-name="rol"/>
+  <table-filter match-name="usuario_rol"/>
+  <table-filter match-name="area_caja"/>
+  <table-filter match-name="medico_deriva_atiende"/>
+  <table-filter match-name="servicios_fondo_solidaridad"/>
+  <table-filter match-name="paquete_fondo_solidaridad"/>
+  <table-filter match-name="paquete_fondo_detalle"/>
+  <table-filter match-name="historial_atencion_fps"/>
+  <table-filter match-name="procedimiento"/>
+  <table-filter match-name="permiso"/>
+  <table-filter match-name="usuario_permiso"/>
+  <table-filter match-name="procedimiento_tarifario"/>
+  <table-filter match-name="egreso"/>
+  <table-filter match-name="egreso_detalle"/>
+  <table-filter match-name="cita_detalle"/>
+  <table-filter match-name="organizacion"/>
+  <table-filter match-name="tipo_persona"/>
+  <!-- Farmacia -->
+  <table-filter match-name="almacen"/>
+  <table-filter match-name="almacen_producto"/>
+  <table-filter match-name="compra"/>
+  <table-filter match-name="detalle_compra"/>
+  <table-filter match-name="detalle_venta"/>
+  <table-filter match-name="far_comprobante"/>
+  <table-filter match-name="far_forma_pago"/> 
+  <table-filter match-name="forma_farmaceutica"/>
+  <table-filter match-name="kardex"/>
+  <table-filter match-name="laboratorio"/>
+  <table-filter match-name="presentacion"/>
+  <table-filter match-name="producto"/>
+  <table-filter match-name="proveedor"/>
+  <table-filter match-name="tipo_operacion"/>
+  <table-filter match-name="venta"/>
+  <table-filter match-name="cuentaxcobrar"/>
+  <table-filter match-name="area_consumo"/>
+  <table-filter match-name="precio_producto"/>
+  <table-filter match-name="ajuste_inventario"/>
+</hibernate-reverse-engineering>
+

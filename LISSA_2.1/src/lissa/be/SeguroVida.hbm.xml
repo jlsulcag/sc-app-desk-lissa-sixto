@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.SeguroVida" table="seguro_vida" schema="public" optimistic-lock="version">
+        <id name="idSeguroVida" type="int">
+            <column name="id_seguro_vida" />
+            <generator class="sequence">
+                <param name="sequence">seguro_vida_id_seguro_vida_seq</param>
+            </generator>
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" />
+        </property>
+        <property name="fechaReg" type="date">
+            <column name="fecha_reg" length="29" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <property name="esconvenio" type="int">
+            <column name="esconvenio"/>
+        </property>
+        <property name="tieneCarta" type="int">
+            <column name="tiene_carta"/>
+        </property>
+        <set name="beneficios" table="beneficio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_seguro" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Beneficio" />
+        </set>
+        <set name="seguroVidaUsaPersonas" table="seguro_vida_usa_persona" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_seguro_vida" />
+            </key>
+            <one-to-many class="lissa.be.SeguroVidaUsaPersona" />
+        </set>
+    </class>
+</hibernate-mapping>

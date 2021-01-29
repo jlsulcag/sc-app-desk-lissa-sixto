@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Far_Stock_Total" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="770" leftMargin="36" rightMargin="36" topMargin="20" bottomMargin="20" uuid="01fb39da-3136-45ab-a082-427f115b0107">
+	<property name="ireport.zoom" value="1.100000000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+pro.idproducto,
+pro.nombre,
+p.denominacion pre,
+ff.denominacion forfar,
+lab.denominacion lab,
+sum(case when ap.id_almacen = 1 THEN ap.stock_actual ELSE 0 END) as stock_almacen,
+sum(case when ap.id_almacen = 2 THEN ap.stock_actual ELSE 0 END) as stock_farmacia,
+ap.valor_compra_unitario
+from almacen_producto ap inner join producto pro
+on ap.id_producto = pro.idproducto inner join almacen al
+on ap.id_almacen = al.idalmacen inner join presentacion p
+on pro.id_presentacion = p.idpresentacion inner join laboratorio lab
+on pro.id_laboratorio = lab.idlaboratorio inner join forma_farmaceutica ff
+on pro.id_formafarmaceutica = ff.idformafarmaceutica
+GROUP BY pro.idproducto, p.denominacion, ff.denominacion, lab.denominacion, ap.valor_compra_unitario
+order by pro.nombre asc]]>
+	</queryString>
+	<field name="idproducto" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="pre" class="java.lang.String"/>
+	<field name="forfar" class="java.lang.String"/>
+	<field name="lab" class="java.lang.String"/>
+	<field name="stock_almacen" class="java.lang.Long"/>
+	<field name="stock_farmacia" class="java.lang.Long"/>
+	<field name="valor_compra_unitario" class="java.math.BigDecimal"/>
+	<variable name="SUM_TOTAL" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{stock_almacen}+$F{stock_farmacia})*$F{valor_compra_unitario}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="54">
+			<frame>
+				<reportElement uuid="e7c781fa-5440-4c93-8c1d-33611034f193" mode="Opaque" x="0" y="-18" width="770" height="72"/>
+				<staticText>
+					<reportElement uuid="dae9c813-b82d-43ee-8d94-dff57ca3c05a" x="0" y="42" width="770" height="20"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[REPORTE DE STOCK POR ALMACEN_]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25">
+			<staticText>
+				<reportElement uuid="bf88481f-af35-4ff6-9ccd-a24dc1a34844" mode="Opaque" x="0" y="0" width="534" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2f08d34a-a499-4e18-b75a-55c0e741dce2" mode="Opaque" x="534" y="0" width="145" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3a6c99ea-79ca-48b2-a11e-3563323e04a5" mode="Opaque" x="679" y="0" width="91" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stock valorizado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="025a1a57-1265-4a65-8a81-75367c0573f4" mode="Opaque" x="724" y="12" width="46" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor S/.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a2844758-298c-4338-9720-a3143dda4c7f" mode="Opaque" x="679" y="12" width="45" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="09c9c499-f208-4dc0-a541-65cd7c87667d" mode="Opaque" x="424" y="12" width="110" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laboratorio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a9990b5e-56ff-4441-ad66-8ce5f51206fa" mode="Opaque" x="534" y="12" width="50" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Almacen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca4102d7-6718-4f1a-9031-352c2872cea8" mode="Opaque" x="634" y="12" width="45" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="47a284ef-99ef-45f6-9060-8dd8f22b17a0" mode="Opaque" x="0" y="12" width="27" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40a6b6ec-02aa-4f7d-8043-2c3ee8f34cbc" mode="Opaque" x="27" y="12" width="177" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e806a13e-51fe-40ad-8ca1-bb87a114732d" mode="Opaque" x="584" y="12" width="50" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Farmacia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f697b508-ad0c-455f-a9f3-88c5549483aa" mode="Opaque" x="204" y="12" width="120" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Presentación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="516fc7a9-eb20-4194-8097-09e215b16646" mode="Opaque" x="324" y="12" width="100" height="12" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma Farmaceutica]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="2cb1d6f9-96ea-479a-91eb-0d6126b36ea7" x="0" y="24" width="770" height="1" forecolor="#666666"/>
+			</line>
+			<line>
+				<reportElement uuid="a418be7c-e570-4f69-84cf-d04b55d46f6b" x="0" y="12" width="770" height="1" forecolor="#666666"/>
+			</line>
+			<line>
+				<reportElement uuid="b123d5cb-a2e1-4f99-bd8a-746a82599057" x="0" y="0" width="770" height="1" forecolor="#666666"/>
+			</line>
+			<line>
+				<reportElement uuid="805ddb50-a46a-4289-b9bc-b9b74ffd1639" x="0" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="88fe1bc5-5b93-4c37-ab84-6227ca7e903c" x="26" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="09fa541d-51dd-4f41-8c36-e57cbb59fc65" x="203" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="b1a9c4c1-8f9c-41c7-af5d-98ef35f9b7e9" x="323" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="85ce9512-9a51-4ebb-b0eb-f763c6afa725" x="423" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="8d01de10-0879-4e13-8d5c-1e2e7ff145ee" x="533" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="e9cc836f-c4d5-484f-882c-79addc169262" x="533" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="fb5cf9cb-12b8-4426-aa60-0c3f63a7f7bc" x="583" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="d4111f17-05fe-4a6e-8413-cb2e476ebb7b" x="633" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="bb9aa797-98f4-4c0f-8ab0-fa5245522139" x="678" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="9d094ee7-1642-4f73-800d-940bc13276b4" x="678" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="b21650de-15ce-43d1-a320-fbb35985ec60" x="723" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="41696e92-2836-427c-be01-5ae3eaa39268" x="0" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="70b4f991-4543-4063-be6f-8814b7aa4f1d" x="769" y="13" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="eef3c816-0ec3-4af5-971e-e3b1d9d39bd1" x="769" y="1" width="1" height="11"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="7386102b-0714-4403-b98e-abcfb3a692d4" x="0" y="-1" width="27" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idproducto}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="0cf35772-1046-41ec-9d73-c57b6f9913a4" positionType="FixRelativeToBottom" x="0" y="11" width="770" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="d5d17b02-d818-42fe-94c3-7d124182201c" x="27" y="-1" width="177" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="3a833554-0e87-4287-ae3f-f20c7431d354" x="204" y="-1" width="120" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="9415e025-24ea-47db-9141-aeb1a565f981" x="424" y="-1" width="110" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lab}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ccdfbca9-96c1-426d-9bef-3dd363e45c4b" x="534" y="-1" width="50" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stock_almacen}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="a71ede5c-d671-431f-87b4-50e28ca93b59" x="584" y="-1" width="50" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stock_farmacia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="e8ee86c1-caa6-4e05-adab-c426f259dd19" x="324" y="-1" width="100" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{forfar}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="c5a732e5-fec7-4b35-b295-89365c6ed7fc" x="679" y="-1" width="45" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_compra_unitario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="3ed20ec1-e013-48ce-95b2-dfa397a4dc6f" x="724" y="-1" width="46" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{stock_almacen}+$F{stock_farmacia})*$F{valor_compra_unitario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ae527641-3285-4b6c-8395-4ccdfca3d8bc" x="634" y="-1" width="45" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stock_almacen}+$F{stock_farmacia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="32">
+			<textField>
+				<reportElement uuid="442f505f-37b6-404a-912a-b6ff9b9bca28" mode="Opaque" x="0" y="18" width="730" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="a45224ab-69ef-4eb8-8a7a-6624ebfff666" mode="Opaque" x="730" y="18" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="463759fe-ec38-4516-ae58-5185d01f1ebe" x="0" y="18" width="100" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="58b056d0-6fc1-4ea2-a0a5-65fd5bca4538" x="710" y="-1" width="60" height="15"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_TOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b94091d8-a102-4dc6-bbef-421bfde6b926" x="634" y="-1" width="76" height="15"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[	Total S/.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

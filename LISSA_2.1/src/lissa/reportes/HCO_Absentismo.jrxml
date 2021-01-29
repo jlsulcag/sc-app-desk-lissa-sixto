@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HCO_Habitos" language="groovy" pageWidth="556" pageHeight="842" columnWidth="556" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6e32818c-18a8-48ad-9b11-0c162d3d0e53">
+	<property name="ireport.zoom" value="1.3310000000000055"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_FICHA" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select abs.enfermedad_accidente, abs.asociado_al_trabajo, abs.anio, abs.dias_descanso
+from so_fmo_absentismo abs inner  join  ficha_medico_ocupacional fmo
+on abs.id_fichamedicoocupacional = fmo.idfichamedicoocupacional
+where fmo.idfichamedicoocupacional = $P{ID_FICHA}]]>
+	</queryString>
+	<field name="enfermedad_accidente" class="java.lang.String"/>
+	<field name="asociado_al_trabajo" class="java.lang.Boolean"/>
+	<field name="anio" class="java.lang.Integer"/>
+	<field name="dias_descanso" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="15">
+			<staticText>
+				<reportElement uuid="2f608299-6923-4c60-895e-8ad73de719b4" mode="Opaque" x="0" y="0" width="146" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enfermedad / Accidente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="61a18697-e8ea-4131-a15c-65f79047bbc6" mode="Opaque" x="286" y="0" width="125" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Año]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="39e279a5-35ae-4373-8645-c60bbbbbbe46" mode="Opaque" x="146" y="0" width="140" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asociado al Trabajo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="da6fe7e4-cb84-4eec-9d4e-03b31919091b" mode="Opaque" x="411" y="0" width="145" height="15" forecolor="#000000" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Días de descanso]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15">
+			<rectangle>
+				<reportElement uuid="e83ad33b-9849-4a79-975e-32696c94df02" x="1" y="0" width="165" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="177eddc2-fe82-44cf-9c61-748ff78e4285" x="146" y="0" width="140" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6044b6c3-743f-4d94-9632-8cc537cb6048" x="286" y="0" width="125" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d563e700-5cf2-4c54-930d-755c27c29fc1" x="411" y="0" width="145" height="15"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="63c5899a-663b-49ea-99f2-cd3fc6f5fee2" x="1" y="0" width="145" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{enfermedad_accidente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="bdb09965-9b0b-4bfa-bb16-8e0962fee90c" x="146" y="0" width="140" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{asociado_al_trabajo})?"SI":"NO"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="11d76da9-cda0-46fa-86b6-f9c8efd0935c" x="286" y="0" width="125" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="7bbc5836-3e3d-4212-9684-152850aed2b3" x="411" y="0" width="145" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dias_descanso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

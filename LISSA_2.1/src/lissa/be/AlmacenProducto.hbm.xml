@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/04/2018 04:37:19 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.AlmacenProducto" table="almacen_producto" schema="farmacia" optimistic-lock="version">
+        <id name="idalmacenproducto" type="long">
+            <column name="idalmacenproducto" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="almacen" class="lissa.be.Almacen" fetch="select">
+            <column name="id_almacen" not-null="true" />
+        </many-to-one>
+        <many-to-one name="producto" class="lissa.be.Producto" fetch="select">
+            <column name="id_producto" not-null="true" />
+        </many-to-one>
+        <property name="stockActual" type="big_decimal">
+            <column name="stock_actual" precision="18"/>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" not-null="true" />
+        </property>
+        <property name="fechaUltAct" type="date">
+            <column name="fecha_ult_act" length="13" />
+        </property>
+        <property name="lote" type="string">
+            <column name="lote" length="20" />
+        </property>
+        <property name="fechaVencimiento" type="date">
+            <column name="fecha_vencimiento" length="13" />
+        </property>
+        
+        <property name="estado" type="boolean">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="valorCompraUnitario" type="big_decimal">
+            <column name="valor_compra_unitario" precision="18" />
+        </property>
+        <property name="ordenRegistro" type="java.lang.Integer">
+            <column name="orden_registro" />
+        </property>
+        <set name="precioProductos" table="precio_producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_almacenproducto" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.PrecioProducto" />
+        </set>
+        <set name="ajusteInventarios" table="ajuste_inventario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_almacenproducto" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.AjusteInventario" />
+        </set>
+    </class>
+</hibernate-mapping>

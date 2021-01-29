@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/10/2018 12:21:30 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Permiso" table="permiso" schema="public" optimistic-lock="version">
+        <id name="idpermiso" type="int">
+            <column name="idpermiso" />
+            <generator class="sequence">
+                <param name="sequence">permiso_idpermiso_seq</param>
+            </generator>
+        </id>
+        <property name="codigo" type="int">
+            <column name="codigo" not-null="true" />
+        </property>
+        <property name="permiso" type="string">
+            <column name="permiso" length="40" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="120" not-null="true" />
+        </property>
+        <set name="usuarioPermisos" table="usuario_permiso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_permiso" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.UsuarioPermiso" />
+        </set>
+    </class>
+</hibernate-mapping>

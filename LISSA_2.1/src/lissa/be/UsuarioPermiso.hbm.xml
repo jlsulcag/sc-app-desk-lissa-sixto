@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01/10/2018 12:21:30 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.UsuarioPermiso" optimistic-lock="version" schema="public" table="usuario_permiso">
+        <id name="idusuariopermiso" type="int">
+            <column name="idusuariopermiso"/>
+            <generator class="sequence">
+                <param name="sequence">usuario_permiso_idusuariopermiso_seq</param>
+            </generator>
+        </id>
+        <many-to-one class="lissa.be.Permiso" fetch="select" name="permiso">
+            <column name="id_permiso" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.Usuario" fetch="select" name="usuario">
+            <column name="id_usuario" not-null="true"/>
+        </many-to-one>
+        <property name="fechaAct" type="date">
+            <column length="13" name="fecha_act" not-null="true"/>
+        </property>
+        <many-to-one class="lissa.be.Usuario" fetch="select" name="userReg">
+            <column name="id_userreg"/>
+        </many-to-one>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

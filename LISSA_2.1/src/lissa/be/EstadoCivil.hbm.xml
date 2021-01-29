@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/09/2018 05:49:13 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.EstadoCivil" optimistic-lock="version" schema="public" table="estado_civil">
+        <id name="idestadocivil" type="long">
+            <column name="idestadocivil"/>
+            <generator class="sequence">
+                <param name="sequence">estado_civil_idestadocivil_seq</param>
+            </generator>
+        </id>
+        <property name="estadoCivil" type="string">
+            <column length="60" name="estado_civil"/>
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="personas" table="persona">
+            <key>
+                <column name="id_estadocivil"/>
+            </key>
+            <one-to-many class="lissa.be.Persona"/>
+        </set>
+    </class>
+</hibernate-mapping>

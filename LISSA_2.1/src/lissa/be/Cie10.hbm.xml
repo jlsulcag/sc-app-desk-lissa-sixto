@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Cie10" table="cie10" schema="public" optimistic-lock="version">
+        <id name="idCie10" type="int">
+            <column name="id_cie10" />
+            <generator class="sequence">
+                <param name="sequence">cie10_id_cie10_seq</param>
+            </generator>
+        </id>
+        <property name="codigo" type="string">
+            <column name="codigo" length="20" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="300" />
+        </property>
+    </class>
+</hibernate-mapping>

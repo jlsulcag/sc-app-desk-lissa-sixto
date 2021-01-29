@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/04/2018 04:37:19 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Kardex" table="kardex" schema="farmacia" optimistic-lock="version">
+        <id name="idkardex" type="long">
+            <column name="idkardex" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="almacenByIdOrigen" class="lissa.be.Almacen" fetch="select">
+            <column name="id_origen" />
+        </many-to-one>
+        <many-to-one name="almacenByIdDestino" class="lissa.be.Almacen" fetch="select">
+            <column name="id_destino" />
+        </many-to-one>
+        <property name="idFarcomprobante" type="java.lang.Long">
+            <column name="id_farcomprobante" />
+        </property>
+        <property name="operacion" type="string">
+            <column name="operacion" length="40" not-null="true" />
+        </property>
+        <property name="fechaMov" type="date">
+            <column name="fecha_mov" length="13" not-null="true" />
+        </property>
+        <property name="horaMov" type="string">
+            <column name="hora_mov" length="15" not-null="true" />
+        </property>
+        <property name="tipoOperacion" type="string">
+            <column name="tipo_operacion" length="30" not-null="true" />
+        </property>
+        <property name="idAlmacenAfectado" type="long">
+            <column name="id_almacen_afectado" not-null="true" />
+        </property>
+        <property name="comprobante" type="string">
+            <column name="comprobante" length="30" not-null="true" />
+        </property>
+        <property name="numSerie" type="string">
+            <column name="num_serie" length="10" not-null="true" />
+        </property>
+        <property name="origen" type="string">
+            <column name="origen" length="80" not-null="true" />
+        </property>
+        <property name="destino" type="string">
+            <column name="destino" length="80" not-null="true" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="150" not-null="true" />
+        </property>
+        <property name="numComprobante" type="long">
+            <column name="num_comprobante" not-null="true" />
+        </property>
+        <property name="grupoNumeracion" type="int">
+            <column name="grupo_numeracion" not-null="true" />
+        </property>
+        <property name="idProducto" type="java.lang.Long">
+            <column name="id_producto" />
+        </property>
+        <property name="cantidad" type="big_decimal">
+            <column name="cantidad" precision="10" />
+        </property>
+        <property name="valorUnit" type="big_decimal">
+            <column name="valor_unit" precision="10" />
+        </property>
+        <property name="idAlmacenproducto" type="java.lang.Long">
+            <column name="id_almacenproducto" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" />
+        </property>
+        <property name="nroOrden" type="java.lang.Long">
+            <column name="nro_orden" />
+        </property>
+        <property name="stockAnterior" type="big_decimal">
+            <column name="stock_anterior" precision="10" />
+        </property>
+        <property name="stockActual" type="big_decimal">
+            <column name="stock_actual" precision="10" />
+        </property>
+    </class>
+</hibernate-mapping>

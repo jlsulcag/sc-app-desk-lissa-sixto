@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/09/2018 03:23:00 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Servicio" table="servicio" schema="public" optimistic-lock="version">
+        <id name="idservicio" type="long">
+            <column name="idservicio" />
+            <generator class="sequence">
+                <param name="sequence">servicio_idservicio_seq</param>
+            </generator>
+        </id>
+        <property name="denominacion" type="string">
+            <column name="denominacion" length="300" not-null="true" />
+        </property>
+        <property name="codigo" type="string">
+            <column name="codigo" length="20" />
+        </property>
+        <property name="fechaReg" type="date">
+            <column name="fecha_reg" length="13" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <set name="procedimientos" table="procedimiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_servicio" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Procedimiento" />
+        </set>
+    </class>
+</hibernate-mapping>

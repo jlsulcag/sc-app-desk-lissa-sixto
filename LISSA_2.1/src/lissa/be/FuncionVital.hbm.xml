@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.FuncionVital" optimistic-lock="version" schema="public" table="funcion_vital">
+        <id name="idfuncionvital" type="int">
+            <column name="idfuncionvital"/>
+            <generator class="sequence">
+                <param name="sequence">funcion_vital_idfuncionvital_seq</param>
+            </generator>
+        </id>
+        <many-to-one class="lissa.be.Atencionhc" fetch="select" name="atencionhc">
+            <column name="id_atencionhc"/>
+        </many-to-one>
+        <property name="presionArterial" type="java.lang.Integer">
+            <column name="presion_arterial"/>
+        </property>
+        <property name="presionArterial2" type="java.lang.Integer">
+            <column name="presion_arterial2"/>
+        </property>
+        <property name="temperatura" type="java.lang.Double">
+            <column name="temperatura" precision="17" scale="17"/>
+        </property>
+        <property name="r" type="java.lang.Double">
+            <column name="r" precision="17" scale="17"/>
+        </property>
+        <property name="p" type="java.lang.Double">
+            <column name="p" precision="17" scale="17"/>
+        </property>
+        <property name="peso" type="java.lang.Double">
+            <column name="peso" precision="17" scale="17"/>
+        </property>
+        <property name="talla" type="java.lang.Double">
+            <column name="talla" precision="17" scale="17"/>
+        </property>
+        <property name="imc" type="java.lang.Double">
+            <column name="imc" precision="17" scale="17"/>
+        </property>
+    </class>
+</hibernate-mapping>

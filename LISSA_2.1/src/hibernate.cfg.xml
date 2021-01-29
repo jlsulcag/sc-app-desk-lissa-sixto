@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    
+    <!--  DESARROLLO -->
+        
+    <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/clinicadb2</property>
+    <property name="hibernate.connection.username">clinica</property>
+    <property name="hibernate.connection.password">clinica123*</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.connection.autocommit">false</property>   
+    <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+    
+    
+    <!--  PRODUCCION -->
+    <!--
+    <property name="hibernate.connection.url">jdbc:postgresql://192.168.49.96:5432/clinicadb</property>
+    <property name="hibernate.connection.username">clinica</property>
+    <property name="hibernate.connection.password">clinica123*</property>
+    <property name="hibernate.show_sql">false</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.connection.autocommit">false</property>    
+    <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+    -->
+           
+    <!--
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    -->
+    <mapping resource="lissa/be/TipoDocidentidad.hbm.xml"/>
+    <mapping resource="lissa/be/Rol.hbm.xml"/>
+    <mapping resource="lissa/be/PersonaEmpresa.hbm.xml"/>
+    <mapping resource="lissa/be/Beneficio.hbm.xml"/>
+    <mapping resource="lissa/be/Cita.hbm.xml"/>
+    <mapping resource="lissa/be/TipoComprobante.hbm.xml"/>
+    <mapping resource="lissa/be/TipoMedico.hbm.xml"/>
+    <mapping resource="lissa/be/Pago.hbm.xml"/>
+    <mapping resource="lissa/be/UsuarioRol.hbm.xml"/>
+    <mapping resource="lissa/be/Cie10.hbm.xml"/>
+    <mapping resource="lissa/be/Medico.hbm.xml"/>
+    <mapping resource="lissa/be/TipoHistoriaClinica.hbm.xml"/>
+    <mapping resource="lissa/be/FormaPago.hbm.xml"/>
+    <mapping resource="lissa/be/FondoSolidaridad.hbm.xml"/>
+    <mapping resource="lissa/be/PersonaJuridica.hbm.xml"/>
+    <mapping resource="lissa/be/MedicoEspecialidad.hbm.xml"/>
+    <mapping resource="lissa/be/Especialidad.hbm.xml"/>
+    <mapping resource="lissa/be/Servicio.hbm.xml"/>
+    <mapping resource="lissa/be/SeguroVidaUsaPersona.hbm.xml"/>
+    <mapping resource="lissa/be/ComprobanteDetalle.hbm.xml"/>
+    <mapping resource="lissa/be/Atencion.hbm.xml"/>
+    <mapping resource="lissa/be/FuncionVital.hbm.xml"/>
+    <mapping resource="lissa/be/Atencionhc.hbm.xml"/>
+    <mapping resource="lissa/be/Caja.hbm.xml"/>
+    <mapping resource="lissa/be/Comprobante.hbm.xml"/>
+    <mapping resource="lissa/be/SeguroVida.hbm.xml"/>
+    <mapping resource="lissa/be/Usuario.hbm.xml"/>
+    <mapping resource="lissa/be/EstadoCivil.hbm.xml"/>
+    <mapping resource="lissa/be/Persona.hbm.xml"/>
+    <mapping resource="lissa/be/Tarifario.hbm.xml"/>
+    <mapping resource="lissa/be/HistoriaClinica.hbm.xml"/>
+    <mapping resource="lissa/be/AreaCaja.hbm.xml"/>
+    <mapping resource="lissa/be/MedicoDerivaAtiende.hbm.xml"/>
+    <mapping resource="lissa/be/ServiciosFondoSolidaridad.hbm.xml"/>
+    <mapping resource="lissa/be/PaqueteFondoSolidaridad.hbm.xml"/>
+    <mapping resource="lissa/be/PaqueteFondoDetalle.hbm.xml"/>
+    <mapping resource="lissa/be/HistorialAtencionFps.hbm.xml"/>
+    <mapping resource="lissa/be/Procedimiento.hbm.xml"/>
+    <mapping resource="lissa/be/Permiso.hbm.xml"/>
+    <mapping resource="lissa/be/UsuarioPermiso.hbm.xml"/>
+    <mapping resource="lissa/be/ProcedimientoTarifario.hbm.xml"/>
+    <mapping resource="lissa/be/Egreso.hbm.xml"/>
+    <mapping resource="lissa/be/EgresoDetalle.hbm.xml"/>
+    <mapping resource="lissa/be/CitaDetalle.hbm.xml"/>
+    <mapping resource="lissa/be/Organizacion.hbm.xml"/>
+    <mapping resource="lissa/be/TipoPersona.hbm.xml"/>
+    <!-- Mapeo Farmacia -->
+    <mapping resource="lissa/be/Almacen.hbm.xml"/>
+    <mapping resource="lissa/be/AlmacenProducto.hbm.xml"/>
+    <mapping resource="lissa/be/Compra.hbm.xml"/>
+    <mapping resource="lissa/be/DetalleCompra.hbm.xml"/>
+    <mapping resource="lissa/be/DetalleVenta.hbm.xml"/>
+    <mapping resource="lissa/be/FarComprobante.hbm.xml"/>
+    <mapping resource="lissa/be/FarFormaPago.hbm.xml"/>
+    <mapping resource="lissa/be/FormaFarmaceutica.hbm.xml"/>
+    <mapping resource="lissa/be/Kardex.hbm.xml"/>
+    <mapping resource="lissa/be/Laboratorio.hbm.xml"/>
+    <mapping resource="lissa/be/Presentacion.hbm.xml"/>
+    <mapping resource="lissa/be/Producto.hbm.xml"/>
+    <mapping resource="lissa/be/Proveedor.hbm.xml"/>
+    <mapping resource="lissa/be/TipoOperacion.hbm.xml"/>
+    <mapping resource="lissa/be/Venta.hbm.xml"/>
+    <mapping resource="lissa/be/Cuentaxcobrar.hbm.xml"/>
+    <mapping resource="lissa/be/AreaConsumo.hbm.xml"/>
+    <mapping resource="lissa/be/PrecioProducto.hbm.xml"/>
+    <mapping resource="lissa/be/AjusteInventario.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

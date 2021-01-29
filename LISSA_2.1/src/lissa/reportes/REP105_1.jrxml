@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REP105_1" language="groovy" pageWidth="388" pageHeight="842" columnWidth="388" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cf652c94-246c-43b7-bf6b-8f7c356117ed">
+	<property name="ireport.zoom" value="1.6105100000000319"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_COMPROBANTE" class="java.lang.Long"/>
+	<parameter name="ID_SERVICIO" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select
+g.codigo,
+a.fecha_atencion,
+g.denominacion,
+a.unidad_medida,
+a.monto_cubierto
+from comprobante_detalle a inner join comprobante b
+on a.id_comprobante = b.idcomprobante inner join procedimiento_tarifario f
+on a.id_procedimientotarifario = f.idprocedimientotarifario inner join procedimiento g
+on f.id_procedimiento =  g.idprocedimiento inner join servicio h
+on g.id_servicio = h.idservicio
+where h.idservicio = $P{ID_SERVICIO} and b.idcomprobante = $P{ID_COMPROBANTE}]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="fecha_atencion" class="java.sql.Date"/>
+	<field name="denominacion" class="java.lang.String"/>
+	<field name="unidad_medida" class="java.lang.String"/>
+	<field name="monto_cubierto" class="java.math.BigDecimal"/>
+	<variable name="SUM" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto_cubierto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement uuid="f6849527-df2d-4ea0-be04-3f492f5b3fdb" x="1" y="19" width="388" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="916855ba-a73a-470f-88b7-1097afc0a7aa" x="0" y="1" width="1" height="18"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="9112a917-dcdf-4ebc-965d-31910d8aeebf" x="50" y="1" width="1" height="18"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="041dbee5-d4ba-4397-bb45-3564983b317e" x="106" y="1" width="1" height="18"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="2c127796-4a87-462b-9833-fa3a1bf33cb5" x="335" y="1" width="1" height="17"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="e352703e-5aa2-47b2-ab5d-d27d8db522d0" x="244" y="1" width="1" height="18"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="86e7ce26-176f-4335-99de-f762173f4fd2" x="279" y="1" width="1" height="17"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="78b68982-b86a-4157-b543-3d53dd75166e" x="244" y="0" width="36" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidad_medida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ab10f060-9507-49ea-b374-6530cf9b4491" x="279" y="0" width="57" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_cubierto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7c921c19-68b4-4b85-bcd8-50ad79076925" x="335" y="0" width="54" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_cubierto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="984f3643-7f8f-46f2-b027-e158537e9d27" x="50" y="0" width="57" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_atencion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="5d5d9621-bb06-4353-a1af-11c635d5a7c1" x="106" y="0" width="139" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{denominacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="21ce1b2a-5200-423f-9c15-091b5a74f989" x="0" y="0" width="51" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="15">
+			<staticText>
+				<reportElement uuid="8f0223d7-de7b-4e32-b9fb-d8ec1e6c9fb8" x="279" y="0" width="56" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[S/.]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="62a3f771-e53c-4916-a2f5-a81ad056b532" x="335" y="0" width="52" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

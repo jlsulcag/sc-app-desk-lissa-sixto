@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Factura" language="groovy" pageWidth="218" pageHeight="5040" columnWidth="177" leftMargin="22" rightMargin="19" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="6e9b53c3-420d-49bc-8bd3-f8742910d2e3">
+	<property name="ireport.zoom" value="1.610510000000003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="92"/>
+	<parameter name="ID_COMPROBANTE" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[Select
+(per.apellido_paterno || ' ' || per.apellido_materno || ' ' || per.nombre) as Nombres, per.numero_documento,
+c.numero,
+c.sub_total,
+c.monto_igv,
+c.monto_total,
+ic.concepto,
+ic.monto_pagado,
+to_char(c.FECHA_REG,'DD/MM/YYYY - HH24:MI') as FECHA_REG,
+u.nombre as user,
+c.numero_operacion,
+c.tipo_documento,
+c.numero,
+pj.razon_social,
+pj.numero_ruc,
+hc.numerohc
+from comprobante as c inner join comprobante_detalle as ic
+on c.idcomprobante = ic.id_comprobante inner join atencion as pac on c.id_atencion = pac.idatencion
+inner join persona as per on per.idpersona = pac.id_persona inner join usuario as u on u.id_usuario = c.id_usuario
+left join persona_juridica pj on pj.id_persona_juridica = c.id_persona_ruc_factura
+left join historia_clinica hc
+on pac.id_historiaclinica = hc.idhistoriaclinica
+where c.idcomprobante = $P{ID_COMPROBANTE}]]>
+	</queryString>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="numero_documento" class="java.lang.String"/>
+	<field name="numero" class="java.lang.Long"/>
+	<field name="sub_total" class="java.math.BigDecimal"/>
+	<field name="monto_igv" class="java.math.BigDecimal"/>
+	<field name="monto_total" class="java.math.BigDecimal"/>
+	<field name="concepto" class="java.lang.String"/>
+	<field name="monto_pagado" class="java.math.BigDecimal"/>
+	<field name="fecha_reg" class="java.lang.String"/>
+	<field name="user" class="java.lang.String"/>
+	<field name="numero_operacion" class="java.lang.Integer"/>
+	<field name="tipo_documento" class="java.lang.Long"/>
+	<field name="razon_social" class="java.lang.String"/>
+	<field name="numero_ruc" class="java.lang.String"/>
+	<field name="numerohc" class="java.lang.Integer"/>
+	<variable name="sub_total_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{sub_total}]]></variableExpression>
+	</variable>
+	<variable name="monto_igv_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto_igv}]]></variableExpression>
+	</variable>
+	<variable name="monto_total_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto_total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0289bfd6-0564-4565-b70d-5ca9e805a378" x="0" y="25" width="177" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POLICLINICO SANTA MARIA MAGDALENA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bc0f9910-b0a2-40f3-8545-969755d01858" x="0" y="36" width="177" height="14" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUC: 20494436761]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8eb20365-7921-4f8f-b0c6-13eacdb37938" x="0" y="14" width="177" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMPRESA DE SALUD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2fa86931-ff8a-478a-aecf-7d8d8456d416" x="0" y="49" width="177" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[JR. BELLIDO N° 275 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="09c7a26b-d79c-48ca-aba7-345901d4c042" x="0" y="61" width="177" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[AYACUCHO - HUAMANGA - AYACUCHO]]></text>
+			</staticText>
+			<textField pattern="00000000" isBlankWhenNull="true">
+				<reportElement uuid="76cd02c8-925d-49a0-9d61-935906feaa27" x="98" y="73" width="79" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c9769344-d0c2-4000-a2c8-23603adc86e8" x="0" y="73" width="98" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TICKET FACTURA  N° ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dc269fdd-5e79-4a75-aa91-25479868c52e" x="0" y="111" width="39" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[NUM-OP: ]]></text>
+			</staticText>
+			<textField pattern="0000000000" isBlankWhenNull="true">
+				<reportElement uuid="52511265-1d60-49a0-a2d9-3572b2fbf813" x="39" y="111" width="138" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_operacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a5cdd50b-0f76-4037-8a5c-5a38f5f531ab" x="0" y="98" width="177" height="14" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[N° DE SERIE    FFCF267104]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="22f74b73-1ad5-4945-8f99-4d5ecf10eb37" x="0" y="85" width="177" height="14" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[N° AUTORIZACIÓN SUNAT : 0243845090887]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="86" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="131e0ff7-19dd-448d-9f2e-f5dc67d783c4" x="0" y="31" width="64" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PACIENTE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="0cb52161-2a11-451b-871e-a7f331483bda" x="64" y="57" width="113" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bab2dd40-5f8e-4228-b545-4befa9074967" x="64" y="44" width="113" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_documento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7c096e61-b5ec-4bc2-b3c7-631ac7744dce" x="0" y="0" width="64" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[RAZON  SOCIAL:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d8f3fba3-812d-49cc-83ed-3d1995aff73d" x="64" y="0" width="113" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3b66f0cb-3960-4eac-8ba4-19a45c13245c" x="0" y="13" width="64" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="54d2a42d-fa7d-4c04-8ea5-c2c96e8c41d6" x="64" y="13" width="113" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9958ceff-3b58-4ac1-804b-69b13cd11def" x="0" y="44" width="64" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[Doc :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b52b965e-c838-487f-ac6f-c784d79a44fe" x="0" y="57" width="64" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[Nombres :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1233f4d1-5bd1-435c-9bf1-c46d9c6679cd" x="64" y="31" width="20" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HC :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="dfa4236b-3b6a-471a-8550-eda3dfeb0707" x="84" y="31" width="93" height="13" forecolor="#0000FF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numerohc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="45ec28ee-dd43-4c50-bc93-c098f1de3ea0" x="0" y="0" width="149" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[PROCEDIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="97ee5786-2191-46e5-8e16-5b664c9d962a" x="149" y="0" width="28" height="13" forecolor="#000000"/>
+				<textElement>
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5e4efa18-7d82-42da-ae55-4ec0eeea5b57" x="0" y="16" width="177" height="1" forecolor="#000000"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d2020750-cea3-45af-9713-f16a6e7edd9c" x="0" y="0" width="149" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e52732b2-45b4-4aa0-acab-f43b6731c1d1" x="149" y="0" width="28" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_pagado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="90" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e1c4aae1-4968-4e9a-8b73-f24bfa79f806" x="149" y="7" width="28" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sub_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="22062b0c-3683-4ca0-b377-10ece989fab5" x="54" y="7" width="88" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[Sub Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2f3f33b7-2486-40d4-91ea-0f7fe480f33f" x="149" y="20" width="28" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_igv}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8652cf88-16be-4a03-ba11-a527a5af3449" x="54" y="20" width="88" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[IGV:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="29d121dd-c18e-4a8e-81fb-9d4359b94e67" x="149" y="33" width="28" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="958ec689-0430-4f3f-9828-a11ba48b2c21" x="54" y="33" width="88" height="13" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ceae8823-5278-4fb2-aa08-5b503775611e" x="39" y="66" width="138" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_reg}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8b5d97d8-d7e2-4e83-b56e-1b4835beaa87" x="0" y="65" width="39" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="589f3017-f095-419f-8d77-664ea0777a08" x="0" y="2" width="177" height="1" forecolor="#000000"/>
+			</line>
+			<staticText>
+				<reportElement uuid="4bd565d0-f3ff-4451-8368-8a2271900bcd" x="0" y="53" width="39" height="12" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<text><![CDATA[USUARIO:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="36e805be-7f02-47f1-abf5-d5b5cc6ab30f" x="39" y="53" width="138" height="13" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

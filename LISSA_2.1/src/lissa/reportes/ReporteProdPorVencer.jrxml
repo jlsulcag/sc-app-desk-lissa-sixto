@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportePorTurno" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="828" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" uuid="b15ca1b7-acc2-4239-9857-53fdc1053a75">
+	<property name="ireport.zoom" value="2.5937424601000076"/>
+	<property name="ireport.x" value="914"/>
+	<property name="ireport.y" value="1"/>
+	<parameter name="NUMDIAS" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select
+p.nombre as prod,
+ff.denominacion as forfarm,
+pre.denominacion as presentacion,
+lab.denominacion as lab,
+a.nombre AS nomAlm,
+ap.stock_actual,
+ap.fecha_vencimiento
+from forma_farmaceutica ff inner join producto p
+on ff.idformafarmaceutica = p.id_formafarmaceutica inner join presentacion pre
+on p.id_presentacion = pre.idpresentacion inner join laboratorio lab
+on p.id_laboratorio = lab.idlaboratorio inner join almacen_producto ap
+on p.idproducto = ap.id_producto inner join almacen a
+on ap.id_almacen = a.idalmacen
+where ap.fecha_vencimiento <= $P{NUMDIAS} and ap.stock_actual>0
+order by ap.fecha_vencimiento asc, a.nombre desc]]>
+	</queryString>
+	<field name="prod" class="java.lang.String"/>
+	<field name="forfarm" class="java.lang.String"/>
+	<field name="presentacion" class="java.lang.String"/>
+	<field name="lab" class="java.lang.String"/>
+	<field name="nomalm" class="java.lang.String"/>
+	<field name="stock_actual" class="java.lang.Integer"/>
+	<field name="fecha_vencimiento" class="java.sql.Date"/>
+	<variable name="SUM_TOTAL" class="java.math.BigDecimal"/>
+	<variable name="SUM_TOTAL_CALC" class="java.lang.String"/>
+	<group name="Group1">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group3">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group4">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="54">
+			<frame>
+				<reportElement uuid="99ae1269-232f-4efe-b403-96143beb1674" mode="Opaque" x="0" y="0" width="828" height="51" backcolor="#FFFFFF"/>
+				<staticText>
+					<reportElement uuid="26142663-aad8-4a68-838d-b013b91562a6" x="0" y="15" width="828" height="20" forecolor="#000000"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Reporte productos por vencer]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15">
+			<rectangle>
+				<reportElement uuid="24f5a4d6-3e25-43fb-97a3-692d20b56e09" x="755" y="0" width="60" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="9a207e99-1247-4f3d-95df-ebf63186fcff" x="658" y="0" width="97" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="1d892412-31d7-4eeb-9c44-07fb255af6da" x="616" y="0" width="42" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="49d0d88b-61c7-426f-ab8a-640791e47037" x="535" y="0" width="81" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7becec17-dd52-4622-880c-4b7969484d03" x="438" y="0" width="97" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="dbc3420e-238d-429b-9a94-1f5b39643de4" x="341" y="0" width="97" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="bc4981f0-e110-475c-8bbc-449c036cddbc" x="241" y="0" width="100" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="2be743ac-0428-46e2-b5cd-a66b38c95841" x="18" y="0" width="223" height="15"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="fb3077e7-a221-4ddd-87a9-8cfd01784e9b" x="241" y="0" width="100" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ FORMA FARMACUTICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="81fafb08-5134-4dd0-8fa5-20f8bb24ecb3" x="438" y="0" width="97" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ LABORATORIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1caf058b-1405-4355-a33d-5f0045317de6" x="535" y="0" width="81" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ ALMACEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="49b55b7b-993b-4cfe-bded-c510e21f797d" x="616" y="0" width="42" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[STOCK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a26e8354-b8f7-40ce-bf04-a300caed657f" x="658" y="0" width="97" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA VENCIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bf6fe162-08b7-4b17-ae80-f3adb0f5b4aa" x="18" y="0" width="223" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="93a8eb52-472c-484a-99d4-aa0c7c31143f" x="341" y="0" width="97" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ PRESENTACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ebe63ef-7bac-4577-ac68-dea323c82449" x="755" y="0" width="60" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band/>
+		<band height="15">
+			<textField>
+				<reportElement uuid="093c8dbb-08f5-454d-b7f3-3a79e6f6ea18" x="241" y="0" width="100" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{forfarm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="81c78f7e-337c-4bac-9440-379d0d4231f5" x="341" y="0" width="97" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presentacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cd78a876-8490-4d43-b0d0-ed3546018d84" x="438" y="0" width="97" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="433d5fa5-7ec9-4bd6-86bc-acd428d64725" x="535" y="0" width="81" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomalm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="abb09bd8-96b8-483c-8491-0fabf76e76ec" x="616" y="0" width="42" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stock_actual}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="e9db4d36-a2d9-4768-a182-dbaea0142330" x="18" y="14" width="797" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="74c36bcf-259f-41c3-80a2-f9767949c5ae" x="755" y="1" width="60" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{fecha_vencimiento}<new java.util.Date()? "VENCIDO" : "POR VENCER" )]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="f3606b3b-5b65-47ae-bf22-ae855718ddeb" x="658" y="1" width="97" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_vencimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b55fb79b-622a-483e-a85f-6b1c109a485f" x="19" y="0" width="223" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prod}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="19">
+			<textField>
+				<reportElement uuid="ba6e8563-0e73-4ff2-ab6a-5d9d7615e3c9" mode="Opaque" x="0" y="4" width="541" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="2ddfdd44-2509-4394-bc45-49303d637bab" mode="Opaque" x="541" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="bfda59fd-4ee4-468b-8b4a-cebf3fd9baef" x="0" y="4" width="224" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

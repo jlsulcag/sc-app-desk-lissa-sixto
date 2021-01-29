@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Caja" table="caja" schema="public" optimistic-lock="version">
+        <id name="idcaja" type="int">
+            <column name="idcaja" />
+            <generator class="sequence">
+                <param name="sequence">caja_idcaja_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="usuario" class="lissa.be.Usuario" fetch="select">
+            <column name="id_usuario" />
+        </many-to-one>
+        <many-to-one name="areaCaja" class="lissa.be.AreaCaja" fetch="select">
+            <column name="id_areacaja" />
+        </many-to-one>
+        <property name="fechaApertura" type="date">
+            <column name="fecha_apertura" length="13" not-null="true" />
+        </property>
+        <property name="horaApertura" type="string">
+            <column name="hora_apertura" length="30" />
+        </property>
+        <property name="fechaCierre" type="date">
+            <column name="fecha_cierre" length="13" />
+        </property>
+        <property name="horaCierre" type="string">
+            <column name="hora_cierre" length="30" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="30" />
+        </property>
+        <property name="saldoInicial" type="big_decimal">
+            <column name="saldo_inicial" precision="16" />
+        </property>
+        <property name="saldoFinal" type="big_decimal">
+            <column name="saldo_final" precision="16" />
+        </property>
+        <property name="saldoContabilizado" type="big_decimal">
+            <column name="saldo_contabilizado" precision="16" />
+        </property>
+        <property name="descuadre" type="big_decimal">
+            <column name="descuadre" precision="16" />
+        </property>
+        <property name="turno" type="string">
+            <column name="turno" length="30" />
+        </property>
+        <set name="comprobantes" table="comprobante" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_caja" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Comprobante" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-oct-2016 12:42:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Venta" table="venta" schema="farmacia" optimistic-lock="version">
+        <id name="idventa" type="long">
+            <column name="idventa" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="farComprobante" class="lissa.be.FarComprobante" fetch="select">
+            <column name="id_farcomprobante" not-null="true" />
+        </many-to-one>
+        <many-to-one class="lissa.be.TipoDocidentidad" fetch="select" name="tipoDocCliente">
+            <column name="tipo_doc_cliente" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="organizacion" class="lissa.be.Organizacion" fetch="select">
+            <column name="id_organizacion" not-null="true" />
+        </many-to-one>
+        <many-to-one class="lissa.be.Persona" fetch="select" name="clientepersonanatural">
+            <column name="id_clientepersonanatural"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.Persona" fetch="select" name="personaPaciente">
+            <column name="id_personapaciente"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.Usuario" fetch="select" name="usuarioReg">
+            <column name="id_usuarioreg"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.Usuario" fetch="select" name="usuarioAnu">
+            <column name="id_usuarioanu"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.Caja" fetch="select" name="caja">
+            <column name="id_caja"/>
+        </many-to-one>        
+        <many-to-one name="areaConsumo" class="lissa.be.AreaConsumo" fetch="select">
+            <column name="id_areaconsumo" not-null="false" />
+        </many-to-one>
+        <many-to-one name="almacenOrigen" class="lissa.be.Almacen" fetch="select">
+            <column name="id_origen" not-null="false" />
+        </many-to-one>        
+        <property name="fechaVenta" type="date">
+            <column name="fecha_venta" length="13" not-null="true" />
+        </property>
+        <property name="horaVenta" type="string">
+            <column name="hora_venta" length="15" not-null="true" />
+        </property>
+        <property name="numComprobante" type="java.lang.Long">
+            <column name="num_comprobante" />
+        </property>
+        <property name="grupoNumeracion" type="int">
+            <column name="grupo_numeracion" not-null="true" />
+        </property>
+        <property name="subTotal" type="big_decimal">
+            <column name="sub_total" precision="18" not-null="true" />
+        </property>
+        <property name="montoIgv" type="big_decimal">
+            <column name="monto_igv" precision="18" not-null="true" />
+        </property>
+        <property name="total" type="big_decimal">
+            <column name="total" precision="18" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="30" not-null="true" />
+        </property>
+        <property name="motivoAnulacion" type="string">
+            <column name="motivo_anulacion" length="160" />
+        </property>
+        <property name="numOperacion" type="int">
+            <column name="num_operacion" not-null="true" />
+        </property>
+        <property name="descripcionSeguros" type="string">
+            <column name="descripcion_seguros" length="120" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="360" />
+        </property>
+        <property name="correoClienteTemp" type="string">
+            <column name="correo_cliente_temp" length="100" />
+        </property>
+        <!---->
+        <property name="serie" type="string">
+            <column length="4" name="serie"/>
+        </property>
+        <property name="tipoCambio" type="big_decimal">
+            <column name="tipo_cambio" precision="10" />
+        </property>
+        <property name="totalValorVentaOpGravadas" type="big_decimal">
+            <column name="total_valor_venta_op_gravadas" precision="12" not-null="true" />
+        </property>
+        <property name="totalValorVentaOpeInafectas" type="big_decimal">
+            <column name="total_valor_venta_ope_inafectas" precision="12" not-null="true" />
+        </property>
+        <property name="totalValorVentaOpeExoneradas" type="big_decimal">
+            <column name="total_valor_venta_ope_exoneradas" precision="12" not-null="true" />
+        </property>
+        <property name="totalSumatoriaIgv" type="big_decimal">
+            <column name="total_sumatoria_igv" precision="12" not-null="true" />
+        </property>
+        <property name="totalSumatoriaIsc" type="big_decimal">
+            <column name="total_sumatoria_isc" precision="12" not-null="true" />
+        </property>
+        <property name="totalSumatoriaOtrosTributos" type="big_decimal">
+            <column name="total_sumatoria_otros_tributos" precision="12" not-null="true" />
+        </property>
+        <property name="totalSumatoriaOtrosCargos" type="big_decimal">
+            <column name="total_sumatoria_otros_cargos" precision="12" not-null="true" />
+        </property>
+        <property name="totalSumatoriaDescuentos" type="big_decimal">
+            <column name="total_sumatoria_descuentos" precision="12" not-null="true" />
+        </property>
+        <property name="totalImporteVenta" type="big_decimal">
+            <column name="total_importe_venta" precision="12" not-null="true" />
+        </property>
+        <property name="tipoMoneda" type="string">
+            <column name="tipo_moneda" length="10" not-null="true" />
+        </property>
+        <property name="totalOpeGratuitas" type="big_decimal">
+            <column name="total_ope_gratuitas" precision="12" not-null="true" />
+        </property>
+        
+        <property name="estadoSunat" type="string">
+            <column name="estado_sunat" length="30" not-null="true" />
+        </property>        
+        
+        <set name="detalleVentas" table="detalle_venta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_venta" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.DetalleVenta" />
+        </set>
+        <set name="cuentaxcobrars" table="cuentaxcobrar" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_venta" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Cuentaxcobrar" />
+        </set>
+        <property name="responsableNotasalida" type="string">
+            <column name="responsable_notasalida" length="120" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

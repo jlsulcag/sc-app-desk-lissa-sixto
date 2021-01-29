@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/12/2018 04:24:27 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Organizacion" table="organizacion" schema="public" optimistic-lock="version">
+        <id name="idorganizacion" type="long">
+            <column name="idorganizacion" />
+            <generator class="assigned" />
+        </id>
+        <property name="razonSocial" type="string">
+            <column name="razon_social" length="150" not-null="true" />
+        </property>
+        <property name="ruc" type="string">
+            <column name="ruc" length="13" not-null="true" />
+        </property>
+        <property name="domicilioFiscal" type="string">
+            <column name="domicilio_fiscal" length="150" not-null="true" />
+        </property>
+        <property name="logo" type="binary">
+            <column name="logo" />
+        </property>
+        <set name="comprobantes" table="comprobante" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_organizacion" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Comprobante" />
+        </set>
+    </class>
+</hibernate-mapping>

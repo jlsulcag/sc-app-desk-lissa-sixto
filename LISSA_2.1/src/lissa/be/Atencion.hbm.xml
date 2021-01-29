@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/09/2018 03:23:00 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Atencion" table="atencion" schema="public" optimistic-lock="version">
+        <id name="idatencion" type="long">            
+            <column name="idatencion" />
+            <generator class="sequence">
+                <param name="sequence">atencion_idatencion_seq</param>
+            </generator>            
+        </id>
+        <many-to-one name="persona" class="lissa.be.Persona" fetch="select">
+            <column name="id_persona" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cita" class="lissa.be.Cita" fetch="select">
+            <column name="id_cita" />
+        </many-to-one>
+        <many-to-one name="historiaClinica" class="lissa.be.HistoriaClinica" fetch="select">
+            <column name="id_historiaclinica"/>
+        </many-to-one>
+        <property name="fechaIngreso" type="date">
+            <column name="fecha_ingreso" length="13" not-null="true" />
+        </property>
+        <property name="numeroAtencion" type="java.lang.Integer">
+            <column name="numero_atencion" />
+        </property>
+        <property name="tipoIngreso" type="string">
+            <column name="tipo_ingreso" length="20" />
+        </property>
+        <property name="idUseradmision" type="java.lang.Long">
+            <column name="id_useradmision" />
+        </property>
+        <property name="idUsertriaje" type="java.lang.Long">
+            <column name="id_usertriaje" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="50">
+                <comment>PEN, CONCLUIDO</comment>
+            </column>
+        </property>
+        <property name="tipoPaciente" type="string">
+            <column name="tipo_paciente" length="20" />
+        </property>
+        <property name="edad" type="java.lang.Integer">
+            <column name="edad" />
+        </property>
+        <set name="comprobantes" table="comprobante" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_atencion" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.Comprobante" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-oct-2016 12:42:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.DetalleVenta" table="detalle_venta" schema="farmacia" optimistic-lock="version">
+        <id name="iddetalleventa" type="long">
+            <column name="iddetalleventa" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="producto" class="lissa.be.Producto" fetch="select">
+            <column name="id_producto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="venta" class="lissa.be.Venta" fetch="select">
+            <column name="id_venta" not-null="true" />
+        </many-to-one>
+        <property name="precioVenta" type="big_decimal">
+            <column name="precio_venta" precision="10" not-null="true" />
+        </property>
+        <property name="cantidadVenta" type="big_decimal">
+            <column name="cantidad_venta" />
+        </property>
+        <property name="lote" type="string">
+            <column name="lote_vendido" />
+        </property>
+        <property name="idAlmacenproducto" type="java.lang.Long">
+            <column name="id_almacenproducto" />
+        </property>
+        
+        <property name="unidadMedida" type="string">
+            <column length="15" name="unidad_medida" not-null="true"/>
+        </property>
+        <property name="idTipoigv" type="long">
+            <column name="id_tipoigv" not-null="true"/>
+        </property>
+        <property name="valorUnitarioItem" type="big_decimal">
+            <column name="valor_unitario_item" precision="10"/>
+        </property>
+        <property name="precioUnitarioItem" type="big_decimal">
+            <column name="precio_unitario_item" precision="10"/>
+        </property>
+        <property name="subTotal" type="big_decimal">
+            <column name="sub_total" precision="12"/>
+        </property>
+        <property name="montoIgvItem" type="big_decimal">
+            <column name="monto_igv_item" precision="10"/>
+        </property>
+        <property name="montoTotal" type="big_decimal">
+            <column name="monto_total" precision="10"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05/12/2018 11:29:34 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.CitaDetalle" table="cita_detalle" schema="public" optimistic-lock="version">
+        <id name="idcitadetalle" type="long">
+            <column name="idcitadetalle" />
+            <generator class="sequence" >
+                <param name="sequence">cita_detalle_idcitadetalle_seq</param>
+            </generator>
+        </id>
+        <property name="costo" type="big_decimal">
+            <column name="costo" precision="10" not-null="true" />
+        </property>
+        <many-to-one class="lissa.be.Cita" fetch="select" name="cita">
+            <column name="id_cita"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.Medico" fetch="select" name="medico">
+            <column name="id_medico"/>
+        </many-to-one>
+        <many-to-one class="lissa.be.ProcedimientoTarifario" fetch="select" name="procedimientoTarifario">
+            <column name="id_procedimientotarifario"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

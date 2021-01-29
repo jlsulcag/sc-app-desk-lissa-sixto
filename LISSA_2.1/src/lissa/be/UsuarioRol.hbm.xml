@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.UsuarioRol" table="usuario_rol" schema="public" optimistic-lock="version">
+        <id name="idUsuarioRol" type="int">
+            <column name="id_usuario_rol" />
+            <generator class="sequence">
+                <param name="sequence">usurio_rol_id_usuario_rol_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="rol" class="lissa.be.Rol" fetch="select">
+            <column name="id_rol" />
+        </many-to-one>
+        <many-to-one name="usuario" class="lissa.be.Usuario" fetch="select">
+            <column name="id_usuario" />
+        </many-to-one>
+        <property name="fechaReg" type="timestamp">
+            <column name="fecha_reg" length="29" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="50" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Beneficio" optimistic-lock="version" schema="public" table="beneficio">
+        <id name="idbeneficio" type="int">
+            <column name="idbeneficio"/>
+            <generator class="sequence">
+                <param name="sequence">beneficio_idbeneficio_seq</param>
+            </generator>
+        </id>
+        <many-to-one class="lissa.be.SeguroVida" fetch="select" name="seguroVida">
+            <column name="id_seguro" not-null="true"/>
+        </many-to-one>
+        <property name="nombreBeneficio" type="string">
+            <column length="50" name="nombre_beneficio"/>
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado"/>
+        </property>
+        <property name="porcCubierto" type="int">
+            <column name="porc_cubierto"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="itemsComprobantes" table="items_comprobante">
+            <key>
+                <column name="id_beneficio"/>
+            </key>
+            <one-to-many class="lissa.be.ComprobanteDetalle"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="comprobantes" table="comprobante">
+            <key>
+                <column name="id_beneficio"/>
+            </key>
+            <one-to-many class="lissa.be.Comprobante"/>
+        </set>
+    </class>
+</hibernate-mapping>

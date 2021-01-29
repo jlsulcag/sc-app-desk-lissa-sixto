@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14/06/2017 04:06:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.ServiciosFondoSolidaridad" table="servicios_fondo_solidaridad" schema="public" optimistic-lock="version">
+        <id name="idserviciosfs" type="int">
+            <column name="idserviciosfs" />
+            <generator class="sequence">
+                <param name="sequence">servicios_fondo_solidaridad_idserviciosfs_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="fondoSolidaridad" class="lissa.be.FondoSolidaridad" fetch="select">
+            <column name="id_fondosolidaridad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paqueteFondoSolidaridad" class="lissa.be.PaqueteFondoSolidaridad" fetch="select">
+            <column name="id_paquete" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

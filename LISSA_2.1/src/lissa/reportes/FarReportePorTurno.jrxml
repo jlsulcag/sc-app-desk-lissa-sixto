@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FarReportePorTurno" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6381b242-f11e-4aff-879e-5f7db48f78e8">
+	<property name="ireport.zoom" value="1.3310000000000064"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_CAJA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Repositorio\\Lissa\\LISSA_1.0\\src\\lissa\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+concat(per.nombre || ' ' || per.apellido_paterno || ' ' || per.apellido_materno) as nombre_usuario,
+us.nombre,
+ca.turno,
+ca.idcaja
+from caja ca inner join area_caja ac
+on ca.id_areacaja = ac.idareacaja inner join usuario us
+on ca.id_usuario = us.id_usuario inner join persona per
+on us.id_persona = per.idpersona
+where ca.idcaja = $P{ID_CAJA}]]>
+	</queryString>
+	<field name="nombre_usuario" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="turno" class="java.lang.String"/>
+	<field name="idcaja" class="java.lang.Integer"/>
+	<variable name="TOTAL" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="SUM" class="java.lang.String"/>
+	<variable name="PRUEBA" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="40">
+			<frame>
+				<reportElement uuid="6b4f5f03-d3ee-4ab4-a79d-9451d576c660" mode="Opaque" x="-20" y="-20" width="595" height="58" backcolor="#FFFFFF"/>
+				<staticText>
+					<reportElement uuid="ef9a438e-6cc7-4d70-a002-0b5b45d801b4" x="143" y="20" width="233" height="30" forecolor="#000000"/>
+					<textElement textAlignment="Center">
+						<font size="20" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Reporte caja por turno]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="5047e2e8-2dde-438f-a78e-7e261032d99c" x="422" y="10" width="171" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre_usuario}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="777005ee-7ec0-4f85-83ea-dc19483590f6" x="376" y="10" width="46" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Cajero :]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="a2fba6fc-6b5f-4c88-9643-049ea299c32a" x="422" y="25" width="171" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="5af12e3c-c619-453e-83e4-91ad7d265cd6" x="376" y="25" width="46" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Usuario :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="31296f00-bd9d-4fe4-930b-7c063346c9a5" x="376" y="40" width="46" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Turno :]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="c7c47c77-895f-40fa-817b-cfc20907d482" x="422" y="40" width="171" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="41">
+			<subreport>
+				<reportElement uuid="5c9f651c-36b7-4dd6-bb99-9c3d8e2fa6bf" x="0" y="0" width="555" height="39"/>
+				<subreportParameter name="ID_CAJA">
+					<subreportParameterExpression><![CDATA[$F{idcaja}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["V:\\REP\\FarReportePorTurnoBoleta.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="38">
+			<subreport>
+				<reportElement uuid="820d85a0-50d7-4278-90ef-7121046febfb" x="0" y="0" width="555" height="36"/>
+				<subreportParameter name="ID_CAJA">
+					<subreportParameterExpression><![CDATA[$F{idcaja}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["V:\\REP\\FarReportePorTurnoFact.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<subreport>
+				<reportElement uuid="f8c3ffd4-4d45-4612-b5e1-54331dbc6b01" x="0" y="0" width="555" height="39"/>
+				<subreportParameter name="ID_CAJA">
+					<subreportParameterExpression><![CDATA[$F{idcaja}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["V:\\REP\\FarReportePorTurnoBoletaSeguros.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="36">
+			<textField>
+				<reportElement uuid="0f16e852-ef84-4509-a486-32085a562519" mode="Opaque" x="0" y="22" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="bee9c31d-de41-4128-a753-3e11240eebb7" mode="Opaque" x="515" y="22" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="390b8170-0bbe-4660-a653-e7d942d74895" x="0" y="22" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="bc8ac676-dbff-4e8d-bc9a-d90841b1b9fc" x="455" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

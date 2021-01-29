@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/09/2018 05:49:13 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.TipoDocidentidad" table="tipo_docidentidad" schema="public" optimistic-lock="version">
+        <id name="idtipodocidentidad" type="long">
+            <column name="idtipodocidentidad" />
+            <generator class="sequence">
+                <param name="sequence">tipo_docidentidad_idtipodocidentidad_seq</param>
+            </generator>
+        </id>
+        <property name="documento" type="string">
+            <column name="documento" length="60" not-null="true" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <property name="codigoSunat" type="string">
+            <column name="codigo_sunat" not-null="true"/>
+        </property>
+        <set name="personas" table="persona" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipodocidentidad" />
+            </key>
+            <one-to-many class="lissa.be.Persona" />
+        </set>
+    </class>
+</hibernate-mapping>

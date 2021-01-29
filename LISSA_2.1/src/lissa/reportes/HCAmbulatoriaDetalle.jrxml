@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HCAmbulatoriaDetalle" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="38210131-921f-48f4-b594-cfdcc328bbce">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<background>
+		<band/>
+	</background>
+	<pageHeader>
+		<band height="4"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="5"/>
+	</columnHeader>
+	<detail>
+		<band height="258">
+			<staticText>
+				<reportElement uuid="0558f2c7-5b75-454c-b882-1e3c1066bb98" x="0" y="7" width="35" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0c2f17f6-9bb7-4f75-b2eb-c20b1361edd7" x="214" y="7" width="32" height="20"/>
+				<textElement/>
+				<text><![CDATA[Hora :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f1d49d41-787e-48ab-b4fe-8fee65bee56c" x="418" y="7" width="31" height="20"/>
+				<textElement/>
+				<text><![CDATA[Edad :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2eb147fd-0e9f-498c-8417-5865175e4c2d" x="0" y="38" width="175" height="20"/>
+				<textElement/>
+				<text><![CDATA[Antecedentes patológicos familiares : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fe160275-fb87-4b93-962f-78369940c211" x="0" y="68" width="175" height="20"/>
+				<textElement/>
+				<text><![CDATA[Antecedentes patológicos personales :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="86006491-f428-4fea-9a92-068a16d97dbc" x="0" y="101" width="146" height="20"/>
+				<textElement/>
+				<text><![CDATA[Alergia a algún medicamento :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ac05e0d8-c048-4636-85e3-e087e4bf9a7a" x="258" y="101" width="57" height="20"/>
+				<textElement/>
+				<text><![CDATA[¿Cuál es?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e342bafb-92e9-44ed-885d-fa86f0e750b8" x="0" y="131" width="35" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[CFV:PA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5256b66f-a102-41b5-b630-abc25760565c" x="63" y="131" width="8" height="20"/>
+				<textElement/>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4d561847-0678-40d1-8fdb-c17e40d74cb8" x="99" y="131" width="28" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[mmHg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5d25317e-db24-47cb-9954-a4a19e7b10c6" x="136" y="131" width="11" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[T°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="29266403-e75e-4e95-88af-a2c4800e065b" x="197" y="131" width="9" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[R]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="07b22343-cf40-4a77-9541-117d0871e7ae" x="258" y="131" width="13" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[P°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="80bb3f7d-3fd6-4527-994b-10f2ad937a25" x="299" y="131" width="12" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[X1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="38b48f65-148e-43e0-a4bb-4dcf1911a863" x="234" y="131" width="12" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[X1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="72c47db2-9c4d-4138-b7a8-97573ac80666" x="325" y="131" width="29" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Peso :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="d0b5040a-3c1d-41eb-837a-34f06e5a63fb" x="34" y="131" width="30" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4ea999e0-6f7d-4958-8967-95658f87ed1d" x="70" y="131" width="30" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="20f439d9-ef5c-413d-9a99-661c27bcc1af" x="146" y="131" width="30" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c94fa987-5cb0-4595-b91f-35edf62eaf11" x="175" y="131" width="11" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[C°]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="afdf306c-13b1-4531-aa9c-d8464d3b3763" x="205" y="131" width="30" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="668cf225-d8fa-490b-8a57-1aba198b7a7f" x="270" y="131" width="30" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bf8d182f-1db8-4b32-8629-50fb2dd513d6" x="353" y="131" width="30" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="086850b1-a132-4bfb-9aae-f47f18eecf26" x="382" y="131" width="12" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Kg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="410902ee-632c-4062-84cd-784ccf85f4fa" x="407" y="131" width="25" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Talla :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="edb5a21e-c297-417c-b219-6ecade6c2f70" x="431" y="131" width="30" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f9ccbde7-6293-4d7b-8932-51845dbbe625" x="460" y="131" width="11" height="20"/>
+				<textElement/>
+				<text><![CDATA[m]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e3680e45-236c-42ad-8e8f-5c812f077e85" x="484" y="131" width="24" height="20"/>
+				<textElement/>
+				<text><![CDATA[IMC :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="fbd5043e-240a-475e-805d-0019efac630b" x="507" y="131" width="30" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a7fd5fe1-164b-453c-9112-dbb13573f52c" x="536" y="131" width="29" height="20"/>
+				<textElement/>
+				<text><![CDATA[kg/m2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d1aad36b-073c-4ea9-9557-51d5c7d8bbce" x="0" y="161" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Motivo de consulta :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0d981935-3eae-41de-9556-ec74a249dac4" x="0" y="192" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Anamnesis :]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

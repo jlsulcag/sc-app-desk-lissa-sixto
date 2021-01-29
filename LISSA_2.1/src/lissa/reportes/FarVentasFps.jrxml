@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FarVentasFps" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f02272ca-1446-4d73-83ad-b870df8cafd7">
+	<property name="ireport.zoom" value="1.1000000000000036"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     detalle_venta."cantidad_venta" AS detalle_venta_cantidad_venta,
+     venta."fecha_venta" AS venta_fecha_venta,
+     venta."num_comprobante" AS venta_num_comprobante,
+     cuentaxcobrar."monto_pagado" AS cuentaxcobrar_monto_pagado,
+     cuentaxcobrar."total" AS cuentaxcobrar_total,
+     cuentaxcobrar."monto_pagofps" AS cuentaxcobrar_monto_pagofps,
+     producto."nombre" AS producto_nombre,
+     persona."nombre" AS persona_nombre,
+     persona."apellido_paterno" AS persona_apellido_paterno,
+     persona."apellido_materno" AS persona_apellido_materno,
+     persona."numero_documento" AS persona_numero_documento,
+     far_comprobante."comprobante" AS far_comprobante_comprobante
+FROM
+     "farmacia"."venta" venta INNER JOIN "farmacia"."detalle_venta" detalle_venta ON venta."idventa" = detalle_venta."id_venta"
+     INNER JOIN "farmacia"."cuentaxcobrar" cuentaxcobrar ON venta."idventa" = cuentaxcobrar."id_venta"
+     INNER JOIN "public"."persona" persona ON venta."id_cliente" = persona."id_persona"
+     INNER JOIN "farmacia"."far_comprobante" far_comprobante ON venta."id_farcomprobante" = far_comprobante."idfarcomprobante"
+     INNER JOIN "farmacia"."producto" producto ON detalle_venta."id_producto" = producto."idproducto"
+WHERE
+     cuentaxcobrar.id_seguro = 4 and cuentaxcobrar.monto_pagofps > 0 and venta.estado = 'ACT']]>
+	</queryString>
+	<field name="detalle_venta_cantidad_venta" class="java.lang.Integer"/>
+	<field name="venta_fecha_venta" class="java.sql.Date"/>
+	<field name="venta_num_comprobante" class="java.lang.Long"/>
+	<field name="cuentaxcobrar_monto_pagado" class="java.math.BigDecimal"/>
+	<field name="cuentaxcobrar_total" class="java.math.BigDecimal"/>
+	<field name="cuentaxcobrar_monto_pagofps" class="java.math.BigDecimal"/>
+	<field name="producto_nombre" class="java.lang.String"/>
+	<field name="persona_nombre" class="java.lang.String"/>
+	<field name="persona_apellido_paterno" class="java.lang.String"/>
+	<field name="persona_apellido_materno" class="java.lang.String"/>
+	<field name="persona_numero_documento" class="java.lang.String"/>
+	<field name="far_comprobante_comprobante" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="6ee58b8f-3dfb-4f39-93eb-13b9b24bd750" x="0" y="0" width="802" height="15"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="bd817767-db89-43b8-bfd3-4dea4adbc6cc" x="0" y="0" width="197" height="15"/>
+				<textElement/>
+				<text><![CDATA[Apellidos y Nombres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6429b941-2633-4272-95ed-58137c561863" x="314" y="0" width="119" height="15"/>
+				<textElement/>
+				<text><![CDATA[Comprobante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="61b21ac5-2be5-4f94-9d20-311062c06b63" x="433" y="0" width="69" height="15"/>
+				<textElement/>
+				<text><![CDATA[Fecha ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="04d4a4e7-1804-4db8-b23f-689a1340d251" x="749" y="0" width="53" height="15"/>
+				<textElement/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a88cb472-d6da-4966-95b3-fdbf15d1609e" x="197" y="0" width="117" height="15"/>
+				<textElement/>
+				<text><![CDATA[DNI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f03c2db5-a2cb-40f4-ab1b-3056238bf76d" x="502" y="0" width="247" height="15"/>
+				<textElement/>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement uuid="aa3b6c10-bffa-41de-9589-0904e70ffab1" x="0" y="1" width="197" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{persona_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9c6c7b9c-67bc-4be9-8b47-a485ec13444c" x="314" y="1" width="119" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{far_comprobante_comprobante}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="4e432fde-68d0-472d-bd5b-bbcf758d8cee" x="433" y="1" width="69" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{venta_fecha_venta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="7fc9cab0-d368-41cd-b2ab-f3d76c9d5052" x="502" y="1" width="247" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{producto_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dc0d57f6-a9f1-4cc5-9848-769b209111c4" x="749" y="1" width="53" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{detalle_venta_cantidad_venta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b4888720-405c-443d-823b-3f441a1b8de2" x="197" y="1" width="119" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{persona_numero_documento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

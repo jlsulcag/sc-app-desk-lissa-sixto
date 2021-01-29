@@ -1,0 +1,1101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaPsicotecnico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f8dcaeab-2887-4a05-887a-0f2f5b5a7274">
+	<property name="ireport.zoom" value="1.3310000000000282"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<parameter name="ID_FPP" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select (per.apellido_paterno || ' ' || per.apellido_materno || ' ' || per.nombre) nombre,
+per.numero_documento, per.fecha_nacimiento, per.sexo, ec.estado_civil, ao.edad_ingreso,
+per.lugar_nacimiento, per.grado_instruccion, per.lugar_procedencia, eo.evaluacion, exo.examen,
+ao.fecha_certificacion, fpp.*
+from ficha_psicologica_psicotecnico fpp inner join atencion_ocupacional ao
+on fpp.id_atencionocupacional = ao.idatencionocupacional inner join historia_clinica hc
+on ao.id_historiaclinica = hc.idhistoriaclinica inner join persona per
+on hc.id_persona = per.id_persona inner join pe_estado_civil ec
+on per.id_estado_civil = ec.idpeestadocivil inner join evaluacion_ocupacional eo
+on ao.id_evaluacion = eo.idevaluacionocupacional inner join examen_ocupacional exo
+on ao.id_tipo_examen = exo.idexamenocupacional
+where fpp.idfichapsicologicapsicotecnico = $P{ID_FPP}]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="numero_documento" class="java.lang.String"/>
+	<field name="fecha_nacimiento" class="java.sql.Date"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="estado_civil" class="java.lang.String"/>
+	<field name="edad_ingreso" class="java.lang.Integer"/>
+	<field name="lugar_nacimiento" class="java.lang.String"/>
+	<field name="grado_instruccion" class="java.lang.String"/>
+	<field name="lugar_procedencia" class="java.lang.String"/>
+	<field name="evaluacion" class="java.lang.String"/>
+	<field name="examen" class="java.lang.String"/>
+	<field name="fecha_certificacion" class="java.sql.Date"/>
+	<field name="idfichapsicologicapsicotecnico" class="java.lang.Integer"/>
+	<field name="id_atencionocupacional" class="java.lang.Integer"/>
+	<field name="motivo_evaluacion" class="java.lang.String"/>
+	<field name="presentacion" class="java.lang.String"/>
+	<field name="postura" class="java.lang.String"/>
+	<field name="discurso_ritmo" class="java.lang.String"/>
+	<field name="discurso_tono" class="java.lang.String"/>
+	<field name="discurso_articulacion" class="java.lang.String"/>
+	<field name="orientacion_tiempo" class="java.lang.String"/>
+	<field name="orientacion_espacio" class="java.lang.String"/>
+	<field name="orientacion_persona" class="java.lang.String"/>
+	<field name="nivel_intelectual" class="java.lang.String"/>
+	<field name="coordinacion_visomotriz" class="java.lang.String"/>
+	<field name="nivel_memoria" class="java.lang.String"/>
+	<field name="personalidad" class="java.lang.String"/>
+	<field name="afectividad" class="java.lang.String"/>
+	<field name="con_area_cognitiva" class="java.lang.String"/>
+	<field name="con_area_emocional" class="java.lang.String"/>
+	<field name="recomendacion" class="java.lang.String"/>
+	<field name="condicion" class="java.lang.String"/>
+	<field name="id_usuario" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="146">
+			<frame>
+				<reportElement uuid="ade0fb78-ddda-4b0f-8ea0-884db32005cf" mode="Opaque" x="0" y="0" width="555" height="146" backcolor="#FFFFFF"/>
+				<rectangle radius="10">
+					<reportElement uuid="e173ecff-81dc-4e63-978d-ac6f281a2d5e" x="99" y="94" width="324" height="28"/>
+				</rectangle>
+				<staticText>
+					<reportElement uuid="ec11e790-54fd-492f-8042-6e246ebe082b" mode="Transparent" x="105" y="97" width="310" height="23" forecolor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="15" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FICHA PSICOTECNICA]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="623">
+			<rectangle>
+				<reportElement uuid="932d034e-0f8a-4672-9bf7-e535e455e4bb" x="260" y="39" width="63" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c1e5c9f6-2847-437c-9b19-15ff3394bca4" x="323" y="65" width="231" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b41d3cc9-c5b3-4305-af96-b2bb64c21cd1" x="88" y="13" width="306" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="1661cf3a-1d96-451e-8ec2-46336e3528be" x="260" y="52" width="103" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="39a9e6af-23f1-473a-b28a-492a4451e608" x="0" y="52" width="91" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="884f074e-f772-467f-9339-15e83f55db5a" x="0" y="13" width="91" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b63f5210-6cc5-41f5-8819-bb495a732fd0" x="260" y="26" width="63" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="65312233-fa1e-4660-a545-6c88138356fb" x="394" y="26" width="45" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a8835ae8-64ce-4172-8fcf-4545db06eb3c" x="91" y="65" width="169" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c6a30235-7d44-43d4-b1d4-affa231e8f58" x="323" y="39" width="231" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="064280e0-f7b1-4c23-b152-2905b41de207" x="363" y="52" width="191" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b5c0b964-a0f7-419d-8b39-9b3e5a5ba688" x="91" y="52" width="169" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3cdece2a-af57-4ca4-8326-b39e4f216ae1" x="0" y="39" width="91" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="4ae621ee-e674-4a30-9ba1-f5b8111f55fe" x="394" y="13" width="45" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="f9ec2960-fbd1-41af-a05b-d700f86e4a92" x="323" y="26" width="71" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3283b02e-b12b-4eb6-9cca-302746509bbc" x="260" y="65" width="63" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d9bef10c-28ee-4ec0-9d94-a2a25413170f" x="439" y="13" width="115" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="57f753d1-d2ea-4c5d-95e0-2113f7d09fd0" x="439" y="26" width="115" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="5a2667a8-6eb7-4851-8c95-3dfd4468bbb5" x="0" y="26" width="91" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="11b87a64-4a8c-484b-86b0-07010bb9e157" x="91" y="39" width="169" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c9f7002f-013c-4ebd-bc76-da8f97a743e1" x="0" y="65" width="91" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="79bffa7f-2772-4c71-b0dd-738fe2452c2d" x="91" y="26" width="169" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6f92dd86-95ac-41f2-b1ce-0d43aed09dd0" x="0" y="466" width="554" height="68"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="54b2e453-d681-48b6-a332-be77bd302bb5" x="0" y="455" width="554" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="548515e0-d298-473e-b5d7-4a880ea82fea" x="116" y="411" width="438" height="44"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="aee33176-68ff-412a-921a-f0f80a4752d0" x="0" y="400" width="116" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7fdc9385-a9dd-4cef-9a52-3bc1b4ce6f58" x="116" y="356" width="438" height="44"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="08358895-1ed2-43a6-b2dc-42b48e29c480" x="0" y="345" width="116" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="27e411df-c12a-4fb1-99de-199feebd7fa5" x="0" y="334" width="554" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="795d36ec-c0f8-4df8-a64a-889940e53e9b" x="0" y="290" width="138" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="810ab57c-0842-4d0c-9d74-e4afcb2bdfc7" x="0" y="301" width="138" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="4de4eb0d-bfad-4037-9b5e-ad3e8866c81f" x="0" y="312" width="138" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="14b687a4-60be-4b49-ac8b-45985b6b54ec" x="0" y="323" width="138" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b7024019-6c22-4ea1-a638-32a7958d6fa2" x="138" y="279" width="416" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="14cf2373-a2f9-409a-a3f5-5432632820ca" x="138" y="290" width="416" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="eb9d8b94-f9df-43d1-b2a7-56eff87e1024" x="138" y="301" width="416" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="fe9f85c7-d8c8-4810-ab31-703239e79982" x="138" y="312" width="416" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b11f89da-d600-4abb-8300-3c9924be6a98" x="138" y="323" width="416" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="60770ef4-7921-415c-b0d0-6e7f21490a61" x="0" y="279" width="138" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="2c420cbc-8f17-4d8e-b889-655203062f00" x="0" y="268" width="554" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6bc72843-2890-4df6-a7aa-4d9faef7ae9f" x="312" y="202" width="31" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="1746d6df-1e18-463b-b2d1-1da7c34ed688" x="312" y="213" width="31" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c968b472-c424-4d17-8302-4ee2cff5b8f9" x="227" y="202" width="65" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="69397500-5239-47ef-a42f-0d11a739cc42" x="227" y="213" width="65" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b6c49b8a-b125-435a-9175-c5c9e17a3f21" x="227" y="224" width="65" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="9a618b68-21ab-4641-bb59-3914e794e298" x="227" y="235" width="65" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="e49f24e8-8c51-4fb0-aeb2-a6a03d87d0e9" x="227" y="246" width="65" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="19c379c2-9d53-4c8a-9b49-6dd45b67962f" x="227" y="257" width="65" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3eeb03a4-73fc-4423-b5e8-6c7a2a0e4d37" x="138" y="235" width="69" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0289fe78-a639-4c24-8b5a-f2f96bb67fe5" x="138" y="246" width="69" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8fbc4151-af14-4fd2-88b5-ab39fe7c0c5f" x="138" y="257" width="69" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="931ae3ec-7f6a-43a3-89ad-61ddec2d69cf" x="138" y="213" width="69" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d6f1a823-4cf9-41af-b58b-70d36e4e9998" x="138" y="224" width="69" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="83f3c6a6-6180-499c-9600-984d7c8f8422" x="158" y="180" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="4a3318a8-489d-4623-9832-114ef8c42d5f" x="158" y="191" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="f14348a1-be03-4817-81d4-f3ae4420f950" x="138" y="202" width="69" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c78fae01-949a-400d-8c84-d9b3a1bf8807" x="89" y="191" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7c23cecb-afcc-4c6c-b6d7-b2c3687cfa58" x="89" y="202" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="ba85aebe-cbda-438b-9d2b-c4030e292741" x="89" y="213" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="15a753d5-119e-41d0-a0f5-4a027e64ccf0" x="89" y="224" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="22a1cfb4-0740-4b80-a013-990361e5ee8a" x="89" y="235" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="85a3bba2-eda8-4f65-9a86-b8b6fc2f4aa0" x="89" y="246" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d6261111-f7df-4c0c-9b83-d55db2e5c732" x="89" y="257" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="06969eae-208e-4bf0-978b-a9d1362b3219" x="89" y="180" width="49" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="95e1b60a-c0f0-4b58-a90e-c619cf54233a" x="0" y="180" width="89" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8647e487-ea66-48d7-92be-3cf5adb4d12f" x="0" y="191" width="89" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="149a87cb-53b7-4e8a-aa37-17bb8744cd9b" x="0" y="202" width="89" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="da2df4ff-fabe-4261-8661-edc6f7cd9774" x="0" y="235" width="89" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="f7cf966b-1ca4-40fe-8b72-9592adc71b92" x="0" y="169" width="554" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="fbf563e0-6c4c-429f-8987-ac9130352ef1" x="0" y="2" width="554" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="05a8e80e-633e-46b7-b80a-0357b06118bf" x="0" y="91" width="554" height="78"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="74e5f68b-f147-4a7e-9897-b2618d6edd07" x="0" y="78" width="554" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="9695c71f-1f38-4727-9cb5-1c104deaf578" x="138" y="180" width="20" height="11"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="8eb97506-f2e0-4aa2-9621-5f6a6f1f7ff8" x="0" y="2" width="554" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  I. DATOS GENERALES :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="47109a4f-6b31-440e-b553-79619b6aba53" x="0" y="78" width="132" height="13"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  II. MOTIVO DE LA EVALUACION :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="df83b98d-7d6e-4785-8de0-62ca5d4a177f" x="0" y="91" width="555" height="78"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{motivo_evaluacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6c0f348b-9942-446f-8bb8-a6709e54552c" x="0" y="169" width="554" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  III. OBSERVACIÓN DE CONDUCTAS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="307de1ba-4310-4045-8f7e-d13d337da187" x="0" y="180" width="89" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Presentación ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="32ff6000-2aa2-42bc-b1c7-6258f1030b3a" x="0" y="191" width="89" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Postura ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5fe9e3b7-76f7-4d78-8fb6-108bfa8002f9" x="0" y="202" width="89" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Discurso ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f942eb42-23ca-4527-a6cf-8bc27a8ce77a" x="0" y="235" width="89" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orientacion ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="78bde597-2fb5-4b6e-b9a9-e5453f35c01c" x="89" y="180" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Adecuado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b4f69015-1d86-442a-9a37-74a86ad6018b" x="158" y="180" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inadecuado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3d0e5837-3273-4f08-b9bb-32ab84ec9ef7" x="89" y="191" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Erguida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d7f08980-b20d-4814-81c7-fbfb6957ce01" x="158" y="191" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Encorvada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="567f1d19-c9bb-4602-b67f-1542c9220845" x="89" y="202" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Ritmo ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d4aa3a56-f86e-4eb1-bf03-521080fe9b97" x="138" y="202" width="69" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Lento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f23e3c5a-88e9-4922-aaca-6c20f495e23f" x="227" y="202" width="65" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Rápido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="efbae7b6-e3ba-41fe-a389-8a44901da2aa" x="312" y="202" width="31" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Fluido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b4f3563-d8bd-4a67-af2e-5eba32f64b61" x="227" y="213" width="65" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Moderado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2a4632dd-0a45-4144-abd5-b4a8e8f5822c" x="138" y="213" width="69" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Bajo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="04a6d286-48ed-4be8-bcea-00a3e1b54bc2" x="312" y="213" width="31" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Alto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dab59fbd-6a46-438b-8f93-c470b44fdfb7" x="89" y="213" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Tono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fed46409-55f5-430a-8646-bb0218d7ddca" x="89" y="224" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Articulación ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3a7e325d-c9a3-4974-b011-5e81e4dfda48" x="138" y="224" width="69" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Con Dificultad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40cb2b56-6038-46ed-b909-d8418c892696" x="227" y="224" width="65" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Sin Dificultadad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3676baf7-1a4b-43a6-81f5-3d5059fdb4d1" x="89" y="235" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Tiempo ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="03fa5363-1eab-4fa9-a589-243022bc1697" x="89" y="246" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Espacio ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f692a5fa-9fd6-4303-b23b-04147a80fefe" x="89" y="257" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Persona ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="59ecca4d-4491-4b1e-8c4a-3e87c43f00bd" x="138" y="235" width="69" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Orientado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="767c282c-f0ca-4966-860d-e9e22160d7f3" x="227" y="235" width="65" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Desorientado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a2f098c2-e909-4500-8ca1-7c8dab062c71" x="227" y="246" width="65" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Desorientado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ce5af56a-fa24-42fc-8478-d883989cd987" x="138" y="246" width="69" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Orientado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9efb3de7-e489-41fd-bf17-771fcd69c7cf" x="227" y="257" width="65" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Desorientado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9c68536-4f1c-4c7a-bf76-348816d123c3" x="138" y="257" width="69" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Orientado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9865fdb2-d1a9-4682-a87a-65eb63686af2" x="0" y="268" width="554" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  IV. RESULTADOS DE LA EVALUACION :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbc25dba-5471-4ae6-8d3c-7af37fe0630f" x="0" y="279" width="138" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Nivel intelectual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="91fa37f9-3283-453f-a0b9-ca4f05326117" x="0" y="290" width="138" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Coordinación Visomotriz]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="44eb6b25-818f-4463-af9f-ba7ac521dbfd" x="0" y="301" width="138" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Nivel de Memoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0c054744-a2a0-4f13-88bb-f183e19ecfb3" x="0" y="312" width="138" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Personalidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="693ffeb6-9433-43e9-92cc-5b2eb5654655" x="0" y="323" width="138" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Afectiviad]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="515933b8-ed06-4371-926b-d00a5b501c92" x="138" y="279" width="416" height="11"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nivel_intelectual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="89d13017-c774-430d-a43d-9335be375733" x="138" y="290" width="416" height="11"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coordinacion_visomotriz}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7ba2f6f1-1836-4dfe-b274-4acbf5d8a798" x="138" y="312" width="416" height="11"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{personalidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="43067da5-377e-472a-9320-6da1ac73317d" x="138" y="301" width="416" height="11"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nivel_memoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dc2460c1-a735-4209-bf9b-3e99116093e1" x="138" y="323" width="416" height="11"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{afectividad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7cab0b24-5f07-47a0-a5cb-0113cbb7e2d8" x="0" y="334" width="554" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  V. CONCLUSIONES :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="02b04272-e0b3-406d-8d15-d57e8a2fe0fe" x="0" y="400" width="116" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Área Emocional]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2bc82fa3-883b-41d7-88b4-91a5f00879e6" x="116" y="356" width="438" height="44"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{con_area_cognitiva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b38eca9-4d79-4997-bf64-63a1fb09429c" x="116" y="411" width="438" height="44"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{con_area_emocional}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="227f1702-3d45-4cd4-a812-8e7eb3ed0abd" x="-1" y="455" width="555" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  VI. RECOMENDACIONES :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c04425bb-90c5-4c6b-b2b9-2abe185ffdaf" x="-1" y="466" width="555" height="68"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{recomendacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="20df3c6c-3610-46fb-ad47-2e831c7bff50" x="138" y="180" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presentacion}.equals("ADECUADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="4c5f87f2-c90b-4143-a108-5ad7ffe42ba4" x="207" y="180" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="ddabdec9-548a-40be-a178-ec956624f187" x="207" y="180" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presentacion}.equals("INADECUADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="c5f4e73b-0303-4cb0-be17-dab468608a03" x="207" y="202" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="971c703f-76e7-45f0-a1d9-fc2baf956974" x="207" y="202" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discurso_ritmo}.equals("LENTO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="bf883b6c-da92-4398-b8f3-9c7df0022be3" x="292" y="202" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="ed7a9fa8-7382-4598-b705-9c77ac66df6c" x="292" y="202" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discurso_ritmo}.equals("RAPIDO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="05ca60ce-9ff0-4ed3-9dbc-5ef84269f9b1" x="207" y="213" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="a16f1fc7-bdc0-4113-b30e-b720a0ccb22c" x="207" y="213" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discurso_tono}.equals("BAJO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="a0fb0bbd-0b36-4380-83f4-23a8bbb49a1b" x="207" y="224" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="90e69f68-948a-44ce-a3b4-ba19442a5c37" x="207" y="224" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discurso_articulacion}.equals("CON DIFICULTAD")?"√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="ddd2e974-0274-435f-8dd7-dcec86766a83" x="207" y="235" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="8947fc46-fcc2-4fc4-97b2-e4765ecda3ba" x="207" y="235" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orientacion_tiempo}.equals("ORIENTADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="5a1c0791-416b-45ba-ba15-8e7f7a199266" x="207" y="246" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="2678869a-b781-46a6-a42c-dae0cd3d8871" x="207" y="246" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orientacion_espacio}.equals("ORIENTADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="ebad6aee-1828-421c-a0f3-3ea654f5b10d" x="207" y="257" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="499eb7e6-b0fc-4586-af49-66404110759b" x="207" y="257" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orientacion_persona}.equals("ORIENTADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="a0a9e081-f43f-40f0-a9a9-5ad13d82f456" x="138" y="191" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="c9716bbb-e134-47fe-b765-6e0f0ea0b162" x="138" y="191" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{postura}.equals("ERGUIDA")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="ff795da6-2c92-40ab-84cf-3baffe3c7f1d" x="292" y="213" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="18954aa7-15d0-4570-b9c0-ed625e10e9e6" x="292" y="213" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discurso_tono}.equals("MODERADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="e3a62f1d-e6c4-44bf-85e1-9e972b010837" x="343" y="202" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="9924349d-2fae-4818-aafc-084318b972f3" x="343" y="202" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discurso_ritmo}.equals("LENTO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="582158b1-8750-49cb-96b3-32dfdcc782fa" x="343" y="213" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="798936e6-a6fe-4fde-8beb-bd9a280bdbcf" x="343" y="213" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discurso_tono}.equals("ALTO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="b8b40255-8974-4f73-aff1-3d67528337b7" x="292" y="224" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="31c901e5-8d46-4116-b603-c289266ae7d8" x="292" y="224" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discurso_articulacion}.equals("SIN DIFICULTAD")?"√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="e0e5e68e-6a2c-4770-980b-c1f27581fd91" x="292" y="235" width="20" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a50afb7a-30cd-485a-8e2d-8fb8a82a76f3" x="0" y="594" width="278" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="eccb4e8e-c119-496d-9339-8a979b04d13c" x="278" y="594" width="276" height="15"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="d4358721-7355-4138-9f19-9c735c661002" x="292" y="235" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orientacion_tiempo}.equals("DESORIENTADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="07960c7c-7c10-4d11-a86e-949dfdf6067a" x="292" y="246" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="1cc18ea3-7624-4ac4-b522-a76da031aad7" x="292" y="246" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orientacion_espacio}.equals("DESORIENTADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="262af1fc-ecd0-4085-a882-f5177b177abb" x="292" y="257" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="2d0fb10c-dffb-4cad-b6c7-9ba3f971729d" x="292" y="257" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orientacion_persona}.equals("DESORIENTADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="4c261cb1-b8a1-4529-95ac-8961b9662349" x="207" y="191" width="20" height="11"/>
+			</rectangle>
+			<textField>
+				<reportElement uuid="fcd2628e-f3ca-4d96-a68e-cffed440ab61" x="207" y="191" width="20" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{postura}.equals("ENCORVADO")? "√" : ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="3bc6daf9-89a5-4ccd-ba94-52e44f9b2129" x="227" y="180" width="327" height="22"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="daf05081-5c5b-41d6-b071-c9e8a20274d8" x="363" y="202" width="191" height="22"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="e62cff19-bfbc-4e3d-b042-154b3c8bae98" x="312" y="224" width="242" height="44"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a173e411-43c7-4b80-aef4-bed328c253d2" x="0" y="213" width="89" height="22"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="79c0c9cb-74c1-4318-aeb3-35b3efade276" x="0" y="246" width="89" height="22"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="371c9781-40cf-480f-823d-1ac494de813f" x="116" y="345" width="438" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c71f31aa-eb2d-4b0a-8a58-4710ecc1fc2b" x="0" y="356" width="116" height="44"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="e9074a56-0528-410e-aee7-d96cd80b68af" x="0" y="345" width="116" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Área Cognitiva]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="2a8151e6-a8d6-4a6d-933a-68e4dea5eeb5" x="116" y="400" width="438" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="2d63e7b1-b7fb-40a9-8551-c9807734b30a" x="0" y="411" width="116" height="44"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="ab7e3e6a-9da7-4f8b-a7ba-05c39a41d555" x="-1" y="594" width="279" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Firma del Trabajador]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="a366a9d3-e24c-41d5-9aea-ae909da88613" x="0" y="543" width="278" height="51"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="121ecd3d-3444-49e5-9f08-4a88fe939757" x="278" y="594" width="276" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Firma del Médico]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="43fd60d1-1c5e-42a8-b2dd-3107fbf0a98d" x="278" y="543" width="276" height="51"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="9c012690-4c07-4842-a1e4-7254661ca0a6" x="0" y="39" width="91" height="13"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Lugar de Nacimiento ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a9e369ee-d7ec-4a04-b3cc-781a98099b8a" x="260" y="65" width="63" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Examen ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c99c8b6c-d9e3-4899-97b0-c0847db1d882" x="260" y="26" width="63" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="6dbc7cf3-a313-4ed9-bf01-7508b48f3713" x="91" y="26" width="169" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_nacimiento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c37425b9-3881-4239-a9c0-acd836e1bb8a" x="91" y="52" width="169" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grado_instruccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1fe58018-3235-48f6-b665-1e3f804cd419" x="394" y="26" width="45" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c82ceb8f-4aea-4fa6-b7e8-9ba71bee0f0b" x="363" y="52" width="191" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b4631034-6cb4-489a-8718-a02b9e397ed8" x="91" y="13" width="303" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="22417c39-eca4-43f6-8dd2-9f9e0002ecde" x="91" y="39" width="169" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lugar_nacimiento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a4646f0e-2a2f-4215-a6e5-5e9b29518094" x="0" y="52" width="91" height="13"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Grado de instrucción ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="93d707e6-0fbc-46ae-9aa8-25760866b4c0" x="0" y="65" width="91" height="13"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Evaluación ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2b024c74-4129-40d9-bf65-d1cf19617c36" x="323" y="39" width="231" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado_civil}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2aca71c5-0aa9-4c37-b849-fb5bba74f4c3" x="439" y="26" width="115" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="188022e6-8398-4187-b7f1-6a8b59c094c7" x="439" y="13" width="115" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_documento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8f4b637b-addd-42d2-9238-482b2120aabb" x="260" y="52" width="103" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lugar de Residencia ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="3169ced1-0491-48ff-9357-167b19e9af6b" x="91" y="65" width="169" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evaluacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d1679f9a-8ed0-4a4e-a2fe-98018ed8fb50" x="323" y="26" width="71" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad_ingreso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="99d6cd4a-6474-4061-8aeb-950263b8f555" x="0" y="26" width="91" height="13"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Fecha de Nacimiento ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9da83964-d4ac-468f-a4e3-5bdc6d111b2a" x="260" y="39" width="63" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado Civil ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b8450cc4-6675-4fca-acfe-b57e6d49144c" x="0" y="13" width="91" height="13"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[ Apellidos y Nombres ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f2686088-671b-4f7a-846f-6f5630453126" x="323" y="65" width="231" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{examen}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5d23d417-ba7e-4a9f-bbcb-6ab20a5c71fa" x="394" y="13" width="45" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Doc ]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="8aadd1a6-948e-47e1-ba44-b4af84587c16" x="0" y="4" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

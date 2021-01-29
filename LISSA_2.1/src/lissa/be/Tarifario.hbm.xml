@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.Tarifario" optimistic-lock="version" schema="public" table="tarifario">
+        <id name="idtarifario" type="long">
+            <column name="idtarifario"/>
+            <generator class="sequence">
+                <param name="sequence">tarifario_idtarifario_seq</param>
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column length="60" name="nombre"/>
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado"/>
+        </property>
+        <property name="esconvenio" type="int">
+            <column name="esconvenio"/>
+        </property>
+        <set name="procedimientoTarifarios" table="procedimiento_tarifario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tarifario" not-null="true" />
+            </key>
+            <one-to-many class="lissa.be.ProcedimientoTarifario" />
+        </set>
+    </class>
+</hibernate-mapping>

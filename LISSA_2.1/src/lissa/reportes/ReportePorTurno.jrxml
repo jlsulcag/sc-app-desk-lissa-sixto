@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportePorTurno" language="groovy" pageWidth="595" pageHeight="842" columnWidth="581" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" uuid="b15ca1b7-acc2-4239-9857-53fdc1053a75">
+	<property name="ireport.zoom" value="1.2100000000000044"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_CAJA" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["V:\\REP\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[Select
+caj.idcaja,
+caj.turno,
+caj.fecha_apertura,
+(per.nombre || ' ' || per.apellido_paterno || ' ' || per.apellido_materno) as person,
+usu.nombre
+from caja caj inner join usuario usu
+on caj.id_usuario = usu.id_usuario inner join persona per
+on usu.id_persona = per.idpersona
+where caj.idcaja = $P{ID_CAJA}]]>
+	</queryString>
+	<field name="idcaja" class="java.lang.Integer"/>
+	<field name="turno" class="java.lang.String"/>
+	<field name="fecha_apertura" class="java.sql.Date"/>
+	<field name="person" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<variable name="SUM_TOTAL" class="java.math.BigDecimal"/>
+	<variable name="SUM_TOTAL_CALC" class="java.lang.String"/>
+	<group name="Group1">
+		<groupHeader>
+			<band height="23">
+				<subreport>
+					<reportElement uuid="eacdccad-6592-4110-b9a4-15a3421afc6f" x="10" y="1" width="571" height="22"/>
+					<subreportParameter name="ID_CAJA">
+						<subreportParameterExpression><![CDATA[$F{idcaja}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["V:\\REP\\RepTurnoRecibo.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupHeader>
+			<band height="21">
+				<subreport>
+					<reportElement uuid="77bf60bf-ff14-4741-8020-233a0fa08837" x="10" y="0" width="571" height="21"/>
+					<subreportParameter name="ID_CAJA">
+						<subreportParameterExpression><![CDATA[$F{idcaja}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["V:\\REP\\RepTurnoBoleta.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group3">
+		<groupHeader>
+			<band height="18">
+				<subreport>
+					<reportElement uuid="6c77fcfb-0059-4ead-92d5-d67b484cb946" x="10" y="0" width="571" height="18"/>
+					<subreportParameter name="ID_CAJA">
+						<subreportParameterExpression><![CDATA[$F{idcaja}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["V:\\REP\\RepTurnoFactura.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group4">
+		<groupHeader>
+			<band height="28">
+				<subreport>
+					<reportElement uuid="d1e848d9-2fd3-4f74-94c6-8692fbc2b27e" x="10" y="10" width="571" height="18"/>
+					<subreportParameter name="ID_CAJA">
+						<subreportParameterExpression><![CDATA[$F{idcaja}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["V:\\REP\\EgresoPagoMedico.jasper"]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement uuid="5b82ab33-0e6e-446f-9129-30383b267a2b" x="10" y="0" width="176" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[EGRESO PAGO A MEDICOS]]></text>
+				</staticText>
+			</band>
+			<band height="28">
+				<staticText>
+					<reportElement uuid="5bd6815d-4c79-4bcd-a7c2-9700ab40032f" x="10" y="0" width="176" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[OTROS EGRESOS]]></text>
+				</staticText>
+				<subreport>
+					<reportElement uuid="b5eef147-56ad-4222-afb6-7ba92e6f4fde" x="10" y="10" width="571" height="18"/>
+					<subreportParameter name="ID_CAJA">
+						<subreportParameterExpression><![CDATA[$F{idcaja}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "EgresosOtros.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="30">
+			<frame>
+				<reportElement uuid="99ae1269-232f-4efe-b403-96143beb1674" mode="Opaque" x="0" y="0" width="581" height="28"/>
+				<staticText>
+					<reportElement uuid="26142663-aad8-4a68-838d-b013b91562a6" x="0" y="6" width="581" height="20"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[ARQUEO DE CAJA POR TURNO]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15">
+			<staticText>
+				<reportElement uuid="bf6fe162-08b7-4b17-ae80-f3adb0f5b4aa" x="10" y="0" width="46" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRES :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fb3077e7-a221-4ddd-87a9-8cfd01784e9b" x="234" y="0" width="42" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUARIO :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="93a8eb52-472c-484a-99d4-aa0c7c31143f" x="368" y="0" width="34" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TURNO :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e447c85a-16e5-4dbc-84d6-d5cc1b734ca6" x="62" y="0" width="162" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{person}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bda6089b-9238-4cc0-a128-ee37b6822c63" x="402" y="0" width="73" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bb06b6e9-122a-453a-afca-59a1f16cda8b" x="276" y="0" width="92" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="65753f86-cd22-4423-b3c4-7556861c8ab4" x="475" y="0" width="34" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="2cb55da6-dc7c-427d-879b-88fcd27c57d9" x="509" y="0" width="72" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_apertura}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="2"/>
+	</columnHeader>
+	<detail>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band height="6"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="ba6e8563-0e73-4ff2-ab6a-5d9d7615e3c9" mode="Opaque" x="10" y="4" width="531" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="2ddfdd44-2509-4394-bc45-49303d637bab" mode="Opaque" x="541" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="bfda59fd-4ee4-468b-8b4a-cebf3fd9baef" x="10" y="4" width="214" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

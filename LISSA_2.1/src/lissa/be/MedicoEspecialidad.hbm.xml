@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-abr-2016 18:27:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="lissa.be.MedicoEspecialidad" table="medico_especialidad" schema="public" optimistic-lock="version">
+        <id name="idmedicoespecialidad" type="int">
+            <column name="idmedicoespecialidad" />
+            <generator class="sequence">
+                <param name="sequence">medico_especialidad_idmedicoespecialidad_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="especialidad" class="lissa.be.Especialidad" fetch="select">
+            <column name="id_especialidad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="medico" class="lissa.be.Medico" fetch="select">
+            <column name="id_medico" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

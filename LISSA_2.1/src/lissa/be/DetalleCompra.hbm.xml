@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-oct-2016 10:03:31 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="lissa.be.DetalleCompra" optimistic-lock="version" schema="farmacia" table="detalle_compra">
+    <id name="iddetallecompra" type="long">
+      <column name="iddetallecompra"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="lissa.be.Compra" fetch="select" name="compra">
+      <column name="id_compra" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="lissa.be.Producto" fetch="select" name="producto">
+      <column name="id_producto" not-null="true"/>
+    </many-to-one>
+    <property name="cantidad" type="java.lang.Integer">
+      <column name="cantidad"/>
+    </property>
+    <property name="lote" type="string">
+      <column length="15" name="lote"/>
+    </property>
+    <property name="fechaVencimiento" type="date">
+      <column length="13" name="fecha_vencimiento"/>
+    </property>
+    <property name="precioCompra" type="big_decimal">
+      <column name="precio_compra" not-null="true" precision="18"/>
+    </property>
+    <property name="valorCompraUnitario" type="big_decimal">
+      <column name="precio_compra_unitario" not-null="true" precision="18"/>
+    </property>
+    <property name="descuentoItem" type="big_decimal">
+      <column name="descuento_item" precision="18"/>
+    </property>
+    <property name="porcDesc1" type="double">
+      <column name="porc_desc1" not-null="true" precision="17" scale="17"/>
+    </property>
+    <property name="porcDesc2" type="double">
+      <column name="porc_desc2" not-null="true" precision="17" scale="17"/>
+    </property>
+    <property name="igvItem" type="big_decimal">
+      <column default="0.00" name="igv_item" not-null="true" precision="18"/>
+    </property>
+    <property name="isUnitario" type="java.lang.Boolean">
+      <column name="is_unitario" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>
