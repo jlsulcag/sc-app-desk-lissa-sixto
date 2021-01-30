@@ -17,7 +17,9 @@ public class Producto implements java.io.Serializable {
     private String codigo;
     private String concentracion;
     private Integer fraccion;
-    private String nombreGenerico;
+    private String principioActivo;
+    private String accionTerapeutica;
+    private int generico;
     private Set<DetalleCompra> detalleCompras = new HashSet<DetalleCompra>(0);
     private Set<AlmacenProducto> almacenProductos = new HashSet<AlmacenProducto>(0);
     private Set<DetalleVenta> detalleVentas = new HashSet<DetalleVenta>(0);
@@ -91,12 +93,28 @@ public class Producto implements java.io.Serializable {
         this.fraccion = fraccion;
     }
 
-    public String getNombreGenerico() {
-        return this.nombreGenerico;
+    public String getPrincipioActivo() {
+        return principioActivo;
     }
 
-    public void setNombreGenerico(String nombreGenerico) {
-        this.nombreGenerico = nombreGenerico;
+    public void setPrincipioActivo(String principioActivo) {
+        this.principioActivo = principioActivo;
+    }
+
+    public String getAccionTerapeutica() {
+        return accionTerapeutica;
+    }
+
+    public void setAccionTerapeutica(String accionTerapeutica) {
+        this.accionTerapeutica = accionTerapeutica;
+    }
+
+    public int getGenerico() {
+        return generico;
+    }
+
+    public void setGenerico(int generico) {
+        this.generico = generico;
     }
 
     public Set<DetalleCompra> getDetalleCompras() {
