@@ -21,6 +21,9 @@ public class Variables {
     public static final String FAR_BOLETA_ELECTRONICA = "FarBoletaElectronica";
     public static final String FAR_FACTURA_ELECTRONICA = "FarBoletaElectronica";
     
+    public static final int ES_GENERICO = 1;
+    public static final int NO_GENERICO = 0;
+    
     //Variables OpenFact Demo
     /*
     public static final String openfactUrl = "http://openfactv2-openfact-development.apps.console.sistcoop.org:83/api";    
