@@ -15,6 +15,7 @@ import lissa.table.ModeloKardexAlmacen;
 import lissa.table.ModeloProducto;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
+import lissa.util.Variables;
 
 public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
 
@@ -270,7 +271,8 @@ public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
     private void buscarProducto() {
         if (isDatosValidos()) {
             oProductoBl = new ProductoBl();
-            listProducto = oProductoBl.listRef(txfProducto.getText().trim().toUpperCase());
+            listProducto = oProductoBl.listRef(txfProducto.getText().trim().toUpperCase(), Variables.BUSQ_X_PRODUCTO);
+            oModeloProducto.clear();
             if(!listProducto.isEmpty()){
                 oModeloProducto.addAll(listProducto);
             }
@@ -288,14 +290,13 @@ public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
     }
 
     private void personalizaTablas() {
-        Utilitarios.formateaColumna(0, tblProductos, 60);
+        Utilitarios.formateaColumna(0, tblProductos, 50);
         Utilitarios.formateaColumna(2, tblProductos, 80);
         Utilitarios.formateaColumna(3, tblProductos, 120);
         Utilitarios.formateaColumna(4, tblProductos, 120);
         Utilitarios.formateaColumna(5, tblProductos, 120);
-        Utilitarios.formateaColumna(6, tblProductos, 60);
-        
-        Utilitarios.alinearDatosColumnaTablaDerecha(6, tblProductos);
+        Utilitarios.formateaColumna(8, tblProductos, 50);
+        Utilitarios.alinearDatosColumnaTablaDerecha(8, tblProductos);
         
         Utilitarios.formateaColumna(0, tblKardex, 60);
         Utilitarios.formateaColumna(2, tblKardex, 60);

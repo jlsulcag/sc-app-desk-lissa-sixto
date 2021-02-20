@@ -13,15 +13,18 @@ import lissa.be.Kardex;
 import lissa.be.PrecioProducto;
 import lissa.be.Producto;
 import lissa.be.Usuario;
+import lissa.be.dto.AlmacenProductoDTO;
 import lissa.bl.AlmacenProductoBl;
 import lissa.bl.KardexBl;
 import lissa.bl.PrecioProductoBl;
 import lissa.gui.JF_Principal;
+import lissa.table.ModeloAlmacenProductoDTO;
 import lissa.table.ModeloVentaProducto;
 import lissa.util.AbstractDA;
 import lissa.util.Utilitarios;
 import lissa.util.HibernateUtil;
 import lissa.util.Mensajes;
+import lissa.util.Variables;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -110,6 +113,36 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
             Query query = sesion.createQuery(hql);
             list = (ArrayList<AlmacenProducto>) query.list();
         } catch (HibernateException e) {
+            manejaExcepcion(e);
+        } finally {
+            sesion.close();
+        }
+        return list;
+    }
+    
+    public ArrayList<AlmacenProducto> listProductosRef(String ref, String almacen, int op) {
+        StringBuilder sql = new StringBuilder();
+        try {
+            iniciarOperacion();
+            sql.append("select ap from AlmacenProducto ap ");
+            sql.append("left join fetch ap.producto p left join fetch ap.almacen al ");
+            sql.append("left join fetch p.formaFarmaceutica ff left join fetch p.presentacion pr ");
+            sql.append("left join fetch p.laboratorio lab ");
+            if(op == Variables.BUSQ_X_PRODUCTO){
+                sql.append("where p.nombre like concat('%', :ref, '%') ");
+            } else if(op == Variables.BUSQ_X_PRINCIPIO_ACTIVO){
+                sql.append("where p.principioActivo like concat('%', :ref, '%') ");
+            } else if(op == Variables.BUSQ_X_ACCION_FARMACOLOGICA){
+                sql.append("where p.accionTerapeutica like concat('%', :ref, '%') ");
+            }            
+            sql.append("and al.nombre =:almacen ");
+            sql.append("and ap.stockActual>0 order by p.idproducto, ap.fechaVencimiento asc ");            
+            Query query = sesion.createQuery(sql.toString());
+            query.setParameter("ref", ref);
+            query.setParameter("almacen", almacen);
+            list = (ArrayList<AlmacenProducto>) query.list();
+        } catch (HibernateException e) {
+            list=new ArrayList<>();
             manejaExcepcion(e);
         } finally {
             sesion.close();
@@ -485,6 +518,47 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
     private AlmacenProducto buscarProductoxAlmacenyLote(Almacen almacen, String lote, Producto oProducto) {
         AlmacenProductoBl oAlmacenProductoBl = new AlmacenProductoBl();
         return oAlmacenProductoBl.buscarProductoxAlmacenyLote(lote, almacen, oProducto);
+    }
+
+    public int registrarInventarioInicial(ModeloAlmacenProductoDTO oModeloAlmacenProductoDTO, Usuario usuario) {
+        int r = -1;
+        try {
+            iniciarOperacion();
+            for (int i = 0; i < oModeloAlmacenProductoDTO.getRowCount(); i++) {
+                AlmacenProductoDTO ap = oModeloAlmacenProductoDTO.get(i);
+                
+                AlmacenProducto oAlmacenProducto = new AlmacenProducto();
+                oAlmacenProducto.setProducto(ap.getProducto());
+                oAlmacenProducto.setAlmacen(ap.getAlmacen());
+                oAlmacenProducto.setStockActual(ap.getStockActual());
+                oAlmacenProducto.setPrecioCompraUnitario(ap.getPrecioCompraUnit());
+                oAlmacenProducto.setFechaRegistro(new Date());
+                
+                sesion.save(oAlmacenProducto);
+                
+                //Save precio producto
+                oPrecioProducto = new PrecioProducto();
+                    
+                oPrecioProducto.setAlmacenProducto(oAlmacenProducto);
+                oPrecioProducto.setPvMin(BigDecimal.ZERO);
+                oPrecioProducto.setPvMax(BigDecimal.ZERO);
+                oPrecioProducto.setPvSugerido(ap.getPrecioVentaUnit());
+                oPrecioProducto.setFechaInicio(new Date());
+                oPrecioProducto.setFechaFin(null);
+                oPrecioProducto.setIdUsuario(usuario.getIdUsuario());
+                oPrecioProducto.setEstado(1);
+                sesion.save(oPrecioProducto);                
+            }
+            tx.commit();
+            r = SUCCESS;
+            
+        } catch (HibernateException e) {
+            manejaExcepcion(e);
+            r = ERROR;
+        }finally{
+            cerrarSesion();
+        }
+        return r;
     }
 
 }

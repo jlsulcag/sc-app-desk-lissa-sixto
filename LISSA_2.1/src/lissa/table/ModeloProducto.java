@@ -12,7 +12,7 @@ import org.rx.cr.table.AbstractTableModel;
 public class ModeloProducto extends AbstractTableModel<Producto>{
 
     public ModeloProducto() {
-        super.setTitles(new String[]{"ID","Producto", "Concentracion", "Forma Farmaceutica", "Presentación", "Laboratorio", "Fracción"});
+        super.setTitles(new String[]{"ID","Producto", "Concentracion", "Forma Farmaceutica", "Presentación", "Laboratorio", "Principio Activo", "Accion Terapéutica","Fracción"});
     }    
     
     @Override
@@ -31,7 +31,17 @@ public class ModeloProducto extends AbstractTableModel<Producto>{
             case 5: if(bean.getLaboratorio() != null){
                 return bean.getLaboratorio().getDenominacion();
             }else{return "";}
-            case 6: return bean.getFraccion();
+            case 6:if(bean.getPrincipioActivo()!=null && !bean.getPrincipioActivo().equalsIgnoreCase("")){
+                return bean.getPrincipioActivo();
+            }else{
+                return "";
+            }
+            case 7:if(bean.getAccionTerapeutica()!=null && !bean.getAccionTerapeutica().equalsIgnoreCase("")){
+                return bean.getAccionTerapeutica();
+            }else{
+                return "";
+            }
+            case 8: return bean.getFraccion();
             default: return null;
         }
     }

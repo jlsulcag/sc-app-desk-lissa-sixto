@@ -36,6 +36,9 @@
         <property name="valorCompraUnitario" type="big_decimal">
             <column name="valor_compra_unitario" precision="18" />
         </property>
+        <property name="PrecioCompraUnitario" type="big_decimal">
+            <column name="precio_compra" precision="9" />
+        </property>
         <property name="ordenRegistro" type="java.lang.Integer">
             <column name="orden_registro" />
         </property>
