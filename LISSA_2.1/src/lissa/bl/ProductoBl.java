@@ -67,9 +67,9 @@ public class ProductoBl extends AbstractBL<Producto>{
         return dao.listar(hql);
     }
     
-    public ArrayList<Producto> listRef(String ref){
+    public ArrayList<Producto> listRef(String ref, int op){
         dao = new ProductoDao();
-        return dao.listarRef(ref);
+        return dao.listarRef(ref, op);
     }
     
 }

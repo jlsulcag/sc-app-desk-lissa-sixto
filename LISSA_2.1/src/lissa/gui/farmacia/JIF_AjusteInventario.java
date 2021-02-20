@@ -274,7 +274,6 @@ public class JIF_AjusteInventario extends javax.swing.JInternalFrame {
         Utilitarios.formateaColumna(5, tblResultados, 70);
         Utilitarios.formateaColumna(6, tblResultados, 70);
         Utilitarios.formateaColumna(7, tblResultados, 70);
-        Utilitarios.formateaColumna(8, tblResultados, 100);
         Utilitarios.alinearDatosColumnaTablaCentro(4, tblResultados);
         Utilitarios.alinearDatosColumnaTablaDerecha(7, tblResultados);
 

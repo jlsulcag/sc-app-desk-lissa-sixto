@@ -12,6 +12,7 @@ import lissa.be.Kardex;
 import lissa.be.Producto;
 import lissa.be.Usuario;
 import lissa.dao.AlmacenProductoDao;
+import lissa.table.ModeloAlmacenProductoDTO;
 import lissa.table.ModeloVentaProducto;
 import lissa.util.AbstractBL;
 import lissa.util.AbstractDA;
@@ -85,6 +86,11 @@ public class AlmacenProductoBl extends AbstractBL<AlmacenProducto>{
         return dao.listRef(ref,almacen);
     }
     
+    public ArrayList<AlmacenProducto> listProductosRef(String ref, String almacen, int op) {
+        dao = new AlmacenProductoDao();
+        return dao.listProductosRef(ref,almacen, op);
+    }
+    
     public List<AlmacenProducto> listRef(String ref) {
         dao = new AlmacenProductoDao();
         return dao.listRef(ref);
@@ -142,6 +148,12 @@ public class AlmacenProductoBl extends AbstractBL<AlmacenProducto>{
     public int registrarMovimiento(Almacen origen, Almacen destino, FarComprobante oFarComprobante, Date fechaMov, String perOrigen, String perDestino, String glosa,ModeloVentaProducto omvp, Usuario userTemp, String numeroComp) {
         dao = new AlmacenProductoDao();
         return dao.registrarMovimiento(origen,destino,oFarComprobante,fechaMov, perOrigen,perDestino,glosa, omvp, userTemp, numeroComp);
+    }
+
+
+    public int registrarInventarioInicial(ModeloAlmacenProductoDTO oModeloAlmacenProductoDTO, Usuario usuario) {
+        dao = new AlmacenProductoDao();
+        return dao.registrarInventarioInicial(oModeloAlmacenProductoDTO, usuario);
     }
 
     

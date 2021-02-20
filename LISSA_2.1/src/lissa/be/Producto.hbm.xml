@@ -1,54 +1,59 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 19/04/2018 04:37:19 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="lissa.be.Producto" table="producto" schema="farmacia" optimistic-lock="version">
-        <id name="idproducto" type="long">
-            <column name="idproducto" />
-            <generator class="increment" />
-        </id>
-        <many-to-one name="formaFarmaceutica" class="lissa.be.FormaFarmaceutica" fetch="select">
-            <column name="id_formafarmaceutica" />
-        </many-to-one>
-        <many-to-one name="laboratorio" class="lissa.be.Laboratorio" fetch="select">
-            <column name="id_laboratorio" />
-        </many-to-one>
-        <many-to-one name="presentacion" class="lissa.be.Presentacion" fetch="select">
-            <column name="id_presentacion" />
-        </many-to-one>
-        <property name="nombre" type="string">
-            <column name="nombre" length="120" not-null="true" />
-        </property>
-        <property name="codigo" type="string">
-            <column name="codigo" length="20" />
-        </property>
-        <property name="concentracion" type="string">
-            <column name="concentracion" length="40" />
-        </property>
-        <property name="fraccion" type="java.lang.Integer">
-            <column name="fraccion" />
-        </property>
-        <property name="nombreGenerico" type="string">
-            <column name="nombre_generico" length="120" />
-        </property>
-        <set name="detalleCompras" table="detalle_compra" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_producto" not-null="true" />
-            </key>
-            <one-to-many class="lissa.be.DetalleCompra" />
-        </set>
-        <set name="almacenProductos" table="almacen_producto" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_producto" not-null="true" />
-            </key>
-            <one-to-many class="lissa.be.AlmacenProducto" />
-        </set>
-        <set name="detalleVentas" table="detalle_venta" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_producto" not-null="true" />
-            </key>
-            <one-to-many class="lissa.be.DetalleVenta" />
-        </set>
-    </class>
+  <class name="lissa.be.Producto" optimistic-lock="version" schema="farmacia" table="producto">
+    <id name="idproducto" type="long">
+      <column name="idproducto"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="lissa.be.FormaFarmaceutica" fetch="select" name="formaFarmaceutica">
+      <column name="id_formafarmaceutica"/>
+    </many-to-one>
+    <many-to-one class="lissa.be.Laboratorio" fetch="select" name="laboratorio">
+      <column name="id_laboratorio"/>
+    </many-to-one>
+    <many-to-one class="lissa.be.Presentacion" fetch="select" name="presentacion">
+      <column name="id_presentacion"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="120" name="nombre" not-null="true"/>
+    </property>
+    <property name="codigo" type="string">
+      <column length="20" name="codigo"/>
+    </property>
+    <property name="concentracion" type="string">
+      <column length="40" name="concentracion"/>
+    </property>
+    <property name="fraccion" type="java.lang.Integer">
+      <column name="fraccion"/>
+    </property>
+    <property name="principioActivo" type="string">
+      <column length="200" name="principio_activo"/>
+    </property>
+    <property name="accionTerapeutica" type="string">
+      <column length="200" name="accion_terapeutica"/>
+    </property>
+    <property name="generico" type="int">
+      <column name="generico"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="detalleCompras" table="detalle_compra">
+      <key>
+        <column name="id_producto" not-null="true"/>
+      </key>
+      <one-to-many class="lissa.be.DetalleCompra"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="almacenProductos" table="almacen_producto">
+      <key>
+        <column name="id_producto" not-null="true"/>
+      </key>
+      <one-to-many class="lissa.be.AlmacenProducto"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="detalleVentas" table="detalle_venta">
+      <key>
+        <column name="id_producto" not-null="true"/>
+      </key>
+      <one-to-many class="lissa.be.DetalleVenta"/>
+    </set>
+  </class>
 </hibernate-mapping>

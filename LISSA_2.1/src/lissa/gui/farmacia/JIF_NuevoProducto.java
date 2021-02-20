@@ -11,6 +11,7 @@ import lissa.controller.PresentacionCtrl;
 import lissa.gui.JF_Principal;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
+import lissa.util.Variables;
 
 public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
 
@@ -57,12 +58,15 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         btnAddLaboratorio = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txfNombreGenerico = new javax.swing.JTextField();
+        txfPrincipioActivo = new javax.swing.JTextField();
+        chbxGenerico = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        txfAccionTerapeutica = new javax.swing.JTextField();
 
         setClosable(true);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Descripción :");
+        jLabel1.setText("Descripción/Producto :");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -137,7 +141,11 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Forma farmaceutica :");
 
-        jLabel6.setText("Nombre Generico :");
+        jLabel6.setText("Principio Activo(Contenido) :");
+
+        chbxGenerico.setText("Génerico");
+
+        jLabel8.setText("Acción terapéutica(Uso) :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,60 +153,69 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnGuardar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txfConcentracion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txfProducto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                            .addComponent(txfCodigo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txfPrincipioActivo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txfAccionTerapeutica, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txfProducto)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(chbxGenerico))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txfFraccion, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbxLaboratorio, javax.swing.GroupLayout.Alignment.LEADING, 0, 397, Short.MAX_VALUE)
+                                .addComponent(cbxPresentacion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbxFormaFarmaceutica, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cbxFormaFarmaceutica, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txfConcentracion, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxPresentacion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txfCodigo, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxLaboratorio, javax.swing.GroupLayout.Alignment.LEADING, 0, 316, Short.MAX_VALUE)
-                                    .addComponent(txfFraccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(btnAddLaboratorio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(btnAddFamilia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnAddClase, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(61, 61, 61))
-                            .addComponent(txfNombreGenerico))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(btnAddLaboratorio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(btnAddFamilia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnAddClase, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txfProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txfNombreGenerico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(chbxGenerico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txfPrincipioActivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txfAccionTerapeutica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txfConcentracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,28 +226,27 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
                             .addComponent(cbxFormaFarmaceutica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addGap(7, 7, 7)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cbxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addComponent(btnAddFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel7)
-                                .addComponent(cbxLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnAddLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txfFraccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCancelar)
-                            .addComponent(btnGuardar)))
+                            .addComponent(cbxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAddClase, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(31, 31, 31)
+                        .addComponent(btnAddFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddClase, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(cbxLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txfFraccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnGuardar))
                 .addGap(18, 18, 18))
         );
 
@@ -325,6 +341,7 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cbxFormaFarmaceutica;
     private javax.swing.JComboBox cbxLaboratorio;
     private javax.swing.JComboBox cbxPresentacion;
+    private javax.swing.JRadioButton chbxGenerico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -332,12 +349,14 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txfAccionTerapeutica;
     private javax.swing.JTextField txfCodigo;
     private javax.swing.JTextField txfConcentracion;
     private javax.swing.JTextField txfFraccion;
-    private javax.swing.JTextField txfNombreGenerico;
+    private javax.swing.JTextField txfPrincipioActivo;
     private javax.swing.JTextField txfProducto;
     // End of variables declaration//GEN-END:variables
     public int getInvocador() {
@@ -381,6 +400,9 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         oProducto.setNombre(txfProducto.getText().toUpperCase().trim());
         oProducto.setCodigo(txfCodigo.getText().toUpperCase().trim());
         oProducto.setConcentracion(txfConcentracion.getText().toUpperCase().trim());
+        oProducto.setPrincipioActivo(txfPrincipioActivo.getText().toUpperCase().trim());
+        oProducto.setAccionTerapeutica(txfAccionTerapeutica.getText().toUpperCase().trim());
+        oProducto.setGenerico(chbxGenerico.isSelected()?Variables.ES_GENERICO:Variables.NO_GENERICO);
         if (!txfFraccion.getText().trim().equals("")) {
             oProducto.setFraccion(Integer.parseInt(txfFraccion.getText().trim()));
         } else {
@@ -389,8 +411,6 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         oProducto.setPresentacion((Presentacion) cbxPresentacion.getSelectedItem());
         oProducto.setFormaFarmaceutica((FormaFarmaceutica) cbxFormaFarmaceutica.getSelectedItem());
         oProducto.setLaboratorio((Laboratorio) cbxLaboratorio.getSelectedItem());
-        oProducto.setNombreGenerico(txfNombreGenerico.getText().toUpperCase().trim());
-
         return oProductoBl.registrar(oProducto);
     }
 
@@ -402,7 +422,9 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         cbxPresentacion.setSelectedIndex(0);
         cbxFormaFarmaceutica.setSelectedIndex(0);
         cbxLaboratorio.setSelectedIndex(0);
-        txfNombreGenerico.setText("");
+        txfPrincipioActivo.setText("");
+        txfAccionTerapeutica.setText("");
+        chbxGenerico.setSelected(Boolean.FALSE);
         resetPaintComponentes();
     }
 
@@ -412,6 +434,9 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         txfCodigo.setText(this.oProducto.getCodigo());
         txfConcentracion.setText(this.oProducto.getConcentracion());
         txfFraccion.setText(this.oProducto.getFraccion() + "");
+        txfPrincipioActivo.setText(this.oProducto.getPrincipioActivo());
+        txfAccionTerapeutica.setText(this.oProducto.getAccionTerapeutica());
+        chbxGenerico.setSelected(this.oProducto.getGenerico()==Variables.ES_GENERICO?Boolean.TRUE:Boolean.FALSE);
         if (this.oProducto.getPresentacion() == null) {
             cbxPresentacion.setSelectedIndex(0);
         } else {
@@ -427,7 +452,6 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         } else {
             oLaboratorioCtrl.recuperaDatosCbx(this.oProducto.getLaboratorio().getIdlaboratorio(), cbxLaboratorio);
         }
-        txfNombreGenerico.setText(this.oProducto.getNombreGenerico());
 
     }
 
@@ -452,8 +476,9 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         proAct.setPresentacion((Presentacion) cbxPresentacion.getSelectedItem());
         proAct.setFormaFarmaceutica((FormaFarmaceutica) cbxFormaFarmaceutica.getSelectedItem());
         proAct.setLaboratorio((Laboratorio) cbxLaboratorio.getSelectedItem());
-        proAct.setNombreGenerico(txfNombreGenerico.getText().toUpperCase().trim());
-
+        proAct.setPrincipioActivo(txfPrincipioActivo.getText().toUpperCase().trim());
+        proAct.setAccionTerapeutica(txfAccionTerapeutica.getText().toUpperCase().trim());
+        proAct.setGenerico(chbxGenerico.isSelected()?Variables.ES_GENERICO:Variables.NO_GENERICO);
         return oProductoBl.actualizar(proAct);
     }
 

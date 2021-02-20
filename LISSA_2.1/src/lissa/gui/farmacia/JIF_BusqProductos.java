@@ -12,6 +12,7 @@ import lissa.gui.JF_Principal;
 import lissa.table.ModeloBusqProducto;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
+import lissa.util.Variables;
 
 public class JIF_BusqProductos extends javax.swing.JInternalFrame {
 
@@ -28,6 +29,7 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
     private DetalleVentaBl oDetalleVentaBl;
     public static final String ALMACEN = "ALMACEN";
     public static final String FARMACIA = "FARMACIA";
+    private int opBusqueda = 0;
 
     public JIF_BusqProductos(JF_Principal root) {
         initComponents();
@@ -47,6 +49,10 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
         txfBusqueda = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txfPrincipioActivo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txfAccionTerapeutica = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
@@ -89,7 +95,23 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Descripción :");
+        jLabel1.setText("Producto :");
+
+        jLabel2.setText("Principio activo :");
+
+        txfPrincipioActivo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfPrincipioActivoKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setText("Accion terapéutica :");
+
+        txfAccionTerapeutica.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfAccionTerapeuticaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -97,9 +119,15 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txfBusqueda)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txfBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+                    .addComponent(txfPrincipioActivo)
+                    .addComponent(txfAccionTerapeutica))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -111,7 +139,15 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
                     .addComponent(txfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(jLabel1))
-                .addGap(3, 3, 3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txfPrincipioActivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txfAccionTerapeutica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -137,7 +173,7 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -159,7 +195,7 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -181,17 +217,8 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txfBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfBusquedaKeyReleased
-        if (!txfBusqueda.getText().toUpperCase().trim().equals("")) {
-            String ref = txfBusqueda.getText().toUpperCase().trim();
-            buscarStockProducto(ref);
-        } else {
-            oModeloBusqProducto.clear();
-            inicializar();
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
-            tblProductos.requestFocus();
-        }
-        personalizaTabla();
+        setOpBusqueda(Variables.BUSQ_X_PRODUCTO);
+        listProductosGeneric(evt);
     }//GEN-LAST:event_txfBusquedaKeyReleased
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -218,36 +245,34 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblProductosKeyPressed
 
+    private void txfPrincipioActivoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPrincipioActivoKeyReleased
+        setOpBusqueda(Variables.BUSQ_X_PRINCIPIO_ACTIVO);
+        listProductosGeneric(evt);
+    }//GEN-LAST:event_txfPrincipioActivoKeyReleased
+
+    private void txfAccionTerapeuticaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfAccionTerapeuticaKeyReleased
+        setOpBusqueda(Variables.BUSQ_X_ACCION_FARMACOLOGICA);
+        listProductosGeneric(evt);
+    }//GEN-LAST:event_txfAccionTerapeuticaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProductos;
+    private javax.swing.JTextField txfAccionTerapeutica;
     private javax.swing.JTextField txfBusqueda;
+    private javax.swing.JTextField txfPrincipioActivo;
     // End of variables declaration//GEN-END:variables
 
-    private void buscarStockProducto(String ref) {
-        oAlmacenProductoBl = new AlmacenProductoBl();
-        if (getInvocador() == JIF_ALMACEN) {
-            listProducto = oAlmacenProductoBl.listRef(ref, ALMACEN);
-        } else if (getInvocador() == JIF_VENTAS) {
-            listProducto = oAlmacenProductoBl.listRef(ref, FARMACIA);
-        } else if (getInvocador() == JIF_NOTASALIDA) {
-            listProducto = oAlmacenProductoBl.listRef(ref, FARMACIA);
-        }
-        if (!listProducto.isEmpty()) {
-            oModeloBusqProducto.addAll(listProducto);
-        }
-
-    }
-
     void inicializar() {
-        //listarProductoFull();//lista todos os productos sin importar en que almacen se encuentre
         resetComponent();
         switch (getInvocador()) {
             case JIF_ALMACEN:
@@ -263,14 +288,6 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
         personalizaTabla();
     }
 
-    private void listarProductoFull() {
-        oAlmacenProductoBl = new AlmacenProductoBl();
-        listProducto = oAlmacenProductoBl.listar("");
-        if (!listProducto.isEmpty()) {
-            oModeloBusqProducto.addAll(listProducto);
-        }
-    }
-
     public int getInvocador() {
         return invocador;
     }
@@ -282,24 +299,23 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
     private void personalizaTabla() {
         Utilitarios.formateaColumna(0, tblProductos, 50);
         Utilitarios.formateaColumna(2, tblProductos, 150);
-        Utilitarios.formateaColumna(3, tblProductos, 150);
+        Utilitarios.formateaColumna(3, tblProductos, 50);
         Utilitarios.formateaColumna(4, tblProductos, 50);
         Utilitarios.formateaColumna(5, tblProductos, 70);
         Utilitarios.formateaColumna(6, tblProductos, 70);
-        Utilitarios.formateaColumna(7, tblProductos, 70);
-        Utilitarios.formateaColumna(8, tblProductos, 100);
         Utilitarios.alinearDatosColumnaTablaCentro(4, tblProductos);
-        Utilitarios.alinearDatosColumnaTablaDerecha(7, tblProductos);
+        Utilitarios.alinearDatosColumnaTablaDerecha(6, tblProductos);
     }
 
     private void resetComponent() {
         txfBusqueda.setText("");
+        txfPrincipioActivo.setText("");
+        txfAccionTerapeutica.setText("");
         oModeloBusqProducto.clear();
     }
 
     private void listarProductosAlmacen() {
         oAlmacenProductoBl = new AlmacenProductoBl();
-        System.out.println("aqui...");
         listProducto = oAlmacenProductoBl.listXAlmacen(ALMACEN);
         if (!listProducto.isEmpty()) {
             oModeloBusqProducto.addAll(listProducto);
@@ -312,5 +328,72 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
         if (!listProducto.isEmpty()) {
             oModeloBusqProducto.addAll(listProducto);
         }
+    }
+
+    private void listProductosGeneric(KeyEvent evt) {
+        switch (getOpBusqueda()) {
+            case Variables.BUSQ_X_PRODUCTO:
+                if (!txfBusqueda.getText().toUpperCase().trim().equals("")) {
+                    String ref = txfBusqueda.getText().toUpperCase().trim();
+                    listProductosRef(ref, Variables.BUSQ_X_PRODUCTO);
+                } else {
+                    oModeloBusqProducto.clear();
+                    inicializar();
+                }
+                break;
+            case Variables.BUSQ_X_PRINCIPIO_ACTIVO:
+                if (!txfPrincipioActivo.getText().toUpperCase().trim().equals("")) {
+                    String ref = txfPrincipioActivo.getText().toUpperCase().trim();
+                    listProductosRef(ref, Variables.BUSQ_X_PRINCIPIO_ACTIVO);
+                } else {
+                    oModeloBusqProducto.clear();
+                    inicializar();
+                }
+                break;
+            case Variables.BUSQ_X_ACCION_FARMACOLOGICA:
+                if (!txfAccionTerapeutica.getText().toUpperCase().trim().equals("")) {
+                    String ref = txfAccionTerapeutica.getText().toUpperCase().trim();
+                    listProductosRef(ref, Variables.BUSQ_X_ACCION_FARMACOLOGICA);
+                } else {
+                    oModeloBusqProducto.clear();
+                    inicializar();
+                }
+                break;
+            default:
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+            tblProductos.requestFocus();
+        }
+        personalizaTabla();
+    }
+
+    private void listProductosRef(String ref, int op) {
+        oAlmacenProductoBl = new AlmacenProductoBl();
+        oModeloBusqProducto.clear();
+        switch (getInvocador()) {
+            case JIF_ALMACEN:
+                listProducto = oAlmacenProductoBl.listProductosRef(ref, ALMACEN, op);
+                break;
+            case JIF_VENTAS:
+                listProducto = oAlmacenProductoBl.listProductosRef(ref, FARMACIA, op);
+                break;
+            case JIF_NOTASALIDA:
+                listProducto = oAlmacenProductoBl.listProductosRef(ref, FARMACIA, op);
+                break;
+            default:
+                break;
+        }
+        if (!listProducto.isEmpty()) {
+            oModeloBusqProducto.addAll(listProducto);
+        }
+
+    }
+
+    public int getOpBusqueda() {
+        return opBusqueda;
+    }
+
+    public void setOpBusqueda(int opBusqueda) {
+        this.opBusqueda = opBusqueda;
     }
 }

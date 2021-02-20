@@ -1090,6 +1090,11 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
                     tipoComprobante = Variables.FAR_FACTURA_ELECTRONICA;
                     txfSerie.setText("FF01");
                     break;
+                case Variables.COMPROBANTE_TICKET_BOLETA:
+                    oTipoDocIdentidadCtrl.defaultSelectCbx("DNI", cbxTipoDoc2);
+                    tipoComprobante = Variables.FAR_TICKET_BOLETA;
+                    txfSerie.setText("B001");
+                    break;
                 default:
                     txfSerie.setText("");
             }

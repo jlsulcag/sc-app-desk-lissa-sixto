@@ -7,6 +7,7 @@ import lissa.be.Caja;
 import lissa.be.Producto;
 import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
+import lissa.util.Variables;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -74,18 +75,30 @@ public class ProductoDao extends AbstractDA<Producto>{
         throw new HibernateException("Ocurrió un error en la capa de acceso a datos", he);
     }
 
-    public ArrayList<Producto> listarRef(String ref) {
+    public ArrayList<Producto> listarRef(String ref, int op) {
+        StringBuilder hql = new StringBuilder();
         try {
             iniciarOperacion();
-            String hql = "from Producto p where p.nombre like '%"+ref+"%'";
-            Query query = sesion.createQuery(hql);
+            hql.append("from Producto p ");
+            hql.append("left join fetch p.formaFarmaceutica ff left join fetch p.presentacion pr ");
+            hql.append("left join fetch p.laboratorio lab ");
+            if(op == Variables.BUSQ_X_PRODUCTO){
+                hql.append("where p.nombre like concat('%', :ref, '%') ");
+            } else if(op == Variables.BUSQ_X_PRINCIPIO_ACTIVO){
+                hql.append("where p.principioActivo like concat('%', :ref, '%') ");
+            } else if(op == Variables.BUSQ_X_ACCION_FARMACOLOGICA){
+                hql.append("where p.accionTerapeutica like concat('%', :ref, '%') ");
+            } 
+            Query query = sesion.createQuery(hql.toString());
+            query.setParameter("ref", ref);
             list = (ArrayList<Producto>) query.list();
         } catch (HibernateException e) {
             manejaExcepcion(e);
+            list = new ArrayList<>();
         }
-//        finally{
-//            sesion.close();
-//        }
+        finally{
+            sesion.close();
+        }
         return list;
     }
     

@@ -11,7 +11,7 @@ public class ModeloBusqProducto extends AbstractTableModel<AlmacenProducto> {
     private PrecioProducto oPrecioProducto;
 
     public ModeloBusqProducto() {
-        super.setTitles(new String[]{"ID", "Producto y/o descripción", "Laboratorio", "Presentación", "Stock", "Lote", "Vencimiento", "Precio Venta", "Ubicacion"});
+        super.setTitles(new String[]{"ID", "Producto y/o descripción", "Laboratorio", "Stock", "Lote", "Vencimiento", "Precio Venta", "Princ Activo"});
     }
 
     @Override
@@ -27,24 +27,18 @@ public class ModeloBusqProducto extends AbstractTableModel<AlmacenProducto> {
                     return bean.getProducto().getLaboratorio().getDenominacion();
                 } else {
                     return "";
-                }
+                }            
             case 3:
-                if (bean.getProducto().getPresentacion() != null) {
-                    return bean.getProducto().getPresentacion().getDenominacion();
-                } else {
-                    return "";
-                }
-            case 4:
                 return bean.getStockActual();
-            case 5:
+            case 4:
                 return bean.getLote();
-            case 6:
+            case 5:
                 if (bean.getFechaVencimiento() != null) {
                     return Utilitarios.formatFecha(bean.getFechaVencimiento());
                 } else {
                     return "";
                 }
-            case 7:
+            case 6:
                 oPrecioProductoBl = new PrecioProductoBl(); 
                 oPrecioProducto = new PrecioProducto();
                 oPrecioProducto = oPrecioProductoBl.buscarxIdAlmacenProducto(bean.getIdalmacenproducto());
@@ -53,8 +47,12 @@ public class ModeloBusqProducto extends AbstractTableModel<AlmacenProducto> {
                 }else{
                     return "";
                 }
-            case 8:
-                return bean.getAlmacen().getNombre();
+            case 7:
+                if(bean.getProducto().getPrincipioActivo() != null && !bean.getProducto().getPrincipioActivo().equalsIgnoreCase("")){
+                    return bean.getProducto().getPrincipioActivo();
+                }else{
+                    return "";
+                }                
             default:
                 return null;
         }
