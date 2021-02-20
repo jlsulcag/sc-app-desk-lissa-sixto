@@ -278,13 +278,13 @@ public class VentaDao extends AbstractDA<Venta> {
             }
             
             //registrar comprobante electronico  
-            
+            /*
             if (oVenta.getTotal().compareTo(BigDecimal.ZERO) == 1) {
                 if (oVenta.getFarComprobante().getComprobante().trim().equals("BOLETA ELECTRONICA") || oVenta.getFarComprobante().getComprobante().trim().equals("FACTURA ELECTRONICA")) {
                     emitirComprobanteElectronico(oVenta, omvp);
                 }
             }
-            
+            */
             
             tx.commit();
             res = SUCCESS;

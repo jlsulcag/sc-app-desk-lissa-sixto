@@ -87,6 +87,10 @@ public class Mensajes {
     public static void msjExisteRegistro() {
         JOptionPane.showMessageDialog(null, "El registro ya existe ", "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+    public static void msjNoExisteItemsTabla() {
+        JOptionPane.showMessageDialog(null, "No hay items para registrar ", "Error", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     public static void docAnulado() {
         JOptionPane.showMessageDialog(null, "El documento se encuentra anulado ", "Error", JOptionPane.ERROR_MESSAGE);
@@ -113,7 +117,7 @@ public class Mensajes {
     }
 
     public static void ErrorFatal(HibernateException he) {
-        JOptionPane.showMessageDialog(null, "ERROR FATAL ... Consulte al administrador del sistema : " + he, "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "ERROR INTERNO : Consulte al administrador del sistema", "Error 500", JOptionPane.ERROR_MESSAGE);
     }
     public static void ErrorReporte(Exception ex) {
         JOptionPane.showMessageDialog(null, "ERROR FATAL REPORTE ... Consulte al administrador del sistema : " + ex, "Error al generar reporte", JOptionPane.ERROR_MESSAGE);

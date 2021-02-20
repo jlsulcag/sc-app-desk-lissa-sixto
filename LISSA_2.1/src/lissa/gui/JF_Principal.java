@@ -52,7 +52,7 @@ import lissa.gui.farmacia.JIF_EditarItemsCompra;
 import lissa.gui.farmacia.JIF_FormaPago;
 import lissa.gui.farmacia.JIF_HistorialAtencionFPS;
 import lissa.gui.farmacia.JIF_KardexAlmacen;
-import lissa.gui.farmacia.JIF_Migrar;
+import lissa.gui.farmacia.JIF_InventarioInicial;
 import lissa.gui.farmacia.JIF_NotaSalidaFar;
 import lissa.gui.farmacia.JIF_NuevoProducto;
 import lissa.gui.farmacia.JIF_ProductosVencidos;
@@ -69,6 +69,7 @@ import lissa.gui.rep.JIF_RecaudacionTipoPaciente;
 import lissa.gui.rep.JIF_RepConsumo;
 import lissa.gui.rep.JIF_RepCuentasXCobrarFarmacia;
 import lissa.gui.rep.JIF_RepFPS;
+import lissa.gui.rep.JIF_RepUtilidad;
 import lissa.gui.rep.JIF_RepVentas;
 import lissa.gui.rep.JIF_RepXMedico;
 import lissa.gui.rep.JIF_RepXServicio;
@@ -161,7 +162,7 @@ public class JF_Principal extends javax.swing.JFrame {
     public JIF_ProductosXVencer jifProductosXVencer;
     public JIF_RecaudacionTipoPaciente jifRecaudaciobTipoPaciente;
     public JIF_BusqProveedor jifBusqProveedor;
-    public JIF_Migrar jifMigrar;
+    public JIF_InventarioInicial jifMigrar;
     public JIF_CantidadVenta jifCantidadVenta;
     public JIF_ProductosVencidos jifProductosVencidos;
     public JIF_ConsultaFPS jifConsultaFPS;
@@ -197,6 +198,7 @@ public class JF_Principal extends javax.swing.JFrame {
     public JIF_CuentasXCobrarFarmacia jifCuentasxCobrarFarmacia;
     public JIF_RepCuentasXCobrarFarmacia jifRepCuentasxCobrarfarmacia;
     public JIF_EditarItemsCompra jifEditarItemsCompra;
+    public JIF_RepUtilidad jifReporteUtilidad;
 
 //    private JD_BackUpDB_Creator_Sirec bcpc = null;
 //    private JD_BackUpDB_Restore_Sirec bcpr = null;
@@ -241,7 +243,7 @@ public class JF_Principal extends javax.swing.JFrame {
         jifCompras = new JIF_Compras(this);
         jifConsultaFPS = new JIF_ConsultaFPS(this);
         jifKardexAlmacen = new JIF_KardexAlmacen(this);
-        jifMigrar = new JIF_Migrar(this);
+        jifMigrar = new JIF_InventarioInicial(this);
         jifNuevoProducto = new JIF_NuevoProducto(this);
         jifProductosXVencer = new JIF_ProductosXVencer(this);
         jifProductosVencidos = new JIF_ProductosVencidos(this);
@@ -332,6 +334,7 @@ public class JF_Principal extends javax.swing.JFrame {
         jifCuentasxCobrarFarmacia = new JIF_CuentasXCobrarFarmacia(this);
         jifRepCuentasxCobrarfarmacia = new JIF_RepCuentasXCobrarFarmacia(this);
         jifEditarItemsCompra = new JIF_EditarItemsCompra(this);
+        jifReporteUtilidad = new JIF_RepUtilidad(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -396,6 +399,7 @@ public class JF_Principal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jmiCuentasxCobrarFarmacia = new javax.swing.JMenuItem();
         jmiExportarTarifario = new javax.swing.JMenuItem();
+        jmiReporteUtilidad = new javax.swing.JMenuItem();
         jmPersonal = new javax.swing.JMenu();
         jmiUsuarios = new javax.swing.JMenuItem();
         jmiStafProfesional = new javax.swing.JMenuItem();
@@ -882,6 +886,14 @@ public class JF_Principal extends javax.swing.JFrame {
         });
         jmReportes.add(jmiExportarTarifario);
 
+        jmiReporteUtilidad.setText("Reporte de Utilidad");
+        jmiReporteUtilidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiReporteUtilidadActionPerformed(evt);
+            }
+        });
+        jmReportes.add(jmiReporteUtilidad);
+
         jmbPrincipal.add(jmReportes);
 
         jmPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lissa/resources/user-settings.png"))); // NOI18N
@@ -1120,7 +1132,7 @@ public class JF_Principal extends javax.swing.JFrame {
         });
         jmMantenimiento.add(jMenuItem36);
 
-        jMenuItem2.setText("Migración");
+        jMenuItem2.setText("Inventario Inicial");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -1602,6 +1614,11 @@ public class JF_Principal extends javax.swing.JFrame {
         GenerarExcelTarifario();
     }//GEN-LAST:event_jmiExportarTarifarioActionPerformed
 
+    private void jmiReporteUtilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReporteUtilidadActionPerformed
+        insertarInternalFrames(jifReporteUtilidad);
+        jifReporteUtilidad.inicializar();
+    }//GEN-LAST:event_jmiReporteUtilidadActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1709,6 +1726,7 @@ public class JF_Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiMisComprobantesAdmision;
     private javax.swing.JMenuItem jmiMisComprobantesFarmacia;
     private javax.swing.JMenuItem jmiReimpresionEgresos;
+    private javax.swing.JMenuItem jmiReporteUtilidad;
     private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem jmiStafProfesional;
     private javax.swing.JMenuItem jmiUsuarios;
@@ -2045,17 +2063,16 @@ public class JF_Principal extends javax.swing.JFrame {
         jmbPrincipal.removeAll();
         habilitarLoguin();
         jmbPrincipal.add(jmInicio);
-        jmbPrincipal.add(jmAdmision);
         //MENU CAJA
         jmbPrincipal.add(jmCaja);
         jmCaja.removeAll();
         jmCaja.add(jMenuItem12);
         jmCaja.add(jMenuItem13);
-        jmCaja.add(jMenuItem1);
         jmCaja.add(jMenu1);
+        jMenu1.removeAll();
+        jMenu1.add(jMenuItem6);
+        jMenu1.add(jMenuItem5);
         jmCaja.add(jMenuItem41);
-        jmCaja.add(jmiReimpresionEgresos);
-        jmCaja.add(jmCtasxCobrar);
         //MENU MI CUENTA
         jmbPrincipal.add(jmMiCuenta);
         //MENU REPORTES
@@ -2065,23 +2082,11 @@ public class JF_Principal extends javax.swing.JFrame {
         jmReportes.add(jmi009);
         jmReportes.add(jmi010);
         jmReportes.add(jmi011);
-        jmReportes.add(jmi039);
-        jmReportes.add(jmi040);
-        jmReportes.add(jmi041);
-        jmReportes.add(jmi038);
-        jmReportes.add(jmiExportarTarifario);
+        jmReportes.add(jmiReporteUtilidad);
         //MENU PERSONAL
         jmbPrincipal.add(jmPersonal);
         jmPersonal.removeAll();
         jmPersonal.add(jmiUsuarios);
-        jmPersonal.add(jmiStafProfesional);
-        //MENU MANTENIMIENTO
-        jmbPrincipal.add(jmMantenimiento);
-        jmMantenimiento.removeAll();
-        jmMantenimiento.add(jMenuItem36);
-        jmMantenimiento.add(jMenuItem38);
-        jmMantenimiento.add(jMenuItem39);
-        jmMantenimiento.add(jMenuItem16);
         //ALMACEN FARMACIA      
         jmbPrincipal.add(jmAlmacen);
         jmAlmacen.removeAll();

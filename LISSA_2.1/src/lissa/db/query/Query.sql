@@ -11,6 +11,7 @@ delete from detalle_kardex;
 delete from kardex;
 delete from almacen_producto;
 
+
 delete from producto
 delete from presentacion
 delete from forma_farmaceutica
