@@ -214,23 +214,20 @@ public class JIF_CerrarCajaFar extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txfDescuadre, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                            .addComponent(txfSaldoContabilizado)
-                                            .addComponent(txfSaldoFinal)
-                                            .addComponent(txfSaldoInicial))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jdcFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txfDescuadre, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(txfSaldoContabilizado)
+                                    .addComponent(txfSaldoFinal)
+                                    .addComponent(txfSaldoInicial))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jdcFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txfObservaciones)
                                 .addContainerGap())))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -397,11 +394,8 @@ public class JIF_CerrarCajaFar extends javax.swing.JInternalFrame {
         cajaBl = new CajaBl();
         modeloCaja.clear();
         String caja;
-        if (rolTemp.getDenominacion().trim().equals("FARMACIA")) {
+        if (rolTemp.getDenominacion().trim().equals("FARMACIA") || rolTemp.getDenominacion().trim().equals("JEFE CAJA")) {
             caja = "CAJA 02 - FARMACIA";
-            listCajas = cajaBl.listarxUsuario(userTemp, caja);
-        } else {
-            caja = "CAJA 01 - CLINICA";
             listCajas = cajaBl.listarxUsuario(userTemp, caja);
         }
         if (!listCajas.isEmpty()) {
@@ -414,7 +408,7 @@ public class JIF_CerrarCajaFar extends javax.swing.JInternalFrame {
         oCaja = modeloCaja.get(tblCajas.getSelectedRow());
         //OBTENER FECHA Y HORA DE CIERRE
         txfSaldoInicial.setText(oCaja.getSaldoInicial().toString());
-//        calcularTotalRecibo(oCaja);
+        //calcularTotalRecibo(oCaja);
         calcularTotalBoleta(oCaja);
         calcularTotalFactura(oCaja);
         calcularTotalFinal();

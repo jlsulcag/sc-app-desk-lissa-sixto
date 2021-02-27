@@ -22,6 +22,7 @@ import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
+import lissa.util.Variables;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -152,6 +153,7 @@ public class CompraDao extends AbstractDA<Compra> {
                 oAlmacenProducto.setLote(oDetalleCompra.getLote());
                 oAlmacenProducto.setFechaVencimiento(oDetalleCompra.getFechaVencimiento());
                 oAlmacenProducto.setValorCompraUnitario(((oDetalleCompra.getValorCompraUnitario()).multiply(new BigDecimal(oDetalleCompra.getCantidad()))).divide(oAlmacenProducto.getStockActual(), 2, RoundingMode.HALF_UP));
+                oAlmacenProducto.setPrecioCompraUnitario(oAlmacenProducto.getValorCompraUnitario().multiply(Variables.CIEN_IGV));
                 //obtener el ultimo numero de orden de registro segun id de producto
                 int orden = oAlmacenProductoBl.buscarxAlmacenyIdproducto(oAlmacenProducto.getProducto().getIdproducto(), (new AlmacenBl().buscar(1)).getIdalmacen());
                 oAlmacenProducto.setOrdenRegistro(orden + 1);

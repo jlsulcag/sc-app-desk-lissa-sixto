@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REP0107" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="70649f45-9d13-46cc-bb5b-b2fdbe84e65b">
 	<property name="ireport.zoom" value="1.0245201830476125"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="23"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="FECHA_INI" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -18,7 +18,7 @@ v.num_comprobante,
 p.nombre,
 dv.cantidad_venta,
 dv.precio_venta,
-ap.valor_compra_unitario
+ap.precio_compra
 from detalle_venta dv inner join venta v
 on dv.id_venta = v.idventa inner join producto p
 on dv.id_producto = p.idproducto inner join almacen_producto ap
@@ -36,9 +36,9 @@ order by v.num_comprobante desc]]>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="cantidad_venta" class="java.math.BigDecimal"/>
 	<field name="precio_venta" class="java.math.BigDecimal"/>
-	<field name="valor_compra_unitario" class="java.math.BigDecimal"/>
+	<field name="precio_compra" class="java.math.BigDecimal"/>
 	<variable name="SUM" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[($F{precio_venta}*$F{cantidad_venta})-($F{valor_compra_unitario}*$F{cantidad_venta})]]></variableExpression>
+		<variableExpression><![CDATA[($F{precio_venta}*$F{cantidad_venta})-($F{precio_compra}*$F{cantidad_venta})]]></variableExpression>
 	</variable>
 	<variable name="variable1" class="java.lang.Number">
 		<variableExpression><![CDATA[1]]></variableExpression>
@@ -273,7 +273,7 @@ order by v.num_comprobante desc]]>
 					<font size="8"/>
 					<paragraph leftIndent="5" rightIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{valor_compra_unitario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{precio_compra}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0" isBlankWhenNull="true">
 				<reportElement uuid="bbf37cc8-5b1f-47b0-a863-64640372659a" x="681" y="0" width="59" height="20"/>
@@ -289,7 +289,7 @@ order by v.num_comprobante desc]]>
 					<font size="8"/>
 					<paragraph rightIndent="2" spacingAfter="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{precio_venta}*$F{cantidad_venta})-($F{valor_compra_unitario}*$F{cantidad_venta})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{precio_venta}*$F{cantidad_venta})-($F{precio_compra}*$F{cantidad_venta})]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement uuid="7b1efeca-eea1-43fa-a157-971f7dc4b754" x="0" y="19" width="802" height="1"/>

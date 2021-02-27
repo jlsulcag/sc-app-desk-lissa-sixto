@@ -136,7 +136,7 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
                 sql.append("where p.accionTerapeutica like concat('%', :ref, '%') ");
             }            
             sql.append("and al.nombre =:almacen ");
-            sql.append("and ap.stockActual>0 order by p.idproducto, ap.fechaVencimiento asc ");            
+            sql.append("and ap.stockActual>=0 order by p.idproducto, ap.fechaVencimiento asc ");            
             Query query = sesion.createQuery(sql.toString());
             query.setParameter("ref", ref);
             query.setParameter("almacen", almacen);
@@ -409,6 +409,7 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
                     if (temp != null) {
                         oAlmacenProductoDestino.setFechaVencimiento(temp.getFechaVencimiento() != null ? temp.getFechaVencimiento() : null);
                         oAlmacenProductoDestino.setValorCompraUnitario(temp.getValorCompraUnitario());
+                        oAlmacenProductoDestino.setPrecioCompraUnitario(temp.getPrecioCompraUnitario());
                     }
                     sesion.save(oAlmacenProductoDestino);
                     //Buscar  el precio del producto de  no existir se proceder a registrar
@@ -533,7 +534,8 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
                 oAlmacenProducto.setStockActual(ap.getStockActual());
                 oAlmacenProducto.setPrecioCompraUnitario(ap.getPrecioCompraUnit());
                 oAlmacenProducto.setFechaRegistro(new Date());
-                
+                oAlmacenProducto.setFechaVencimiento(ap.getFechaVencimiento());
+                oAlmacenProducto.setLote(ap.getLote());
                 sesion.save(oAlmacenProducto);
                 
                 //Save precio producto

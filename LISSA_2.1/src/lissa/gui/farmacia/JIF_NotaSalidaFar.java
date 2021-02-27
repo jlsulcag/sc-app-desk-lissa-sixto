@@ -536,8 +536,6 @@ public class JIF_NotaSalidaFar extends javax.swing.JInternalFrame {
                 Mensajes.msjRegCorrecta();
                 generarReporte();
                 inicializar();
-            } else {
-                Mensajes.msjRegError();
             }
         } else {
             Mensajes.msjValidarIngreso();

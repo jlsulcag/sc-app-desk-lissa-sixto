@@ -88,28 +88,23 @@
                               <Component id="jLabel8" alignment="1" max="32767" attributes="0"/>
                               <Component id="jLabel9" alignment="1" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txfDescuadre" alignment="0" pref="100" max="32767" attributes="0"/>
-                                              <Component id="txfSaldoContabilizado" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="txfSaldoFinal" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="txfSaldoInicial" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="lblMensaje" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jdcFechaCierre" min="-2" pref="123" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txfDescuadre" alignment="0" pref="100" max="32767" attributes="0"/>
+                                      <Component id="txfSaldoContabilizado" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txfSaldoFinal" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txfSaldoInicial" alignment="0" max="32767" attributes="0"/>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblMensaje" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jdcFechaCierre" min="-2" pref="123" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txfObservaciones" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
