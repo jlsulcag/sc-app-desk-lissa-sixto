@@ -16,6 +16,8 @@ public class AlmacenProductoDTO {
     private Boolean estado;
     private BigDecimal precioCompraUnit;
     private BigDecimal precioVentaUnit;
+    private String lote;
+    private Date fechaVencimiento;
 
     public AlmacenProductoDTO() {
     }
@@ -83,6 +85,22 @@ public class AlmacenProductoDTO {
 
     public void setPrecioVentaUnit(BigDecimal precioVentaUnit) {
         this.precioVentaUnit = precioVentaUnit;
+    }
+
+    public String getLote() {
+        return lote;
+    }
+
+    public void setLote(String lote) {
+        this.lote = lote;
+    }
+
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
     
     

@@ -1308,21 +1308,16 @@ public class JF_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        if (oRol.getDenominacion().trim().equals("FARMACIA")) {
-            insertarInternalFrames(jifCerrarCajaFar);
-            jifCerrarCajaFar.cargarDatosUser(user, oPersona, oRol);
-            jifCerrarCajaFar.inicializar();
-        } else {
-            insertarInternalFrames(jifCerrarCaja);
-            jifCerrarCaja.cargarDatosUser(user, oPersona, oRol);
-            jifCerrarCaja.inicializar();
-        }
+        insertarInternalFrames(jifCerrarCajaFar);
+        jifCerrarCajaFar.cargarDatosUser(user, oPersona, oRol);
+        jifCerrarCajaFar.inicializar();
+        
 
 
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        salir();
+        //salir();
     }//GEN-LAST:event_formWindowClosing
 
     private void jmReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReportesActionPerformed

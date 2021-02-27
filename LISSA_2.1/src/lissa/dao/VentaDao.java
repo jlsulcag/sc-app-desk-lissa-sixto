@@ -142,8 +142,13 @@ public class VentaDao extends AbstractDA<Venta> {
         BigDecimal total;
         try {
             iniciarOperacion();
-            String hql = "select sum(vt.total) from Venta vt inner join vt.farComprobante fc inner join vt.caja c where c.idcaja = " + oCaja.getIdcaja() + " and (fc.comprobante = 'BOLETA' OR fc.comprobante = 'BOLETA ELECTRONICA') and vt.estado='ACT'";
-            Query query = sesion.createQuery(hql);
+            StringBuilder hql = new StringBuilder();
+            hql.append("select sum(vt.total) from Venta vt inner join vt.farComprobante fc ");
+            hql.append("inner join vt.caja c where c.idcaja = :idCaja ");
+            hql.append("and (fc.comprobante = 'BOLETA' OR fc.comprobante = 'BOLETA ELECTRONICA' OR fc.comprobante = 'TICKET BOLETA') ");
+            hql.append("and vt.estado='ACT'");
+            Query query = sesion.createQuery(hql.toString());
+            query.setParameter("idCaja", oCaja.getIdcaja());
             total = (BigDecimal) query.uniqueResult();
             if (total == null || total == new BigDecimal("0.00")) {
                 total = new BigDecimal("0.00");

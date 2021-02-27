@@ -1,16 +1,13 @@
 package lissa.gui.farmacia;
 
 import java.awt.event.KeyEvent;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import lissa.be.AlmacenProducto;
 import lissa.be.DetalleVenta;
 import lissa.bl.AlmacenProductoBl;
 import lissa.bl.DetalleVentaBl;
 import lissa.gui.JF_Principal;
 import lissa.table.ModeloBusqProducto;
-import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
 import lissa.util.Variables;
 
@@ -123,11 +120,11 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
-                    .addComponent(txfPrincipioActivo)
-                    .addComponent(txfAccionTerapeutica))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfPrincipioActivo, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
+                    .addComponent(txfAccionTerapeutica)
+                    .addComponent(txfBusqueda, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -173,7 +170,7 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(

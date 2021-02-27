@@ -147,7 +147,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         tblProductos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         btnQuitar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -391,12 +391,12 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lissa/resources/Save16.png"))); // NOI18N
-        jButton2.setText("Guardar");
-        jButton2.setToolTipText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lissa/resources/Save16.png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setToolTipText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
@@ -516,7 +516,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnFormapago)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -528,7 +528,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
+                        .addComponent(btnGuardar)
                         .addComponent(btnFormapago))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -632,11 +632,11 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         personalizaTabla();
     }//GEN-LAST:event_btnQuitarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         //Registro transaccional
         registrar();
         //Fin transaccional        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         resetComponent();
@@ -661,11 +661,11 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFormapago;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnQuitar;
     private javax.swing.JComboBox cbxTipoComprobante;
     private javax.swing.JComboBox cbxTipoDoc2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -708,6 +708,8 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         cargarCbxAlmacen();
         Utilitarios.fechaActual(jdcFechaComprobante);
         llenarCbxTipoDoc();
+        btnGuardar.setEnabled(false);
+        
     }
 
     private void llenarCbxTipoDoc() {
@@ -1054,6 +1056,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         lblTotalDescuento.setText("0.00");
         lblMontoIgv.setText("0.00");
         lblMontoTotal.setText("0.00");
+        btnGuardar.setEnabled(false);
     }
 
     public void EnviarDatosCaja(Caja oCaja) {
@@ -1173,6 +1176,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
 
     void enviaCuentasxcobrar(BigDecimal totalAPagar, BigDecimal totalDescuento) {
         calcularTotalesaPagar(totalAPagar, totalDescuento);
+        btnGuardar.setEnabled(true);
     }
 
     void enviaCuentasxcobrar(Cuentaxcobrar obj, BigDecimal totalAPagar, BigDecimal totalDescuento) {
@@ -1219,10 +1223,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
                 oCuentaxcobrar = null;
                 oPersonaPaciente = null;
                 oPersonaCliente = null;
-            } else {
-                Mensajes.msjRegError();
             }
-
         } else {
             Mensajes.msjValidarIngreso();
             paintComponents();
