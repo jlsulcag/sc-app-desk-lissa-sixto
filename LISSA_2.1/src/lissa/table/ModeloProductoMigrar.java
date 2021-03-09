@@ -15,7 +15,7 @@ import org.rx.cr.table.AbstractTableModel;
  */
 public class ModeloProductoMigrar extends AbstractTableModel<Producto>{
     public ModeloProductoMigrar() {
-        super.setTitles(new String[]{"ID","Producto"});
+        super.setTitles(new String[]{"ID","Producto", "Laboratorio"});
     }    
     
     @Override
@@ -24,6 +24,7 @@ public class ModeloProductoMigrar extends AbstractTableModel<Producto>{
         switch(col){
             case 0: return Utilitarios.numberFormat(bean.getIdproducto(),"######"); 
             case 1: return bean.getNombre();
+            case 2: return bean.getLaboratorio().getDenominacion();
             default: return null;
         }
     }
