@@ -11,7 +11,7 @@ public class ModeloBusqProducto extends AbstractTableModel<AlmacenProducto> {
     private PrecioProducto oPrecioProducto;
 
     public ModeloBusqProducto() {
-        super.setTitles(new String[]{"ID", "Producto y/o descripción", "Laboratorio", "Stock", "Lote", "Vencimiento", "Precio Venta", "Princ Activo"});
+        super.setTitles(new String[]{"ID", "Producto", "Laboratorio", "Stock", "Lote", "Vencimiento", "Precio Venta", "Princ Activo", "Acción Terapéutica"});
     }
 
     @Override
@@ -52,7 +52,13 @@ public class ModeloBusqProducto extends AbstractTableModel<AlmacenProducto> {
                     return bean.getProducto().getPrincipioActivo();
                 }else{
                     return "";
-                }                
+                } 
+            case 8:
+                if(bean.getProducto().getAccionTerapeutica() != null && !bean.getProducto().getAccionTerapeutica().equalsIgnoreCase("")){
+                    return bean.getProducto().getAccionTerapeutica();
+                }else{
+                    return "";
+                }
             default:
                 return null;
         }

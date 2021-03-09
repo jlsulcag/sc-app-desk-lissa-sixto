@@ -498,7 +498,8 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
     private void printDatosUser() {
         txfPersonaOrigen.setText(perTemp.getNombre().trim() + " " + perTemp.getApellidoPaterno().trim() + " " + perTemp.getApellidoMaterno().trim());
     }
-
+    
+    /*Viene datos desde Jif_cantidad*/
     void enviaDatosProducto(DetalleVenta obj) {
         oDetalleVenta = obj;
         //verificar  la existencia del producto en la lista de la tabla
@@ -802,8 +803,6 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
             if(r==Variables.SUCCESS){
                 Mensajes.msjRegCorrecta();
                 resetComponentFull();
-            }else{
-                Mensajes.msjRegError();
             }
             /*
              actualizarAlmacenStock();

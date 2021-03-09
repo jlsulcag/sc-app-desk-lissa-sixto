@@ -991,8 +991,7 @@ public class JIF_FormaPago extends javax.swing.JInternalFrame {
         }
     }
 
-    private void guardar() {
-        
+    private void guardar() {        
         totalDescuento = descuento.add(cuentasxcobrar).setScale(2, RoundingMode.HALF_UP);
         if (cbxModalidadPago.getSelectedItem().toString().equals("CONTADO")) {
             root.jifRegVentas.enviaCuentasxcobrar(totalAPagar, totalDescuento);

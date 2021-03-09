@@ -225,7 +225,7 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
         } else if (chbxPrecioMax.isSelected()) {
             oDetalleVenta.setPrecioVenta(txfPrecioMax.getText().trim().equals("") ? BigDecimal.ZERO : new BigDecimal(txfPrecioMax.getText().trim()));
         }
-        oDetalleVenta.setLote(oAlmacenProducto.getLote());
+        oDetalleVenta.setLote(oAlmacenProducto.getLote() == null?"":oAlmacenProducto.getLote());
         oDetalleVenta.setIdAlmacenproducto(oAlmacenProducto.getIdalmacenproducto());
         oDetalleVenta.setPvMin(new BigDecimal(txfPrecioMin.getText().trim()));
         oDetalleVenta.setPvMax(new BigDecimal(txfPrecioMax.getText().trim()));
@@ -243,6 +243,7 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
             oDetalleVenta.setMontoIgvItem(oDetalleVenta.getValorUnitarioItem().multiply(oDetalleVenta.getCantidadVenta()).multiply(Variables.IGV));
             oDetalleVenta.setSubTotal(oDetalleVenta.getValorUnitarioItem().multiply(oDetalleVenta.getCantidadVenta()));            
             oDetalleVenta.setMontoTotal(oDetalleVenta.getPrecioUnitarioItem().multiply(oDetalleVenta.getCantidadVenta()));
+            
             switch (getInvocador()) {
                 case JIF_VENTAS:
                     root.jifRegVentas.enviaDatosProducto(oDetalleVenta);

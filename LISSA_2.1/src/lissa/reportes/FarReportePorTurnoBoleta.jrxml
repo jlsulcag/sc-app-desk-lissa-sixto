@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="48dc8260-97e3-4f93-928c-be20e3f6a138">
 	<property name="ireport.zoom" value="1.4641000000000017"/>
-	<property name="ireport.x" value="10"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.callouts" value="##Fri Jan 13 17:35:59 COT 2017"/>
 	<parameter name="ID_CAJA" class="java.lang.Integer">
@@ -22,7 +22,7 @@ from venta vt left join persona per
 on vt.id_clientepersonanatural = per.idpersona inner join far_comprobante fc
 on vt.id_farcomprobante = fc.idfarcomprobante inner join caja ca
 on vt.id_caja = ca.idcaja
-where  ca.idcaja = $P{ID_CAJA} and (fc.idfarcomprobante = 4 OR fc.idfarcomprobante = 10) AND vt.estado = 'ACT']]>
+where  ca.idcaja = $P{ID_CAJA} and (fc.idfarcomprobante = 4 OR fc.idfarcomprobante = 10 OR fc.idfarcomprobante = 12) AND vt.estado = 'ACT']]>
 	</queryString>
 	<field name="cliente" class="java.lang.String"/>
 	<field name="comprobante" class="java.lang.String"/>
