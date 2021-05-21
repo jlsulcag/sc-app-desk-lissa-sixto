@@ -31,6 +31,7 @@ public class JIF_AdminProducto extends javax.swing.JInternalFrame {
     private int invocador;
     public static final int JIF_COMPRAS = 1;
     public static final int JIF_VENTAS = 2;
+    
     private int opBusqueda;
 
     public JIF_AdminProducto(JF_Principal root) {
