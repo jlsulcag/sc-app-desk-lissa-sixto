@@ -17,7 +17,7 @@ public class ModeloVentaProducto extends AbstractTableModel<DetalleVenta>{
         DetalleVenta bean = get(fil);
         switch(col){
             case 0: return Utilitarios.numberFormat(bean.getIddetalleventa(),"######"); 
-            case 1: return bean.getCantidadVenta();
+            case 1: return bean.getCantidadVenta().setScale(0);
             case 2: return bean.getProducto().getNombre();
             case 3: if( bean.getProducto().getLaboratorio()!= null){
                 return bean.getProducto().getLaboratorio().getDenominacion();
@@ -25,8 +25,8 @@ public class ModeloVentaProducto extends AbstractTableModel<DetalleVenta>{
             case 4: if( bean.getProducto().getPresentacion()!= null){
                 return bean.getProducto().getPresentacion().getDenominacion();
             }else{return "";}
-            case 5: return bean.getPrecioVenta();
-            case 6: return bean.getPrecioVenta().multiply(bean.getCantidadVenta());
+            case 5: return bean.getPrecioVenta().setScale(2);
+            case 6: return bean.getPrecioVenta().multiply(bean.getCantidadVenta()).setScale(2);
             default: return null;
         }
     }

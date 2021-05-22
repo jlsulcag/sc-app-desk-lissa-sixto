@@ -29,6 +29,18 @@ public class DetalleVenta implements java.io.Serializable {
 
     public DetalleVenta() {
     }
+
+    @Override
+    public String toString() {
+        return "DetalleVenta{" + "iddetalleventa=" + iddetalleventa + ", producto=" + producto + 
+                ", venta=" + venta + ", precioVenta=" + precioVenta + ", cantidadVenta=" + cantidadVenta + ", lote=" + 
+                lote + ", idAlmacenproducto=" + idAlmacenproducto + ", pvMin=" + pvMin + ", pvMax=" + pvMax + 
+                ", pvSugerido=" + pvSugerido + ", unidadMedida=" + unidadMedida + ", idTipoigv=" + idTipoigv + 
+                ", valorUnitarioItem=" + valorUnitarioItem + ", precioUnitarioItem=" + precioUnitarioItem + ", subTotal=" + 
+                subTotal + ", montoIgvItem=" + montoIgvItem + ", montoTotal=" + montoTotal + '}';
+    }
+    
+    
     
     public long getIddetalleventa() {
         return this.iddetalleventa;
