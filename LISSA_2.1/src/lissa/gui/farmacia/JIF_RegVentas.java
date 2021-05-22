@@ -22,8 +22,6 @@ import lissa.be.FarComprobante;
 import lissa.be.HistorialAtencionFps;
 import lissa.be.Kardex;
 import lissa.be.Persona;
-import lissa.be.PersonaJuridica;
-import lissa.be.Producto;
 import lissa.be.Rol;
 import lissa.be.TipoComprobante;
 import lissa.be.TipoDocidentidad;
@@ -633,9 +631,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        //Registro transaccional
         registrar();
-        //Fin transaccional        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -709,7 +705,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         Utilitarios.fechaActual(jdcFechaComprobante);
         llenarCbxTipoDoc();
         btnGuardar.setEnabled(false);
-        
+
     }
 
     private void llenarCbxTipoDoc() {
@@ -765,14 +761,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         }
     }
 
-    //Aqui se carega los datos de persona del paciente  para quien son los medicamentos
-    /*
-     public void cargarDatosPaciente(Persona beanTabla) {
-     oPersonaPaciente = beanTabla;
-     txfNumDni.setText(oPersonaPaciente.getNumeroDocumento().trim());
-     txfNombresCliente.setText(oPersonaPaciente.getNombre().trim() + " " + oPersonaPaciente.getApellidoPaterno().trim() + " " + oPersonaPaciente.getApellidoMaterno().trim());
-     }
-     */
+    /*Carga datos del detalle en la ventana principal*/
     void enviaDatosProducto(DetalleVenta obj) {
         oDetalleVenta = obj;
         //verificar  la existencia del producto en la lista de la tabla
@@ -808,7 +797,6 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
 
     private void calcularMontos() {
         if (oModeloVentaProducto.size() > 0) {
-            System.out.println("size ... "+oModeloVentaProducto.size());
             resetTotales();
             for (int i = 0; i < oModeloVentaProducto.size(); i++) {
                 DetalleVenta dv = new DetalleVenta();
@@ -816,20 +804,14 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
                 montoSubTotal = montoSubTotal.add(dv.getSubTotal());
                 montoIgv = montoIgv.add(dv.getMontoIgvItem());
                 montoTotal = montoTotal.add(dv.getMontoTotal());
-                totalDescuentos = BigDecimal.ZERO;
+                totalDescuentos = new BigDecimal("0.00");
+                System.out.println("........... " + dv.toString());
             }
             //impresion de totales
-            lblSubTotal.setText(montoSubTotal.setScale(2, RoundingMode.HALF_UP).toString());
-            lblMontoIgv.setText(montoIgv.setScale(2, RoundingMode.HALF_UP).toString());
-            lblMontoTotal.setText(montoTotal.setScale(2, RoundingMode.HALF_UP).toString());
-            lblTotalDescuento.setText(totalDescuentos.setScale(2, RoundingMode.HALF_UP).toString());
+            printTotales();
         } else {
             resetTotales();
-            //impresion de totales
-            lblSubTotal.setText(montoSubTotal.setScale(2, RoundingMode.HALF_UP).toString());
-            lblMontoIgv.setText(montoIgv.setScale(2, RoundingMode.HALF_UP).toString());
-            lblMontoTotal.setText(montoTotal.setScale(2, RoundingMode.HALF_UP).toString());
-            lblTotalDescuento.setText(totalDescuentos.setScale(2, RoundingMode.HALF_UP).toString());
+            printTotales();
         }
     }
 
@@ -899,13 +881,13 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         oVenta.setTotalSumatoriaOtrosTributos(BigDecimal.ZERO);
         oVenta.setTotalSumatoriaOtrosCargos(BigDecimal.ZERO);
         oVenta.setTotalSumatoriaDescuentos(new BigDecimal(lblTotalDescuento.getText().trim()));
-        oVenta.setTotalImporteVenta(oVenta.getTotalValorVentaOpGravadas()
+        oVenta.setTotalImporteVenta((oVenta.getTotalValorVentaOpGravadas()
                 .add(oVenta.getTotalValorVentaOpeInafectas()
                         .add(oVenta.getTotalValorVentaOpeExoneradas()
                                 .add(oVenta.getTotalSumatoriaIgv()
                                         .add(oVenta.getTotalSumatoriaIsc()
                                                 .add(oVenta.getTotalSumatoriaOtrosTributos()
-                                                        .add(oVenta.getTotalSumatoriaOtrosCargos())))))));
+                                                        .add(oVenta.getTotalSumatoriaOtrosCargos()))))))).setScale(2, RoundingMode.HALF_UP));
         oVenta.setTipoMoneda("PEN");
         oVenta.setTotalOpeGratuitas(BigDecimal.ZERO);
         //setear  valores para el  kardex
@@ -958,13 +940,14 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         oCajaBl = new CajaBl();
         return oCajaBl.buscarPorIdusuario(user);
     }
+
     /*
      private void registrarKardexAlmacen() {
      oKardex = registrarKardex();
 
      }
      */
-    /*
+ /*
      private Kardex registrarKardex() {
      for (int i = 0; i < oModeloVentaProducto.getRowCount(); i++) {
      oDetalleVenta = oModeloVentaProducto.get(i);
@@ -1003,7 +986,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
      return oKardex;
      }
      */
-    /*
+ /*
      private void actualizarAlmacenStock() {
      for (int i = 0; i < oModeloVentaProducto.getRowCount(); i++) {
      oAlmacenProducto = new AlmacenProducto();
@@ -1193,14 +1176,11 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
     //Metodo que calcula  todos los totales en funciona los parametros ingresados en formas de pago
     void calcularTotalesaPagar(BigDecimal totalAPagar, BigDecimal totalDescuento) {
         montoTotal = totalAPagar;
-        montoSubTotal = totalAPagar.divide(Variables.CIEN_IGV, 2, RoundingMode.HALF_UP);
-        montoIgv = ((totalAPagar.divide(Variables.CIEN_IGV, 2, RoundingMode.HALF_UP)).multiply(Variables.IGV)).setScale(2, RoundingMode.HALF_UP);
-        totalDescuentos = totalDescuento.divide(Variables.CIEN_IGV, 2, RoundingMode.HALF_UP);
-
-        lblMontoTotal.setText(montoTotal.toString());
-        lblSubTotal.setText(montoSubTotal.toString());
-        lblMontoIgv.setText(montoIgv.toString());
-        lblTotalDescuento.setText(totalDescuentos.toString());
+        montoSubTotal = totalAPagar.divide(Variables.CIEN_IGV, 4, RoundingMode.HALF_UP);
+        montoIgv = ((montoSubTotal).multiply(Variables.IGV)).setScale(6, RoundingMode.HALF_UP);
+        totalDescuentos = totalDescuento.divide(Variables.CIEN_IGV, 6, RoundingMode.HALF_UP);
+        
+        printTotales();        
     }
 
     private void registrar() {
@@ -1213,9 +1193,6 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
                 if (oVenta.getTotal().compareTo(BigDecimal.ZERO) == 1) {
                     imprimirComprobante();
                 }
-
-                //if (oCuentaxcobrar.getMontoPagado().compareTo(BigDecimal.ZERO) == 1) {//el primer valor es mayor
-                //}
                 resetPaintComponent();
                 resetTotales();
                 resetComponent();
@@ -1251,6 +1228,19 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
             }
         }
 
+    }
+
+    private void printTotales() {
+        /*
+        lblSubTotal.setText(Utilitarios.redondearCustomPrecios(montoSubTotal, 2).toString());
+        lblMontoIgv.setText(Utilitarios.redondearCustomPrecios(montoIgv, 2).toString());
+        lblMontoTotal.setText(Utilitarios.redondearCustomPrecios(montoTotal, 2).toString());
+        lblTotalDescuento.setText(Utilitarios.redondearCustomPrecios(totalDescuentos, 2).toString());
+        */
+        lblSubTotal.setText(montoSubTotal.setScale(2, RoundingMode.HALF_UP).toString());
+        lblMontoIgv.setText(montoIgv.setScale(2, RoundingMode.HALF_UP).toString());
+        lblMontoTotal.setText(montoTotal.setScale(2, RoundingMode.HALF_UP).toString());
+        lblTotalDescuento.setText(totalDescuentos.setScale(2, RoundingMode.HALF_UP).toString());
     }
 
 }

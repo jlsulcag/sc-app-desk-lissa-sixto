@@ -9,6 +9,7 @@ import java.awt.print.*;
 import java.beans.PropertyVetoException;
 import java.io.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -157,6 +158,15 @@ public final class Utilitarios extends JLabel implements Runnable {
     public static double Redondear(double numero, int digitos) {
         int cifras = (int) Math.pow(10, digitos);
         return Math.rint(numero * cifras) / cifras;
+    }
+    
+    public static BigDecimal redondearCustomPrecios(BigDecimal num, int scale) {
+        BigDecimal response = new BigDecimal("0.00");
+        response = num;
+        for (int i = 0; i < scale; i++) {
+            response = response.setScale(i+1, RoundingMode.HALF_UP);           
+        }        
+        return response;
     }
 
     //</editor-fold>    

@@ -9,6 +9,7 @@ import lissa.be.DetalleVenta;
 import lissa.be.PrecioProducto;
 import lissa.bl.PrecioProductoBl;
 import lissa.gui.JF_Principal;
+import lissa.util.Utilitarios;
 import lissa.util.Variables;
 
 /**
@@ -38,25 +39,33 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txfCantidad = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txfPrecioSugerido = new javax.swing.JTextField();
-        chbxPrecioSugerido = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        txfPrecioMin = new javax.swing.JTextField();
-        chbxPrecioMin = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
+        txfCantidad = new javax.swing.JTextField();
+        txfPrecioSugerido = new javax.swing.JTextField();
+        txfPrecioMin = new javax.swing.JTextField();
         txfPrecioMax = new javax.swing.JTextField();
-        chbxPrecioMax = new javax.swing.JCheckBox();
         btnAceptar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Cantidad");
 
-        jLabel1.setText("Cantidad :");
+        jPanel2.setLayout(new java.awt.GridLayout(2, 4));
+
+        jLabel1.setText("Cantidad");
+        jPanel2.add(jLabel1);
+
+        jLabel2.setText("Precio Sugerido");
+        jPanel2.add(jLabel2);
+
+        jLabel3.setText("Precio Min");
+        jPanel2.add(jLabel3);
+
+        jLabel4.setText("Precio Max");
+        jPanel2.add(jLabel4);
 
         txfCantidad.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         txfCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -64,66 +73,33 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txfCantidadKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfCantidadKeyReleased(evt);
+            }
         });
+        jPanel2.add(txfCantidad);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txfCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2.setLayout(new java.awt.GridLayout(3, 3));
-
-        jLabel2.setText("Precio Sugerido :");
-        jPanel2.add(jLabel2);
-
-        txfPrecioSugerido.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txfPrecioSugerido.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         txfPrecioSugerido.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txfPrecioSugerido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txfPrecioSugeridoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfPrecioSugeridoKeyReleased(evt);
+            }
+        });
         jPanel2.add(txfPrecioSugerido);
 
-        buttonGroup1.add(chbxPrecioSugerido);
-        chbxPrecioSugerido.setSelected(true);
-        chbxPrecioSugerido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(chbxPrecioSugerido);
-
-        jLabel3.setText("Precio Min :");
-        jPanel2.add(jLabel3);
-
-        txfPrecioMin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txfPrecioMin.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         txfPrecioMin.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txfPrecioMin.setEnabled(false);
         jPanel2.add(txfPrecioMin);
 
-        buttonGroup1.add(chbxPrecioMin);
-        chbxPrecioMin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(chbxPrecioMin);
-
-        jLabel4.setText("Precio Max :");
-        jPanel2.add(jLabel4);
-
-        txfPrecioMax.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txfPrecioMax.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         txfPrecioMax.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txfPrecioMax.setEnabled(false);
         jPanel2.add(txfPrecioMax);
-
-        buttonGroup1.add(chbxPrecioMax);
-        chbxPrecioMax.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(chbxPrecioMax);
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -137,23 +113,19 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAceptar)
+                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -169,22 +141,32 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
 
     private void txfCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCantidadKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnAceptar.doClick();
+            txfPrecioSugerido.requestFocus();
         }
     }//GEN-LAST:event_txfCantidadKeyPressed
+
+    private void txfPrecioSugeridoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPrecioSugeridoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnAceptar.doClick();
+        }
+    }//GEN-LAST:event_txfPrecioSugeridoKeyPressed
+
+    private void txfCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCantidadKeyReleased
+        Utilitarios.validaCaracterNumerico(evt, txfCantidad);
+    }//GEN-LAST:event_txfCantidadKeyReleased
+
+    private void txfPrecioSugeridoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPrecioSugeridoKeyReleased
+        Utilitarios.validaCaracterNumericoMoneda(evt, txfPrecioSugerido);
+    }//GEN-LAST:event_txfPrecioSugeridoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JCheckBox chbxPrecioMax;
-    private javax.swing.JCheckBox chbxPrecioMin;
-    private javax.swing.JCheckBox chbxPrecioSugerido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txfCantidad;
     private javax.swing.JTextField txfPrecioMax;
@@ -218,18 +200,12 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
     private void cargarDatos() {
         oDetalleVenta = new DetalleVenta();
         oDetalleVenta.setProducto(oAlmacenProducto.getProducto());
-        if (chbxPrecioSugerido.isSelected()) {//se guarda el precio ingresado en la caja de texto
-            oDetalleVenta.setPrecioVenta(txfPrecioSugerido.getText().trim().equals("") ? BigDecimal.ZERO : new BigDecimal(txfPrecioSugerido.getText().trim()));
-        } else if (chbxPrecioMin.isSelected()) {
-            oDetalleVenta.setPrecioVenta(txfPrecioMin.getText().trim().equals("") ? BigDecimal.ZERO : new BigDecimal(txfPrecioMin.getText().trim()));
-        } else if (chbxPrecioMax.isSelected()) {
-            oDetalleVenta.setPrecioVenta(txfPrecioMax.getText().trim().equals("") ? BigDecimal.ZERO : new BigDecimal(txfPrecioMax.getText().trim()));
-        }
+        oDetalleVenta.setPrecioVenta(txfPrecioSugerido.getText().trim().equals("") ? BigDecimal.ZERO : new BigDecimal(txfPrecioSugerido.getText().trim()));
         oDetalleVenta.setLote(oAlmacenProducto.getLote() == null?"":oAlmacenProducto.getLote());
         oDetalleVenta.setIdAlmacenproducto(oAlmacenProducto.getIdalmacenproducto());
         oDetalleVenta.setPvMin(new BigDecimal(txfPrecioMin.getText().trim()));
         oDetalleVenta.setPvMax(new BigDecimal(txfPrecioMax.getText().trim()));
-        oDetalleVenta.setPrecioVenta(new BigDecimal(txfPrecioSugerido.getText().trim()));
+        oDetalleVenta.setPrecioVenta(new BigDecimal(txfPrecioSugerido.getText().trim()).setScale(6, RoundingMode.HALF_UP));
         oDetalleVenta.setUnidadMedida("NIU");
 
         if ((new BigDecimal(txfCantidad.getText().trim())).compareTo(oAlmacenProducto.getStockActual()) == 1) {
@@ -237,12 +213,12 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
             txfCantidad.setText("");
             txfCantidad.requestFocus();
         } else {
-            oDetalleVenta.setCantidadVenta(new BigDecimal(txfCantidad.getText().trim()));
+            oDetalleVenta.setCantidadVenta(new BigDecimal(txfCantidad.getText().trim()).setScale(0, RoundingMode.HALF_UP));
             oDetalleVenta.setPrecioUnitarioItem(oDetalleVenta.getPrecioVenta());
-            oDetalleVenta.setValorUnitarioItem(oDetalleVenta.getPrecioVenta().divide(Variables.CIEN_IGV, 4, RoundingMode.HALF_UP));                        
-            oDetalleVenta.setMontoIgvItem(oDetalleVenta.getValorUnitarioItem().multiply(oDetalleVenta.getCantidadVenta()).multiply(Variables.IGV));
-            oDetalleVenta.setSubTotal(oDetalleVenta.getValorUnitarioItem().multiply(oDetalleVenta.getCantidadVenta()));            
-            oDetalleVenta.setMontoTotal(oDetalleVenta.getPrecioUnitarioItem().multiply(oDetalleVenta.getCantidadVenta()));
+            oDetalleVenta.setValorUnitarioItem((oDetalleVenta.getPrecioVenta().divide(Variables.CIEN_IGV, 4, RoundingMode.HALF_UP)).setScale(6, RoundingMode.HALF_UP));                        
+            oDetalleVenta.setMontoIgvItem((oDetalleVenta.getValorUnitarioItem().multiply(oDetalleVenta.getCantidadVenta()).multiply(Variables.IGV)).setScale(6, RoundingMode.HALF_UP));
+            oDetalleVenta.setSubTotal((oDetalleVenta.getValorUnitarioItem().multiply(oDetalleVenta.getCantidadVenta())).setScale(6, RoundingMode.HALF_UP));            
+            oDetalleVenta.setMontoTotal((oDetalleVenta.getPrecioUnitarioItem().multiply(oDetalleVenta.getCantidadVenta())).setScale(6, RoundingMode.HALF_UP));
             
             switch (getInvocador()) {
                 case JIF_VENTAS:
@@ -267,7 +243,7 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
         txfPrecioMax.setText("");
         txfPrecioSugerido.setText("");
         buttonGroup1.clearSelection();
-        chbxPrecioSugerido.setSelected(true);
+        txfCantidad.requestFocus();
     }
 
 }
