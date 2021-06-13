@@ -769,8 +769,8 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
             oModeloVentaProducto.add(oDetalleVenta);
         } else {
             for (int i = 0; i < oModeloVentaProducto.size(); i++) {
-                DetalleVenta det = oModeloVentaProducto.get(i);
-                if (oDetalleVenta.getIdAlmacenproducto().equals(det.getIdAlmacenproducto())) {
+                DetalleVenta temp = oModeloVentaProducto.get(i);
+                if (oDetalleVenta.getIdAlmacenproducto().compareTo(temp.getIdAlmacenproducto())==0) {
                     //el producto ya existe en la lista
                     JOptionPane.showMessageDialog(null, "El producto ya existe  en la lista", "Atención", JOptionPane.INFORMATION_MESSAGE);
                 } else {
