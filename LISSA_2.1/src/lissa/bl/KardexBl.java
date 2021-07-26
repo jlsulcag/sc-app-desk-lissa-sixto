@@ -71,9 +71,9 @@ public class KardexBl extends AbstractBL<Kardex>{
         return dao.generarNumeracion(grupo);
     }
 
-    public List<Kardex> listarxProducto(long idproducto, long idalmacen) {
+    public List<Kardex> listarxProducto(long idalmprod, long idalmacen) {
         dao = new KardexDao();
-        return dao.listarxProducto(idproducto, idalmacen);
+        return dao.listarxProducto(idalmprod, idalmacen);
     }
 
     public long nroOrdenregistro(Long idProducto) {

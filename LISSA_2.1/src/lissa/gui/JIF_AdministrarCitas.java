@@ -19,7 +19,7 @@ import lissa.table.ModeloCita;
 import lissa.table.ModeloCitaDetalle;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 /**
  *
@@ -269,7 +269,7 @@ public class JIF_AdministrarCitas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnProcesos;
     private javax.swing.JComboBox cbxMedico;
@@ -397,7 +397,7 @@ public class JIF_AdministrarCitas extends javax.swing.JInternalFrame {
             oCitaBl = new CitaBl();
             if (oCitaDetalleTemp.getCita().getEstado().equals("REG")) {
                 oCitaDetalleTemp.getCita().setEstado("ANULADO");
-                if (oCitaBl.actualizar(oCitaDetalleTemp.getCita()) == Variables.SUCCESS) {
+                if (oCitaBl.actualizar(oCitaDetalleTemp.getCita()) == Constants.SUCCESS) {
                     Mensajes.procesoSatisfactorio();
                 } else {
                     Mensajes.procesoError();

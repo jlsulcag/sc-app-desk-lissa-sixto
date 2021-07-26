@@ -117,7 +117,7 @@ public class Mensajes {
     }
 
     public static void ErrorFatal(HibernateException he) {
-        JOptionPane.showMessageDialog(null, "ERROR INTERNO : Consulte al administrador del sistema", "Error 500", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "ERROR INTERNO ... Consulte al administrador del sistema : " + he.getMessage(), "Error 500", JOptionPane.ERROR_MESSAGE);
     }
     public static void ErrorReporte(Exception ex) {
         JOptionPane.showMessageDialog(null, "ERROR FATAL REPORTE ... Consulte al administrador del sistema : " + ex, "Error al generar reporte", JOptionPane.ERROR_MESSAGE);

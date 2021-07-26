@@ -12,7 +12,7 @@ import lissa.be.DetalleCompra;
 import lissa.bl.DetalleCompraBl;
 import lissa.gui.JF_Principal;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_EditarItemsCompra extends javax.swing.JInternalFrame {
 
@@ -404,7 +404,7 @@ public class JIF_EditarItemsCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txfTotalUnidadesKeyPressed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox chbxBono;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -487,13 +487,13 @@ public class JIF_EditarItemsCompra extends javax.swing.JInternalFrame {
 
     private void calcularPrecioConIgv() {
         BigDecimal valorUnitario = txfValorUnitario.getText().trim().equals("") ? new BigDecimal("0.00") : new BigDecimal(txfValorUnitario.getText().trim()).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal precioUnitario = valorUnitario.add(valorUnitario.multiply(Variables.IGV)).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal precioUnitario = valorUnitario.add(valorUnitario.multiply(Constants.IGV)).setScale(2, RoundingMode.HALF_UP);
         txfPrecioUnitario.setText(precioUnitario.toString());
     }
 
     private void calcularPrecioSinIgv() {
         BigDecimal precioUnitario = txfPrecioUnitario.getText().trim().equals("") ? new BigDecimal("0.00") : new BigDecimal(txfPrecioUnitario.getText().trim()).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal valorUnitario = precioUnitario.divide(Variables.CIEN_IGV, RoundingMode.HALF_UP).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal valorUnitario = precioUnitario.divide(Constants.CIEN_IGV, RoundingMode.HALF_UP).setScale(2, RoundingMode.HALF_UP);
 
         txfValorUnitario.setText(valorUnitario.toString());
     }

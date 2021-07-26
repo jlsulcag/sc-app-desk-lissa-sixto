@@ -50,7 +50,7 @@ import lissa.table.ModeloAtencionesFPS;
 import lissa.table.ModelosSeguroVida;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JPanel_Admision extends javax.swing.JPanel {
 
@@ -1212,7 +1212,7 @@ public class JPanel_Admision extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxTipoPacienteItemStateChanged
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
@@ -1336,7 +1336,7 @@ public class JPanel_Admision extends javax.swing.JPanel {
         if (banBoton == 1) {
             if (isDatosValidos()) {
                 if (isDniValido()) {
-                    if (registrar() == Variables.SUCCESS) {
+                    if (registrar() == Constants.SUCCESS) {
                         Mensajes.msjRegCorrecta();
                         modeloPersonas.clear();
                         modeloPersonas.add(buscarPersonaXDni());
@@ -1362,7 +1362,7 @@ public class JPanel_Admision extends javax.swing.JPanel {
 
         } else if (banBoton == 2) {
             if (isDatosValidos()) {
-                if (actualizar() == Variables.SUCCESS) {
+                if (actualizar() == Constants.SUCCESS) {
                     Mensajes.msjActCorrecta();
                     modeloPersonas.clear();
                     modeloPersonas.add(buscarPersonaXDni());

@@ -19,7 +19,7 @@ import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -326,9 +326,9 @@ public class ComprobanteDao extends AbstractDA<Comprobante> {
     }
 
     private void emitirComprobanteElectronico(Comprobante oComprobante, List<ComprobanteDetalle> listComprobanteDetalle) {
-        TokenManager tokenManager = OpenfactClientFactory.getTokenManager("openfact-web-console", Variables.tokenServerUrl, Variables.refreshToken);
-        DocumentsService service = OpenfactClientFactory.getDocumentsService(Variables.openfactUrl, tokenManager);
-        OrganizationClient client = new OrganizationClient(Variables.RUC, service);
+        TokenManager tokenManager = OpenfactClientFactory.getTokenManager("openfact-web-console", Constants.tokenServerUrl, Constants.refreshToken);
+        DocumentsService service = OpenfactClientFactory.getDocumentsService(Constants.openfactUrl, tokenManager);
+        OrganizationClient client = new OrganizationClient(Constants.RUC, service);
 
         DocumentResponseRepresentation invoice = client.createInvoiceAndParseAsEntity(getInvoice(oComprobante, listComprobanteDetalle), true);
         System.out.println("Invoice admision ... : "+invoice.getStatus());

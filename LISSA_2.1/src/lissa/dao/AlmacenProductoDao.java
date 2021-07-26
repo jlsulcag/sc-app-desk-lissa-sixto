@@ -24,7 +24,7 @@ import lissa.util.AbstractDA;
 import lissa.util.Utilitarios;
 import lissa.util.HibernateUtil;
 import lissa.util.Mensajes;
-import lissa.util.Variables;
+import lissa.util.Constants;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -128,11 +128,11 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
             sql.append("left join fetch ap.producto p left join fetch ap.almacen al ");
             sql.append("left join fetch p.formaFarmaceutica ff left join fetch p.presentacion pr ");
             sql.append("left join fetch p.laboratorio lab ");
-            if(op == Variables.BUSQ_X_PRODUCTO){
+            if(op == Constants.BUSQ_X_PRODUCTO){
                 sql.append("where p.nombre like concat('%', :ref, '%') ");
-            } else if(op == Variables.BUSQ_X_PRINCIPIO_ACTIVO){
+            } else if(op == Constants.BUSQ_X_PRINCIPIO_ACTIVO){
                 sql.append("where p.principioActivo like concat('%', :ref, '%') ");
-            } else if(op == Variables.BUSQ_X_ACCION_FARMACOLOGICA){
+            } else if(op == Constants.BUSQ_X_ACCION_FARMACOLOGICA){
                 sql.append("where p.accionTerapeutica like concat('%', :ref, '%') ");
             }            
             sql.append("and al.nombre =:almacen ");
@@ -165,13 +165,22 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
     }
 
     public ArrayList<AlmacenProducto> listXAlmacen(String almacen) {
+        StringBuilder hql = new StringBuilder();
         try {
             iniciarOperacion();
-            String hql = "from AlmacenProducto ap left join fetch ap.producto p left join fetch ap.almacen al left join fetch p.formaFarmaceutica ff left join fetch p.presentacion pr left join fetch p.laboratorio lab where ap.almacen.nombre = '" + almacen + "' and ap.stockActual>0";
-            Query query = sesion.createQuery(hql);
+            hql.append("from AlmacenProducto ap left join fetch ap.producto p ")
+                    .append("left join fetch ap.almacen al ")
+                    .append("left join fetch p.formaFarmaceutica ff ")
+                    .append("left join fetch p.presentacion pr ")
+                    .append("left join fetch p.laboratorio lab ")
+                    .append("where ap.almacen.nombre =:almacen ")
+                    .append("and ap.stockActual>0 ");
+            Query query = sesion.createQuery(hql.toString());
+            query.setParameter("almacen", almacen);
             list = (ArrayList<AlmacenProducto>) query.list();
         } catch (HibernateException e) {
-            manejaExcepcion(e);
+            list = new ArrayList<>();
+            Mensajes.ErrorFatal(e);
         } finally {
             sesion.close();
         }
@@ -179,17 +188,26 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
     }
 
     public AlmacenProducto buscarProductoxAlmacenyLote(String lote, Almacen almacen, Producto oProducto) {
+        StringBuilder hql = new StringBuilder();
         try {
             iniciarOperacion();
-            String hql = "from AlmacenProducto ap where ap.almacen.nombre = '" + almacen.getNombre() + "' and lote = '" + lote + "' and ap.producto.idproducto = " + oProducto.getIdproducto() + " and ap.stockActual > 0";
-            Query query = sesion.createQuery(hql).setMaxResults(1);
+            hql.append("from AlmacenProducto ap ")
+                    .append("where ap.almacen.nombre = :almacen ")
+                    .append("and lote = :lote ")
+                    .append("and ap.producto.idproducto = :idprod ");
+                    //.append("and ap.stockActual > 0");            
+            Query query = sesion.createQuery(hql.toString()).setMaxResults(1);
+            query.setParameter("almacen", almacen.getNombre());
+            query.setParameter("lote", lote);
+            query.setParameter("idprod", oProducto.getIdproducto());
             obj = (AlmacenProducto) query.uniqueResult();
-            tx.commit();
-            sesion.close();
+            //tx.commit();
+
         } catch (HibernateException e) {
-            JOptionPane.showMessageDialog(null, "Error en busqueda de producto en almacen ... Consulte al Administrador del Sistema \n ID PRODUCTO = " + oProducto.getIdproducto(), "Error Fatal", JOptionPane.ERROR_MESSAGE);
-            manejaExcepcion(e);
-            obj = new AlmacenProducto();
+            Mensajes.ErrorFatal(e);
+            obj = null;
+        } finally{
+            sesion.close();
         }
         return obj;
     }
@@ -449,7 +467,8 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
                 oKardex.setGrupoNumeracion(1);
                 oKardex.setIdProducto(Long.parseLong(oDetalleVenta.getProducto().getIdproducto() + ""));
                 oKardex.setCantidad(oDetalleVenta.getCantidadVenta());
-                oKardex.setIdAlmacenproducto(oDetalleVenta.getIdAlmacenproducto());
+                //oKardex.setIdAlmacenproducto(oDetalleVenta.getIdAlmacenproducto());
+                oKardex.setIdAlmacenproducto(oAlmacenProducto.getIdalmacenproducto());
                 oKardex.setValorUnit(BigDecimal.ZERO);
                 oKardex.setEstado(1);
                 //Obtener el ultimo numero de orden de registro de kardex
@@ -483,7 +502,8 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
                 oKardexIngreso.setIdProducto(Long.parseLong(oDetalleVenta.getProducto().getIdproducto() + ""));
                 oKardexIngreso.setCantidad(oDetalleVenta.getCantidadVenta());
                 oKardexIngreso.setValorUnit(BigDecimal.ZERO);
-                oKardexIngreso.setIdAlmacenproducto(oDetalleVenta.getIdAlmacenproducto());
+                //oKardexIngreso.setIdAlmacenproducto(oDetalleVenta.getIdAlmacenproducto());
+                oKardexIngreso.setIdAlmacenproducto(oAlmacenProductoDestino.getIdalmacenproducto());
                 oKardexIngreso.setEstado(1);
                 //Obntener el ultimo numero de orden de registro de kardex
                 long nro1 = oKardexBl.nroOrdenregistro(oKardexIngreso.getIdProducto());
@@ -561,6 +581,32 @@ public class AlmacenProductoDao extends AbstractDA<AlmacenProducto> {
             cerrarSesion();
         }
         return r;
+    }
+    
+    public List<AlmacenProducto> listByAlmacenAndRef(Almacen almacen, String ref) {
+        StringBuilder hql = new StringBuilder();
+        List<AlmacenProducto> lista = null;
+        try {
+            iniciarOperacion();
+            hql.append("from AlmacenProducto ap left join fetch ap.producto p ")
+                    .append("left join fetch ap.almacen al ")
+                    .append("left join fetch p.formaFarmaceutica ff ")
+                    .append("left join fetch p.presentacion pr ")
+                    .append("left join fetch p.laboratorio lab ")
+                    .append("where al.nombre =:almacen ")
+                    .append("and p.nombre like :ref ");
+                    //.append("and ap.stockActual>0 ");
+            Query query = sesion.createQuery(hql.toString());
+            query.setParameter("almacen", almacen.getNombre().trim());
+            query.setParameter("ref", "%"+ref+"%");
+            lista = query.list();
+        } catch (HibernateException e) {
+            lista = new ArrayList<>();
+            Mensajes.ErrorFatal(e);
+        } finally {
+            sesion.close();
+        }
+        return lista;
     }
 
 }

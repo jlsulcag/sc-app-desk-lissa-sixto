@@ -29,7 +29,7 @@ import lissa.reportes.ReportGeneric;
 import lissa.table.ModeloComprobanteVenta;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_BuscarComprobanteVenta extends javax.swing.JInternalFrame {
 
@@ -312,7 +312,7 @@ public class JIF_BuscarComprobanteVenta extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (oVenta.getEstado().equals("ACT")) {
             if (isDatosValidos()) {
-                if (anular() == Variables.SUCCESS) {
+                if (anular() == Constants.SUCCESS) {
                     inicializar();
                     Mensajes.msjRegCorrecta();
                 } else {
@@ -327,7 +327,7 @@ public class JIF_BuscarComprobanteVenta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBusqAvanzada;
     private javax.swing.JButton btnImprimir;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -389,9 +389,9 @@ public class JIF_BuscarComprobanteVenta extends javax.swing.JInternalFrame {
             } else if (oVenta.getFarComprobante().getComprobante().equals("BOLETA SEGUROS")) {
                 tipoComprobante = "Far_BoletaSeguros";
             } else if (oVenta.getFarComprobante().getComprobante().equals("BOLETA ELECTRONICA")) {
-                tipoComprobante = Variables.FAR_BOLETA_ELECTRONICA;
+                tipoComprobante = Constants.FAR_BOLETA_ELECTRONICA;
             } else if (oVenta.getFarComprobante().getComprobante().equals("FACTURA ELECTRONICA")) {
-                tipoComprobante = Variables.FAR_FACTURA_ELECTRONICA;
+                tipoComprobante = Constants.FAR_FACTURA_ELECTRONICA;
             }
         } else {
             Mensajes.tblSelected();

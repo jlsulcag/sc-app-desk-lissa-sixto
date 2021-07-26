@@ -9,7 +9,7 @@ import lissa.bl.DetalleVentaBl;
 import lissa.gui.JF_Principal;
 import lissa.table.ModeloBusqProducto;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_BusqProductos extends javax.swing.JInternalFrame {
 
@@ -19,6 +19,7 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
     private AlmacenProductoBl oAlmacenProductoBl;
     private ArrayList<AlmacenProducto> listProducto;
     private int invocador;
+    private String almacenOrigen;
     public static final int JIF_VENTAS = 1;
     public static final int JIF_ALMACEN = 2;
     public static final int JIF_NOTASALIDA = 3;
@@ -214,7 +215,7 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txfBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfBusquedaKeyReleased
-        setOpBusqueda(Variables.BUSQ_X_PRODUCTO);
+        setOpBusqueda(Constants.BUSQ_X_PRODUCTO);
         listProductosGeneric(evt);
     }//GEN-LAST:event_txfBusquedaKeyReleased
 
@@ -243,17 +244,17 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblProductosKeyPressed
 
     private void txfPrincipioActivoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPrincipioActivoKeyReleased
-        setOpBusqueda(Variables.BUSQ_X_PRINCIPIO_ACTIVO);
+        setOpBusqueda(Constants.BUSQ_X_PRINCIPIO_ACTIVO);
         listProductosGeneric(evt);
     }//GEN-LAST:event_txfPrincipioActivoKeyReleased
 
     private void txfAccionTerapeuticaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfAccionTerapeuticaKeyReleased
-        setOpBusqueda(Variables.BUSQ_X_ACCION_FARMACOLOGICA);
+        setOpBusqueda(Constants.BUSQ_X_ACCION_FARMACOLOGICA);
         listProductosGeneric(evt);
     }//GEN-LAST:event_txfAccionTerapeuticaKeyReleased
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
@@ -271,17 +272,7 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
 
     void inicializar() {
         resetComponent();
-        switch (getInvocador()) {
-            case JIF_ALMACEN:
-                listarProductosAlmacen();
-                break;
-            case JIF_VENTAS:
-                listarProductosFarmacia();
-                break;
-            case JIF_NOTASALIDA:
-                listarProductosFarmacia();
-                break;
-        }
+        listarProductosXAlmacen(getAlmacenOrigen());
         personalizaTabla();
     }
 
@@ -310,18 +301,10 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
         txfAccionTerapeutica.setText("");
         oModeloBusqProducto.clear();
     }
-
-    private void listarProductosAlmacen() {
+    
+    private void listarProductosXAlmacen(String almacen) {
         oAlmacenProductoBl = new AlmacenProductoBl();
-        listProducto = oAlmacenProductoBl.listXAlmacen(ALMACEN);
-        if (!listProducto.isEmpty()) {
-            oModeloBusqProducto.addAll(listProducto);
-        }
-    }
-
-    private void listarProductosFarmacia() {
-        oAlmacenProductoBl = new AlmacenProductoBl();
-        listProducto = oAlmacenProductoBl.listXAlmacen(FARMACIA);
+        listProducto = oAlmacenProductoBl.listXAlmacen(almacen);
         if (!listProducto.isEmpty()) {
             oModeloBusqProducto.addAll(listProducto);
         }
@@ -329,28 +312,28 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
 
     private void listProductosGeneric(KeyEvent evt) {
         switch (getOpBusqueda()) {
-            case Variables.BUSQ_X_PRODUCTO:
+            case Constants.BUSQ_X_PRODUCTO:
                 if (!txfBusqueda.getText().toUpperCase().trim().equals("")) {
                     String ref = txfBusqueda.getText().toUpperCase().trim();
-                    listProductosRef(ref, Variables.BUSQ_X_PRODUCTO);
+                    listProductosRef(ref, Constants.BUSQ_X_PRODUCTO);
                 } else {
                     oModeloBusqProducto.clear();
                     inicializar();
                 }
                 break;
-            case Variables.BUSQ_X_PRINCIPIO_ACTIVO:
+            case Constants.BUSQ_X_PRINCIPIO_ACTIVO:
                 if (!txfPrincipioActivo.getText().toUpperCase().trim().equals("")) {
                     String ref = txfPrincipioActivo.getText().toUpperCase().trim();
-                    listProductosRef(ref, Variables.BUSQ_X_PRINCIPIO_ACTIVO);
+                    listProductosRef(ref, Constants.BUSQ_X_PRINCIPIO_ACTIVO);
                 } else {
                     oModeloBusqProducto.clear();
                     inicializar();
                 }
                 break;
-            case Variables.BUSQ_X_ACCION_FARMACOLOGICA:
+            case Constants.BUSQ_X_ACCION_FARMACOLOGICA:
                 if (!txfAccionTerapeutica.getText().toUpperCase().trim().equals("")) {
                     String ref = txfAccionTerapeutica.getText().toUpperCase().trim();
-                    listProductosRef(ref, Variables.BUSQ_X_ACCION_FARMACOLOGICA);
+                    listProductosRef(ref, Constants.BUSQ_X_ACCION_FARMACOLOGICA);
                 } else {
                     oModeloBusqProducto.clear();
                     inicializar();
@@ -367,19 +350,7 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
     private void listProductosRef(String ref, int op) {
         oAlmacenProductoBl = new AlmacenProductoBl();
         oModeloBusqProducto.clear();
-        switch (getInvocador()) {
-            case JIF_ALMACEN:
-                listProducto = oAlmacenProductoBl.listProductosRef(ref, ALMACEN, op);
-                break;
-            case JIF_VENTAS:
-                listProducto = oAlmacenProductoBl.listProductosRef(ref, FARMACIA, op);
-                break;
-            case JIF_NOTASALIDA:
-                listProducto = oAlmacenProductoBl.listProductosRef(ref, FARMACIA, op);
-                break;
-            default:
-                break;
-        }
+        listProducto = oAlmacenProductoBl.listProductosRef(ref, getAlmacenOrigen(), op);
         if (!listProducto.isEmpty()) {
             oModeloBusqProducto.addAll(listProducto);
         }
@@ -392,5 +363,19 @@ public class JIF_BusqProductos extends javax.swing.JInternalFrame {
 
     public void setOpBusqueda(int opBusqueda) {
         this.opBusqueda = opBusqueda;
+    }
+
+    /**
+     * @return the almacenOrigen
+     */
+    public String getAlmacenOrigen() {
+        return almacenOrigen;
+    }
+
+    /**
+     * @param almacenOrigen the almacenOrigen to set
+     */
+    public void setAlmacenOrigen(String almacenOrigen) {
+        this.almacenOrigen = almacenOrigen;
     }
 }

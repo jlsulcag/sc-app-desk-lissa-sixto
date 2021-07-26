@@ -33,7 +33,7 @@ import static lissa.gui.JIF_AdministrarPersonaJuridica.JIF_EMITIR_COMPROBANTE2;
 import lissa.reportes.ReportGeneric;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 import org.openfact.client.OpenfactClientFactory;
 import org.openfact.client.OrganizationClient;
 import org.openfact.client.oauth.TokenManager;
@@ -509,7 +509,7 @@ public class JIF_CobroCaja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chbxReplicarActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox cbxComprobante;
@@ -569,23 +569,23 @@ public class JIF_CobroCaja extends javax.swing.JInternalFrame {
 
         switch (((TipoComprobante) cbxComprobante.getSelectedItem()).getDenominacion().trim()) {
             case "BOLETA":
-                tipoComprobante = Variables.BOLETA;
+                tipoComprobante = Constants.BOLETA;
                 txfSerie.setText("");
                 break;
             case "FACTURA":
-                tipoComprobante = Variables.FACTURA;
+                tipoComprobante = Constants.FACTURA;
                 txfSerie.setText("");
                 break;
             case "BOLETA ELECTRONICA":
-                tipoComprobante = Variables.BOLETA_ELECTRONICA;
+                tipoComprobante = Constants.BOLETA_ELECTRONICA;
                 txfSerie.setText("BC01");
                 break;
             case "FACTURA ELECTRONICA":
-                tipoComprobante = Variables.FACTURA_ELECTRONICA;
+                tipoComprobante = Constants.FACTURA_ELECTRONICA;
                 txfSerie.setText("FC01");
                 break;
             case "ORDEN DE SERVICIO":
-                tipoComprobante = Variables.ORDEN_SERVICIO;
+                tipoComprobante = Constants.ORDEN_SERVICIO;
                 txfSerie.setText("OC01");
                 break;
             default:
@@ -704,7 +704,7 @@ public class JIF_CobroCaja extends javax.swing.JInternalFrame {
          }
          */
         //Se debe calcular todos los conceptos  sin importar el tipo de comprobante
-        montoSubTotal = montoTotalTemp.divide(Variables.CIEN_IGV, 2, RoundingMode.HALF_UP);
+        montoSubTotal = montoTotalTemp.divide(Constants.CIEN_IGV, 2, RoundingMode.HALF_UP);
         montoIGV = montoTotalTemp.subtract(montoSubTotal).setScale(2, RoundingMode.HALF_UP);
         montoTotal = montoTotalTemp;
         //impresion de totales
@@ -725,7 +725,7 @@ public class JIF_CobroCaja extends javax.swing.JInternalFrame {
         if (isDatosValidos()) {
             //Metodo transaccional para registrar comprobante y su detalle
             res = registrarComprobantes(listComprobanteDetalle);
-            if (res == Variables.SUCCESS) {
+            if (res == Constants.SUCCESS) {
                 Mensajes.msjRegCorrecta();
                 //emitirFacturaElectronica(oComprobante, listComprobanteDetalle);
                 imprimirComprobante(tipoComprobante);

@@ -50,7 +50,7 @@ import lissa.reportes.ReportGeneric;
 import lissa.table.ModeloVentaProducto;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_RegVentas extends javax.swing.JInternalFrame {
 
@@ -614,6 +614,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         root.jifBusqProductos.setInvocador(JIF_BusqProductos.JIF_VENTAS);
+        root.jifBusqProductos.setAlmacenOrigen(Constants.ALMACEN_FARMACIA);
         root.insertarInternalFrames(root.jifBusqProductos);
         root.jifBusqProductos.inicializar();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -655,7 +656,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxTipoDoc2ActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFormapago;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnQuitar;
@@ -768,15 +769,10 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         if (oModeloVentaProducto.size() == 0) {
             oModeloVentaProducto.add(oDetalleVenta);
         } else {
-            for (int i = 0; i < oModeloVentaProducto.size(); i++) {
-                DetalleVenta temp = oModeloVentaProducto.get(i);
-                if (oDetalleVenta.getIdAlmacenproducto().compareTo(temp.getIdAlmacenproducto())==0) {
-                    //el producto ya existe en la lista
-                    JOptionPane.showMessageDialog(null, "El producto ya existe  en la lista", "Atención", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    oModeloVentaProducto.add(oDetalleVenta);
-                    break;
-                }
+            if (validarExistenciaProducto(oModeloVentaProducto, oDetalleVenta)) {
+                JOptionPane.showMessageDialog(null, "El producto ya existe  en la lista", "Atención", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                oModeloVentaProducto.add(oDetalleVenta);
             }
         }
         personalizaTabla();
@@ -1068,17 +1064,17 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
                     break;
                 case "BOLETA ELECTRONICA":
                     oTipoDocIdentidadCtrl.defaultSelectCbx("DNI", cbxTipoDoc2);
-                    tipoComprobante = Variables.FAR_BOLETA_ELECTRONICA;
+                    tipoComprobante = Constants.FAR_BOLETA_ELECTRONICA;
                     txfSerie.setText("BF01");
                     break;
                 case "FACTURA ELECTRONICA":
                     oTipoDocIdentidadCtrl.defaultSelectCbx("RUC", cbxTipoDoc2);
-                    tipoComprobante = Variables.FAR_FACTURA_ELECTRONICA;
+                    tipoComprobante = Constants.FAR_FACTURA_ELECTRONICA;
                     txfSerie.setText("FF01");
                     break;
-                case Variables.COMPROBANTE_TICKET_BOLETA:
+                case Constants.COMPROBANTE_TICKET_BOLETA:
                     oTipoDocIdentidadCtrl.defaultSelectCbx("DNI", cbxTipoDoc2);
-                    tipoComprobante = Variables.FAR_TICKET_BOLETA;
+                    tipoComprobante = Constants.FAR_TICKET_BOLETA;
                     txfSerie.setText("B001");
                     break;
                 default:
@@ -1176,9 +1172,9 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
     //Metodo que calcula  todos los totales en funciona los parametros ingresados en formas de pago
     void calcularTotalesaPagar(BigDecimal totalAPagar, BigDecimal totalDescuento) {
         montoTotal = totalAPagar;
-        montoSubTotal = totalAPagar.divide(Variables.CIEN_IGV, 4, RoundingMode.HALF_UP);
-        montoIgv = ((montoSubTotal).multiply(Variables.IGV)).setScale(6, RoundingMode.HALF_UP);
-        totalDescuentos = totalDescuento.divide(Variables.CIEN_IGV, 6, RoundingMode.HALF_UP);
+        montoSubTotal = totalAPagar.divide(Constants.CIEN_IGV, 4, RoundingMode.HALF_UP);
+        montoIgv = ((montoSubTotal).multiply(Constants.IGV)).setScale(6, RoundingMode.HALF_UP);
+        totalDescuentos = totalDescuento.divide(Constants.CIEN_IGV, 6, RoundingMode.HALF_UP);
         
         printTotales();        
     }
@@ -1187,7 +1183,7 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         int res = 0;
         if (isDatosValidos()) {
             res = registrarVenta(oModeloVentaProducto);
-            if (res == Variables.SUCCESS) {
+            if (res == Constants.SUCCESS) {
                 Mensajes.msjRegCorrecta();
                 //Agregar  validador  para  imprimir  cuando sea mayor  a  cero
                 if (oVenta.getTotal().compareTo(BigDecimal.ZERO) == 1) {
@@ -1241,6 +1237,18 @@ public class JIF_RegVentas extends javax.swing.JInternalFrame {
         lblMontoIgv.setText(montoIgv.setScale(2, RoundingMode.HALF_UP).toString());
         lblMontoTotal.setText(montoTotal.setScale(2, RoundingMode.HALF_UP).toString());
         lblTotalDescuento.setText(totalDescuentos.setScale(2, RoundingMode.HALF_UP).toString());
+    }
+    
+    private boolean validarExistenciaProducto(ModeloVentaProducto oModeloVentaProducto, DetalleVenta ref) {
+        boolean existe = false;
+        for (int i = 0; i < oModeloVentaProducto.size(); i++) {
+            DetalleVenta temp = oModeloVentaProducto.get(i);
+            if (ref.getIdAlmacenproducto().compareTo(temp.getIdAlmacenproducto()) == 0) {
+                existe = true;
+                break;
+            }
+        }
+        return existe;
     }
 
 }

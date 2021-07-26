@@ -3,7 +3,7 @@ package lissa.util;
 
 import java.math.BigDecimal;
 
-public class Variables {
+public class Constants {
     public static final String BOLETA = "Boleta";
     public static final String FACTURA = "Factura";
     public static final String BOLETA_ELECTRONICA = "BoletaElectronica";
@@ -21,6 +21,8 @@ public class Variables {
     public static final String FAR_BOLETA_ELECTRONICA = "FarBoletaElectronica";
     public static final String FAR_FACTURA_ELECTRONICA = "FarBoletaElectronica";
     public static final String FAR_TICKET_BOLETA = "Far_TicketBoleta";
+    public static final String FAR_TICKET_BOLETA_80MM = "FarTicketBoleta80mm";    
+    
     
     public static final int ES_GENERICO = 1;
     public static final int NO_GENERICO = 0;
@@ -31,6 +33,13 @@ public class Variables {
     
     //Tipo Comprobante
     public static final String COMPROBANTE_TICKET_BOLETA = "TICKET BOLETA";
+    
+    public static final String ALMACEN_ALMACEN = "ALMACEN";
+    public static final String ALMACEN_FARMACIA = "FARMACIA";
+
+    /*Estados comprobantes*/
+    public static final String ESTADO_COMPROBANTE_ACT = "ACT";
+    public static final String ESTADO_COMPROBANTE_ANU = "ANU";
     
     //Variables OpenFact Demo
     /*
@@ -57,6 +66,6 @@ public class Variables {
     public static final String refreshToken = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjR1lKa0l3a3FMR1VJbkNzNzBhVFJndS1ua2dCZndOem9OQmVoeFZyNVpvIn0.eyJqdGkiOiJjNDNjYjBjYy05M2YyLTQ2ZWEtYWU4OS1iM2ZjYzVlZmRhZmYiLCJleHAiOjAsIm5iZiI6MCwiaWF0IjoxNTUxNDgwMDc3LCJpc3MiOiJodHRwczovL3Nzby1zc28uYjlhZC5wcm8tdXMtZWFzdC0xLm9wZW5zaGlmdGFwcHMuY29tL2F1dGgvcmVhbG1zL2lubnBhdGgiLCJhdWQiOiJvcGVuZmFjdC13ZWItY29uc29sZSIsInN1YiI6IjBmMDA3NTc2LWZhMzQtNGI4ZS05OWQ4LWUwODM5OTgwNDZiMSIsInR5cCI6Ik9mZmxpbmUiLCJhenAiOiJvcGVuZmFjdC13ZWItY29uc29sZSIsIm5vbmNlIjoiODY1NTdjYzctYjlhYi00MmI0LTg1ZjMtNWFjYjJiOGQwNTg0IiwiYXV0aF90aW1lIjowLCJzZXNzaW9uX3N0YXRlIjoiNTM5ZGRlZTMtYWRlZC00ZjdkLWFlMDQtMDg5ZGM4OWQwNWQ3IiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9yZ2FuaXphdGlvbi1tYW5hZ2VyIiwib2ZmbGluZV9hY2Nlc3MiLCJvcmdhbml6YXRpb24tdXNlciIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsib3BlbmZhY3QiOnsicm9sZXMiOlsibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1vcmdhbml6YXRpb24iLCJ2aWV3LWV2ZW50cyIsInZpZXctZG9jdW1lbnRzIiwibWFuYWdlLWRvY3VtZW50cyIsInZpZXctb3JnYW5pemF0aW9uIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIG9mZmxpbmVfYWNjZXNzIn0.R2sJHzO9gAuqXx3M1ay2krxUul5vOF3GU4ZxS1uzfoIaJoYvWrpuCL1_7p-7dBIxcaTWVvqLtvpOU-GUfmIZYvK9GFuRNiz7iXAoXNHEZX9wMNFvqmUeztAAYcD_VhQAM9C9PCatxMvfH4FZ4k91KAzu2dSn3EmjxeElLckhMRDsQ3qmwLTB7YQAJv7Iu_MbfDtPXx-Q2eK7ukM-3cjWwL2rDqAuj6D77IaDnvCBbHUEvYQviwbsiPP01F5iQ-2iNVU5ImBxTx4wo3Ju9oVyIyuFXcq8ubPOGlKeW4tXN8tVGd_NXbXbDCj66i-rVttVJ2G_B0LauKY6PnZ0nTgpqw";
     public static final String RUC = "20494436761";
     */
-    /*Variables admin producto*/
+    /*Constants admin producto*/
     public static final int JIF_INVENTARIO_INICIAL = 3;
 }

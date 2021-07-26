@@ -8,7 +8,7 @@ import lissa.gui.JF_Principal;
 import lissa.table.ModeloProducto;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_AdminProducto extends javax.swing.JInternalFrame {
 
@@ -256,7 +256,7 @@ public class JIF_AdminProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txfBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfBusquedaKeyReleased
-        setOpBusqueda(Variables.BUSQ_X_PRODUCTO);
+        setOpBusqueda(Constants.BUSQ_X_PRODUCTO);
         buscarGeneric(evt);
     }//GEN-LAST:event_txfBusquedaKeyReleased
 
@@ -294,17 +294,17 @@ public class JIF_AdminProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblProductoKeyPressed
 
     private void txfPrincipioActivoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPrincipioActivoKeyReleased
-        setOpBusqueda(Variables.BUSQ_X_PRINCIPIO_ACTIVO);
+        setOpBusqueda(Constants.BUSQ_X_PRINCIPIO_ACTIVO);
         buscarGeneric(evt);
     }//GEN-LAST:event_txfPrincipioActivoKeyReleased
 
     private void txfAccionTerapeuticaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfAccionTerapeuticaKeyReleased
-        setOpBusqueda(Variables.BUSQ_X_ACCION_FARMACOLOGICA);
+        setOpBusqueda(Constants.BUSQ_X_ACCION_FARMACOLOGICA);
         buscarGeneric(evt);
     }//GEN-LAST:event_txfAccionTerapeuticaKeyReleased
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -401,28 +401,28 @@ public class JIF_AdminProducto extends javax.swing.JInternalFrame {
 
     private void buscarGeneric(KeyEvent evt) {
         switch (getOpBusqueda()) {
-            case Variables.BUSQ_X_PRODUCTO:
+            case Constants.BUSQ_X_PRODUCTO:
                 if (!txfBusqueda.getText().toUpperCase().trim().equals("")) {
                     String ref = txfBusqueda.getText().toUpperCase().trim();
-                    buscar(ref, Variables.BUSQ_X_PRODUCTO);
+                    buscar(ref, Constants.BUSQ_X_PRODUCTO);
                 } else {
                     oModeloProducto.clear();
                     listarProducto();
                 }
                 break;
-            case Variables.BUSQ_X_PRINCIPIO_ACTIVO:
+            case Constants.BUSQ_X_PRINCIPIO_ACTIVO:
                 if (!txfPrincipioActivo.getText().toUpperCase().trim().equals("")) {
                     String ref = txfPrincipioActivo.getText().toUpperCase().trim();
-                    buscar(ref, Variables.BUSQ_X_PRINCIPIO_ACTIVO);
+                    buscar(ref, Constants.BUSQ_X_PRINCIPIO_ACTIVO);
                 } else {
                     oModeloProducto.clear();
                     listarProducto();
                 }
                 break;
-            case Variables.BUSQ_X_ACCION_FARMACOLOGICA:
+            case Constants.BUSQ_X_ACCION_FARMACOLOGICA:
                 if (!txfAccionTerapeutica.getText().toUpperCase().trim().equals("")) {
                     String ref = txfAccionTerapeutica.getText().toUpperCase().trim();
-                    buscar(ref, Variables.BUSQ_X_ACCION_FARMACOLOGICA);
+                    buscar(ref, Constants.BUSQ_X_ACCION_FARMACOLOGICA);
                 } else {
                     oModeloProducto.clear();
                     listarProducto();

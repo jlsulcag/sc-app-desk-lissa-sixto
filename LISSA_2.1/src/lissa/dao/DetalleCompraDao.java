@@ -9,6 +9,7 @@ import lissa.be.DetalleCompra;
 import lissa.be.DetalleVenta;
 import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
+import lissa.util.Mensajes;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -95,17 +96,22 @@ public class DetalleCompraDao extends AbstractDA<DetalleCompra>{
     }
 
     public DetalleCompra buscarXId(DetalleCompra o) {
-        //obj = new DetalleCompra();
+        StringBuilder hql = new StringBuilder();
         try {
             iniciarOperacion();
-            String hql = "select dc from DetalleCompra dc left join fetch dc.compra c left join fetch dc.producto d left join fetch d.presentacion e left join fetch c.farComprobante f "
-                    + "where dc.iddetallecompra= "+o.getIddetallecompra();
-            Query query = s.createQuery(hql);
-            obj = (DetalleCompra) query.uniqueResult();
-            s.close();
+            hql.append("select dc from DetalleCompra dc left join fetch dc.compra c ")
+                    .append("left join fetch dc.producto d left join fetch d.presentacion e ")
+                    .append("left join fetch c.farComprobante f ")
+                    .append("left join fetch c.personaProveedor pp ")
+                    .append("where dc.iddetallecompra =:iddetallecompra");            
+            Query query = s.createQuery(hql.toString());
+            query.setParameter("iddetallecompra", o.getIddetallecompra());
+            obj = (DetalleCompra) query.uniqueResult();            
         } catch (HibernateException e) {
-            manejaExcepcion(e);
-            obj = new DetalleCompra();
+            Mensajes.ErrorFatal(e);
+            obj = null;
+        } finally{
+            s.close();
         }
         return obj;
     }

@@ -40,7 +40,7 @@ import lissa.table.ModeloBusqProducto;
 import lissa.table.ModeloCompraProducto;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_Compras extends javax.swing.JInternalFrame {
 
@@ -1032,7 +1032,7 @@ public class JIF_Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chbxBonoActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnCancelar;
@@ -1464,13 +1464,13 @@ public class JIF_Compras extends javax.swing.JInternalFrame {
 
     private void calcularPrecioConIgv() {
         BigDecimal valorUnitario = txfValorUnitario.getText().trim().equals("") ? new BigDecimal("0.00") : new BigDecimal(txfValorUnitario.getText().trim()).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal precioUnitario = valorUnitario.add(valorUnitario.multiply(Variables.IGV)).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal precioUnitario = valorUnitario.add(valorUnitario.multiply(Constants.IGV)).setScale(2, RoundingMode.HALF_UP);
         txfPrecioUnitario.setText(precioUnitario.toString());
     }
 
     private void calcularPrecioSinIgv() {
         BigDecimal precioUnitario = txfPrecioUnitario.getText().trim().equals("") ? new BigDecimal("0.00") : new BigDecimal(txfPrecioUnitario.getText().trim()).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal valorUnitario = precioUnitario.divide(Variables.CIEN_IGV, RoundingMode.HALF_UP).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal valorUnitario = precioUnitario.divide(Constants.CIEN_IGV, RoundingMode.HALF_UP).setScale(2, RoundingMode.HALF_UP);
 
         txfValorUnitario.setText(valorUnitario.toString());
     }
@@ -1557,10 +1557,10 @@ public class JIF_Compras extends javax.swing.JInternalFrame {
             //Buscar el maximo numero de compra
             oCompra.setUsuarioReg(userTemp);
             r = oCompraBl.registrar(oCompra, oModeloCompraProducto);
-            if (r == Variables.SUCCESS) {
-                imprimirComprobante(oCompra);
-                resetComponentFull();
+            if (r == Constants.SUCCESS) {
                 Mensajes.msjRegCorrecta();
+                imprimirComprobante(oCompra);
+                resetComponentFull();                
             }
 
         } else {
