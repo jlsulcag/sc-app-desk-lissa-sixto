@@ -10,7 +10,7 @@ import lissa.be.PrecioProducto;
 import lissa.bl.PrecioProductoBl;
 import lissa.gui.JF_Principal;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 /**
  *
@@ -160,7 +160,7 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txfPrecioSugeridoKeyReleased
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
@@ -215,8 +215,8 @@ public class JIF_CantidadVenta extends javax.swing.JInternalFrame {
         } else {
             oDetalleVenta.setCantidadVenta(new BigDecimal(txfCantidad.getText().trim()).setScale(0, RoundingMode.HALF_UP));
             oDetalleVenta.setPrecioUnitarioItem(oDetalleVenta.getPrecioVenta());
-            oDetalleVenta.setValorUnitarioItem((oDetalleVenta.getPrecioVenta().divide(Variables.CIEN_IGV, 4, RoundingMode.HALF_UP)).setScale(6, RoundingMode.HALF_UP));                        
-            oDetalleVenta.setMontoIgvItem((oDetalleVenta.getValorUnitarioItem().multiply(oDetalleVenta.getCantidadVenta()).multiply(Variables.IGV)).setScale(6, RoundingMode.HALF_UP));
+            oDetalleVenta.setValorUnitarioItem((oDetalleVenta.getPrecioVenta().divide(Constants.CIEN_IGV, 4, RoundingMode.HALF_UP)).setScale(6, RoundingMode.HALF_UP));                        
+            oDetalleVenta.setMontoIgvItem((oDetalleVenta.getValorUnitarioItem().multiply(oDetalleVenta.getCantidadVenta()).multiply(Constants.IGV)).setScale(6, RoundingMode.HALF_UP));
             oDetalleVenta.setSubTotal((oDetalleVenta.getValorUnitarioItem().multiply(oDetalleVenta.getCantidadVenta())).setScale(6, RoundingMode.HALF_UP));            
             oDetalleVenta.setMontoTotal((oDetalleVenta.getPrecioUnitarioItem().multiply(oDetalleVenta.getCantidadVenta())).setScale(6, RoundingMode.HALF_UP));
             

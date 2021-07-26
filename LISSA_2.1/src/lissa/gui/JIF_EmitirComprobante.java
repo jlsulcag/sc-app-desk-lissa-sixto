@@ -45,7 +45,7 @@ import lissa.controller.SeguroCtrl;
 import lissa.table.ModeloProcedimientoMedico;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_EmitirComprobante extends javax.swing.JInternalFrame {
 
@@ -701,7 +701,7 @@ public class JIF_EmitirComprobante extends javax.swing.JInternalFrame {
         habilitaDeshabilitaSeguro();
     }//GEN-LAST:event_cbxBeneficioItemStateChanged
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscarFondoPrev;
     private javax.swing.JButton btnBuscarPaciente;
@@ -833,8 +833,8 @@ public class JIF_EmitirComprobante extends javax.swing.JInternalFrame {
             oComprobanteDetalle.setUnidadMedida("NIU");
             oComprobanteDetalle.setCantidad(new BigDecimal("1.00"));
             oComprobanteDetalle.setPrecioUnitarioItem(montoPagar);
-            oComprobanteDetalle.setValorUnitarioItem(montoPagar.divide(Variables.CIEN_IGV, 2, RoundingMode.HALF_UP));
-            oComprobanteDetalle.setMontoIgvItem(oComprobanteDetalle.getValorUnitarioItem().multiply(Variables.IGV));
+            oComprobanteDetalle.setValorUnitarioItem(montoPagar.divide(Constants.CIEN_IGV, 2, RoundingMode.HALF_UP));
+            oComprobanteDetalle.setMontoIgvItem(oComprobanteDetalle.getValorUnitarioItem().multiply(Constants.IGV));
             oComprobanteDetalle.setSubTotal(oComprobanteDetalle.getValorUnitarioItem().multiply(oComprobanteDetalle.getCantidad()));
             oComprobanteDetalle.setMontoTotal(oComprobanteDetalle.getPrecioUnitarioItem().multiply(oComprobanteDetalle.getCantidad()));
 
@@ -1210,7 +1210,7 @@ public class JIF_EmitirComprobante extends javax.swing.JInternalFrame {
 
             //Asignar atencion segun lo elegido
             if (cbxSeguro.getSelectedIndex() > 0 && cbxBeneficio.getSelectedIndex() > 0) {
-                if (((Beneficio) cbxBeneficio.getSelectedItem()).getNombreBeneficio().equals(Variables.FONDO_PREVISION)) {
+                if (((Beneficio) cbxBeneficio.getSelectedItem()).getNombreBeneficio().equals(Constants.FONDO_PREVISION)) {
                     if (oFondoSolidaridad != null) {
                         if (isVigente(oFondoSolidaridad.getFechaReg())) {
                             root.insertarInternalFrames(root.jifCobroCaja);
@@ -1223,7 +1223,7 @@ public class JIF_EmitirComprobante extends javax.swing.JInternalFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, "No existe FPS", "Atención", JOptionPane.INFORMATION_MESSAGE);
                     }
-                } else if (cbxSeguro.getSelectedIndex() > 0 && cbxBeneficio.getSelectedIndex() > 0 && !((Beneficio) cbxBeneficio.getSelectedItem()).getNombreBeneficio().equals(Variables.FONDO_PREVISION)) {
+                } else if (cbxSeguro.getSelectedIndex() > 0 && cbxBeneficio.getSelectedIndex() > 0 && !((Beneficio) cbxBeneficio.getSelectedItem()).getNombreBeneficio().equals(Constants.FONDO_PREVISION)) {
                     root.insertarInternalFrames(root.jifCobroCaja);
                     root.jifCobroCaja.inicializar(oUsuario, Ocaja, oPersona, listComprobanteDetalle, montoTotal, this, oAtencion,
                             (Beneficio) cbxBeneficio.getSelectedItem(), txfNumCarta.getText().toUpperCase().trim());
@@ -1318,7 +1318,7 @@ public class JIF_EmitirComprobante extends javax.swing.JInternalFrame {
 
     private boolean tieneCarta() {
         boolean tienecarta;
-        if (cbxSeguro.getSelectedIndex() > 0 && ((SeguroVida) cbxSeguro.getSelectedItem()).getTieneCarta() == Variables.UNO) {
+        if (cbxSeguro.getSelectedIndex() > 0 && ((SeguroVida) cbxSeguro.getSelectedItem()).getTieneCarta() == Constants.UNO) {
             tienecarta = true;
         } else {
             tienecarta = false;
@@ -1371,8 +1371,8 @@ public class JIF_EmitirComprobante extends javax.swing.JInternalFrame {
                     temp.setUnidadMedida("NIU");
                     temp.setCantidad(new BigDecimal("1.00"));
                     temp.setPrecioUnitarioItem(montoPagar);
-                    temp.setValorUnitarioItem(montoPagar.divide(Variables.CIEN_IGV, 2, RoundingMode.HALF_UP));
-                    temp.setMontoIgvItem(temp.getValorUnitarioItem().multiply(Variables.IGV));
+                    temp.setValorUnitarioItem(montoPagar.divide(Constants.CIEN_IGV, 2, RoundingMode.HALF_UP));
+                    temp.setMontoIgvItem(temp.getValorUnitarioItem().multiply(Constants.IGV));
                     temp.setSubTotal(temp.getValorUnitarioItem().multiply(temp.getCantidad()));
                     temp.setMontoTotal(temp.getPrecioUnitarioItem().multiply(temp.getCantidad()));
 

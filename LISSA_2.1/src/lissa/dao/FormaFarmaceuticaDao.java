@@ -5,7 +5,9 @@ import java.util.List;
 import lissa.be.FormaFarmaceutica;
 import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
+import lissa.util.Mensajes;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -62,16 +64,20 @@ public class FormaFarmaceuticaDao extends AbstractDA<FormaFarmaceutica>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    ///---
     public ArrayList<FormaFarmaceutica> buscarF(String ref) {
         ArrayList<FormaFarmaceutica> list = null;
+        StringBuilder hql = new StringBuilder();
         try {
             iniciarOperacion();
-            list = (ArrayList<FormaFarmaceutica>) sesion.createQuery("from FormaFarmaceutica p where (p.denominacion) like '%" + ref + "%'").list();
+            hql.append("from FormaFarmaceutica p ")
+                    .append("where p.denominacion like :ref order by p.denominacion asc");
+            Query q = sesion.createQuery(hql.toString());
+            q.setParameter("ref", "%"+ref+"%");
+            list = (ArrayList<FormaFarmaceutica>) q.list();
         } catch (HibernateException e) {
-            manejaExcepcion(e);
+            list = new ArrayList<>();
+            Mensajes.ErrorFatal(e);
         }
-        tx.commit();
         return list;
     } 
      private void iniciarOperacion() throws HibernateException {

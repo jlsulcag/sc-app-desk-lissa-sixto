@@ -156,5 +156,9 @@ public class AlmacenProductoBl extends AbstractBL<AlmacenProducto>{
         return dao.registrarInventarioInicial(oModeloAlmacenProductoDTO, usuario);
     }
 
+     public List<AlmacenProducto> listByAlmacenAndRef(Almacen almacen, String ref) {
+        dao = new AlmacenProductoDao();
+        return dao.listByAlmacenAndRef(almacen, ref);
+    }
     
 }

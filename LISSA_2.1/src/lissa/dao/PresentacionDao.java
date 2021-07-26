@@ -5,7 +5,9 @@ import java.util.List;
 import lissa.be.Presentacion;
 import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
+import lissa.util.Mensajes;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -73,16 +75,21 @@ public class PresentacionDao extends AbstractDA<Presentacion> {
     public List<Presentacion> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    ///---
+    
     public ArrayList<Presentacion> buscarF(String ref) {
         ArrayList<Presentacion> list = null;
+        StringBuilder hql = new StringBuilder();
         try {
             iniciarOperacion();
-            list = (ArrayList<Presentacion>) sesion.createQuery("from Presentacion p where (p.denominacion) like '%" + ref + "%'").list();
+            hql.append("from Presentacion p ")
+                    .append("where p.denominacion like :ref order by p.denominacion asc");
+            Query q = sesion.createQuery(hql.toString());
+            q.setParameter("ref", "%"+ref+"%");
+            list = (ArrayList<Presentacion>) q.list();
         } catch (HibernateException e) {
-            manejaExcepcion(e);
+            list = new ArrayList<>();
+            Mensajes.ErrorFatal(e);
         }
-        tx.commit();
         return list;
     } 
 }

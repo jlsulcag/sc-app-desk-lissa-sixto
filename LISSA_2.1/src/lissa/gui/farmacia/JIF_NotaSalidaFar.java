@@ -35,7 +35,7 @@ import lissa.reportes.ReportGeneric;
 import lissa.table.ModeloVentaProducto;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_NotaSalidaFar extends javax.swing.JInternalFrame {
 
@@ -389,6 +389,7 @@ public class JIF_NotaSalidaFar extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         root.jifBusqProductos.setInvocador(JIF_BusqProductos.JIF_NOTASALIDA);
+        root.jifBusqProductos.setAlmacenOrigen(Constants.ALMACEN_FARMACIA);
         root.insertarInternalFrames(root.jifBusqProductos);
         root.jifBusqProductos.inicializar();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -411,7 +412,7 @@ public class JIF_NotaSalidaFar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbxAreaConsumo;
     private javax.swing.JComboBox cbxOrigen;
     private javax.swing.JComboBox cbxTipoComprobante;
@@ -532,7 +533,7 @@ public class JIF_NotaSalidaFar extends javax.swing.JInternalFrame {
         int res = 0;
         if (isDatosValidos()) {
             res = registrarSalida(oModeloVentaProducto);
-            if (res == Variables.SUCCESS) {
+            if (res == Constants.SUCCESS) {
                 Mensajes.msjRegCorrecta();
                 generarReporte();
                 inicializar();

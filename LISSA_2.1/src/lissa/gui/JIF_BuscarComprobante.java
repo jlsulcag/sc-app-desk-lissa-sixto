@@ -16,7 +16,7 @@ import lissa.table.ModeloComprobanteClinica;
 import lissa.util.Mensajes;
 import lissa.util.Reportes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_BuscarComprobante extends javax.swing.JInternalFrame {
 
@@ -219,7 +219,7 @@ public class JIF_BuscarComprobante extends javax.swing.JInternalFrame {
         anularComprobante();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnImprimir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
@@ -305,19 +305,19 @@ public class JIF_BuscarComprobante extends javax.swing.JInternalFrame {
             if (oComprobante.getEstado().trim().equals("ACT")) {
                 switch (oComprobante.getTipoComprobante().getDenominacion().trim()) {
                     case "BOLETA":
-                        tipoComprobante = Variables.BOLETA;
+                        tipoComprobante = Constants.BOLETA;
                         break;
                     case "FACTURA":
-                        tipoComprobante = Variables.FACTURA;
+                        tipoComprobante = Constants.FACTURA;
                         break;
                     case "ORDEN DE SERVICIO":
-                        tipoComprobante = Variables.ORDEN_SERVICIO;
+                        tipoComprobante = Constants.ORDEN_SERVICIO;
                         break;
                     case "BOLETA ELECTRONICA":
-                        tipoComprobante = Variables.BOLETA_ELECTRONICA;
+                        tipoComprobante = Constants.BOLETA_ELECTRONICA;
                         break;
                     case "FACTURA ELECTRONICA":
-                        tipoComprobante = Variables.FACTURA_ELECTRONICA;
+                        tipoComprobante = Constants.FACTURA_ELECTRONICA;
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "No existe comprobante configurado", "Atención", JOptionPane.INFORMATION_MESSAGE);

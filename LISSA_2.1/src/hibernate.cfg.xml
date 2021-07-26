@@ -5,8 +5,7 @@
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     
-    <!--  DESARROLLO -->
-        
+    <!--  DESARROLLO Y PROD-->        
     <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/clinicadb2</property>
     <property name="hibernate.connection.username">clinica</property>
     <property name="hibernate.connection.password">clinica123*</property>
@@ -14,19 +13,7 @@
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.connection.autocommit">false</property>   
     <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
-    
-    
-    <!--  PRODUCCION -->
-    <!--
-    <property name="hibernate.connection.url">jdbc:postgresql://192.168.49.96:5432/clinicadb</property>
-    <property name="hibernate.connection.username">clinica</property>
-    <property name="hibernate.connection.password">clinica123*</property>
-    <property name="hibernate.show_sql">false</property>
-    <property name="hibernate.current_session_context_class">thread</property>
-    <property name="hibernate.connection.autocommit">false</property>    
-    <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
-    -->
-           
+               
     <!--
     <property name="hibernate.hbm2ddl.auto">update</property>
     -->

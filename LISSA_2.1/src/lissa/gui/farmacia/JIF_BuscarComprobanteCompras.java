@@ -31,7 +31,7 @@ import lissa.table.ModeloCompraProducto;
 import lissa.table.ModeloDocCompra;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_BuscarComprobanteCompras extends javax.swing.JInternalFrame {
 
@@ -301,7 +301,6 @@ public class JIF_BuscarComprobanteCompras extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         procesarAnulacion();
-        JOptionPane.showMessageDialog(null, "En Desarrollo ...50%", "Atención", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
@@ -323,7 +322,7 @@ public class JIF_BuscarComprobanteCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnImprimir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
@@ -362,8 +361,8 @@ public class JIF_BuscarComprobanteCompras extends javax.swing.JInternalFrame {
     }
 
     private void obtenerDatos() {
-        //oCompra = new Compra();
         if (tblResultados.getRowSelectionAllowed() && tblResultados.getSelectedRow() != -1) {
+            oCompra = new Compra();
             oCompra = oModeloDocCompra.get(tblResultados.getSelectedRow());
             if (oCompra != null) {
                 listarItems(oCompra);
@@ -395,35 +394,14 @@ public class JIF_BuscarComprobanteCompras extends javax.swing.JInternalFrame {
     private void procesarAnulacion() {
         int r = -1;
         if (isDatosValidos()) {
-            int resAlmacenStock = -1;
+            int resAlmacenStock = -1;            
+            oCompraBl = new CompraBl();            
+            oCompra.setEstado(Constants.ESTADO_COMPROBANTE_ANU);            
+            oCompra.setMotivoAunulacion(txfMotivoAnulacion.getText().toUpperCase().trim());
             
-            oCompraBl = new CompraBl();
-            //oCompraTemp2 = new Compra();
-            /*
-            oCompraTemp2.setIdcompra(oCompra.getIdcompra());
-            oCompraTemp2.setFarComprobante(oCompra.getFarComprobante());
-            oCompraTemp2.setNumeroComprobante(oCompra.getNumeroComprobante());
-            oCompraTemp2.setFechaCompra(oCompra.getFechaCompra());
-            oCompraTemp2.setPersonaProveedor(oCompra.getPersonaProveedor());
-            oCompraTemp2.setSerie(oCompra.getSerie());
-            oCompraTemp2.setHoraReg(oCompra.getHoraReg());
-            oCompraTemp2.setFechaReg(oCompra.getFechaReg());
-            oCompraTemp2.setValorNeto(oCompra.getValorNeto());
-            oCompraTemp2.setValorIgv(oCompra.getValorIgv());
-            oCompraTemp2.setValorBruto(oCompra.getValorBruto());
-            */
-            oCompra.setEstado("ANU");
-            
-            oCompra.setMotivoAunulacion(txfMotivoAnulacion.getText().trim().toUpperCase());
-            /*
-            oCompraTemp2.setNumeroCompra(oCompra.getNumeroCompra());
-            oCompraTemp2.setUsuarioReg(oCompra.getUsuarioReg());
-            oCompraTemp2.setValorDescuento(oCompra.getValorDescuento());
-            oCompraTemp2.setValorTotal(oCompra.getValorTotal());
-            */
             r = oCompraBl.procesarAnulacion(oCompra, listDetalleCompra);
 
-            if (r == Variables.SUCCESS) {
+            if (r == Constants.SUCCESS) {
                 Mensajes.msjRegCorrecta();
                 inicializar();
             } else {
@@ -492,6 +470,7 @@ public class JIF_BuscarComprobanteCompras extends javax.swing.JInternalFrame {
         txfMotivoAnulacion.setText("");
         cargarCbxAlmacen();
         oModeloDocCompra.clear();
+        oModeloCompraProducto.clear();
     }
 
     private void cargarCbxAlmacen() {
