@@ -7,7 +7,7 @@ import lissa.be.Caja;
 import lissa.be.Producto;
 import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
-import lissa.util.Variables;
+import lissa.util.Constants;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -82,11 +82,11 @@ public class ProductoDao extends AbstractDA<Producto>{
             hql.append("from Producto p ");
             hql.append("left join fetch p.formaFarmaceutica ff left join fetch p.presentacion pr ");
             hql.append("left join fetch p.laboratorio lab ");
-            if(op == Variables.BUSQ_X_PRODUCTO){
+            if(op == Constants.BUSQ_X_PRODUCTO){
                 hql.append("where p.nombre like concat('%', :ref, '%') ");
-            } else if(op == Variables.BUSQ_X_PRINCIPIO_ACTIVO){
+            } else if(op == Constants.BUSQ_X_PRINCIPIO_ACTIVO){
                 hql.append("where p.principioActivo like concat('%', :ref, '%') ");
-            } else if(op == Variables.BUSQ_X_ACCION_FARMACOLOGICA){
+            } else if(op == Constants.BUSQ_X_ACCION_FARMACOLOGICA){
                 hql.append("where p.accionTerapeutica like concat('%', :ref, '%') ");
             } 
             Query query = sesion.createQuery(hql.toString());

@@ -9,7 +9,7 @@ import lissa.bl.VentaBl;
 import lissa.table.ModeloComprobanteElectronicoAdmision;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_MisComprobantes extends javax.swing.JInternalFrame {
 
@@ -189,7 +189,7 @@ public class JIF_MisComprobantes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -251,7 +251,7 @@ public class JIF_MisComprobantes extends javax.swing.JInternalFrame {
         oVentaBl = new VentaBl();
         if (oVenta.getEstadoSunat().equals("NO ENVIADO")) {
             res = oVentaBl.enviarComprobanteElectronicoASunat(oVenta, listDetalleVenta);
-            if (res == Variables.SUCCESS) {
+            if (res == Constants.SUCCESS) {
                 Mensajes.msjRegCorrecta();
             } else {
                 Mensajes.msjRegError();

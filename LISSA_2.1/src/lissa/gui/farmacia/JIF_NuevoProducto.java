@@ -11,7 +11,7 @@ import lissa.controller.PresentacionCtrl;
 import lissa.gui.JF_Principal;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
 
@@ -332,7 +332,7 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAddLaboratorioActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddClase;
     private javax.swing.JButton btnAddFamilia;
     private javax.swing.JButton btnAddLaboratorio;
@@ -402,7 +402,7 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         oProducto.setConcentracion(txfConcentracion.getText().toUpperCase().trim());
         oProducto.setPrincipioActivo(txfPrincipioActivo.getText().toUpperCase().trim());
         oProducto.setAccionTerapeutica(txfAccionTerapeutica.getText().toUpperCase().trim());
-        oProducto.setGenerico(chbxGenerico.isSelected()?Variables.ES_GENERICO:Variables.NO_GENERICO);
+        oProducto.setGenerico(chbxGenerico.isSelected()?Constants.ES_GENERICO:Constants.NO_GENERICO);
         if (!txfFraccion.getText().trim().equals("")) {
             oProducto.setFraccion(Integer.parseInt(txfFraccion.getText().trim()));
         } else {
@@ -436,7 +436,7 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         txfFraccion.setText(this.oProducto.getFraccion() + "");
         txfPrincipioActivo.setText(this.oProducto.getPrincipioActivo());
         txfAccionTerapeutica.setText(this.oProducto.getAccionTerapeutica());
-        chbxGenerico.setSelected(this.oProducto.getGenerico()==Variables.ES_GENERICO?Boolean.TRUE:Boolean.FALSE);
+        chbxGenerico.setSelected(this.oProducto.getGenerico()==Constants.ES_GENERICO?Boolean.TRUE:Boolean.FALSE);
         if (this.oProducto.getPresentacion() == null) {
             cbxPresentacion.setSelectedIndex(0);
         } else {
@@ -478,7 +478,7 @@ public class JIF_NuevoProducto extends javax.swing.JInternalFrame {
         proAct.setLaboratorio((Laboratorio) cbxLaboratorio.getSelectedItem());
         proAct.setPrincipioActivo(txfPrincipioActivo.getText().toUpperCase().trim());
         proAct.setAccionTerapeutica(txfAccionTerapeutica.getText().toUpperCase().trim());
-        proAct.setGenerico(chbxGenerico.isSelected()?Variables.ES_GENERICO:Variables.NO_GENERICO);
+        proAct.setGenerico(chbxGenerico.isSelected()?Constants.ES_GENERICO:Constants.NO_GENERICO);
         return oProductoBl.actualizar(proAct);
     }
 

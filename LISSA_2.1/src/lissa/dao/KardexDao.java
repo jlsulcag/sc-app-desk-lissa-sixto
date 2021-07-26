@@ -6,6 +6,7 @@ import java.util.List;
 import lissa.be.Kardex;
 import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
+import lissa.util.Mensajes;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -79,14 +80,26 @@ public class KardexDao extends AbstractDA<Kardex>{
         sesion = HibernateUtil.getSessionFactory().openSession();
         tx = sesion.beginTransaction();
     }
-    
-    private void manejaExcepcion(HibernateException he) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    public List<Kardex> listarxProducto(long idproducto, long idalmacen) {
-        String hql = "from Kardex a where a.idProducto = "+idproducto+" and a.idAlmacenAfectado = "+idalmacen+" order by a.fechaMov desc, a.nroOrden desc";
-        return listar(hql);
+    public List<Kardex> listarxProducto(long idalmprod, long idalmacen) {
+        List<Kardex> list = new ArrayList<>();
+        iniciarOperacion();
+        try {
+            StringBuilder hql = new StringBuilder();
+            hql.append("from Kardex a ")
+                    .append("where a.idAlmacenproducto =:idalmprod ")
+                    .append("and a.idAlmacenAfectado =:idalmacen ")
+                    .append("order by a.fechaMov desc, a.nroOrden desc ");
+            Query query = sesion.createQuery(hql.toString());
+            query.setParameter("idalmprod", idalmprod);
+            query.setParameter("idalmacen", idalmacen);
+
+            list = query.list();
+        } catch (HibernateException e) {
+            list = new ArrayList<>();
+            Mensajes.ErrorFatal(e);
+        }
+        return list;
     }
 
     public long nroOrdenregistro(Long idProducto) {

@@ -27,7 +27,7 @@ import lissa.gui.JF_Principal;
 import lissa.table.ModeloVentaProducto;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
 
@@ -91,7 +91,7 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
         cbxTipoOperacion = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setClosable(true);
@@ -128,7 +128,6 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
         txfPersonaOrigen.setEditable(false);
 
         cbxOrigen.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        cbxOrigen.setEnabled(false);
 
         jLabel5.setText("Origen :");
 
@@ -165,7 +164,6 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         cbxDestino.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        cbxDestino.setEnabled(false);
 
         jLabel7.setText("Destino :");
 
@@ -319,12 +317,12 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lissa/resources/add.png"))); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.setToolTipText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lissa/resources/add.png"))); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.setToolTipText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
 
@@ -351,7 +349,7 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)))
                 .addContainerGap())
@@ -363,7 +361,7 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
-                    .addComponent(jButton1))
+                    .addComponent(btnAgregar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -376,11 +374,12 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        root.jifBusqProductos.setInvocador(JIF_BusqProductos.JIF_ALMACEN);
-        root.insertarInternalFrames(root.jifBusqProductos);
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        root.jifBusqProductos.setInvocador(JIF_BusqProductos.JIF_ALMACEN); 
+        root.jifBusqProductos.setAlmacenOrigen(((Almacen)cbxOrigen.getSelectedItem()).getNombre().trim());
+        root.insertarInternalFrames(root.jifBusqProductos);        
         root.jifBusqProductos.inicializar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         registrar();
@@ -407,11 +406,11 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JComboBox cbxDestino;
     private javax.swing.JComboBox cbxOrigen;
     private javax.swing.JComboBox cbxTipoComprobante;
     private javax.swing.JComboBox cbxTipoOperacion;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -800,7 +799,7 @@ public class JIF_RegistroMovimiento extends javax.swing.JInternalFrame {
         int r = -1;
         if (isDatosValidos()) {
             r = registrarMovimiento();
-            if(r==Variables.SUCCESS){
+            if(r==Constants.SUCCESS){
                 Mensajes.msjRegCorrecta();
                 resetComponentFull();
             }

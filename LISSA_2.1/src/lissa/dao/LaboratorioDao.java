@@ -5,7 +5,9 @@ import java.util.List;
 import lissa.be.Laboratorio;
 import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
+import lissa.util.Mensajes;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -63,17 +65,21 @@ public class LaboratorioDao extends AbstractDA<Laboratorio> {
         return list(hql);
     }
 
-    ///---
-
     public ArrayList<Laboratorio> buscarF(String ref) {
         ArrayList<Laboratorio> list = null;
+        StringBuilder hql = new StringBuilder();
         try {
             iniciarOperacion();
-            list = (ArrayList<Laboratorio>) sesion.createQuery("from Laboratorio p where (p.denominacion) like '%" + ref + "%'").list();
+            hql.append("from Laboratorio p ")
+                    .append("where p.denominacion like :ref ")
+                    .append("order by p.denominacion asc");
+            Query q = sesion.createQuery(hql.toString());
+            q.setParameter("ref", "%"+ref+"%");
+            list = (ArrayList<Laboratorio>) q.list();
         } catch (HibernateException e) {
-            manejaExcepcion(e);
+            list = new ArrayList<>();
+            Mensajes.ErrorFatal(e);
         }
-        tx.commit();
         return list;
     }
 

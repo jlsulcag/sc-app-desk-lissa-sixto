@@ -20,7 +20,7 @@ import lissa.controller.SeguroCtrl;
 import lissa.table.ModeloCitaDetalle;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 /**
  *
@@ -477,7 +477,7 @@ public class JIF_RegistrarCita extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbxConvenioActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox cbxBeneficio;
@@ -639,7 +639,7 @@ public class JIF_RegistrarCita extends javax.swing.JInternalFrame {
             if (tieneCarta() && txfNumeroCarta.getText().trim().equals("")) {
                 JOptionPane.showMessageDialog(null, "Ingrese el numero de carta", "Atención", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                if (registrarCita() == Variables.SUCCESS) {
+                if (registrarCita() == Constants.SUCCESS) {
                     Mensajes.msjRegCorrecta();
                     iniciar();
                 } else {

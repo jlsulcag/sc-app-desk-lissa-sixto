@@ -21,7 +21,7 @@ import lissa.table.ModeloMedico;
 import lissa.table.ModeloPersonas;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_AdministrarMedico extends javax.swing.JInternalFrame {
 
@@ -598,7 +598,7 @@ public class JIF_AdministrarMedico extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscarPersonaActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAgregarEspecialidad;
     private javax.swing.JButton btnBuscar;
@@ -682,7 +682,7 @@ public class JIF_AdministrarMedico extends javax.swing.JInternalFrame {
         if (banBoton == 1) {
             if (isDatosValidos()) {
                 resetPaintComponent();
-                if (registrar() == Variables.SUCCESS) {
+                if (registrar() == Constants.SUCCESS) {
                     Mensajes.msjRegCorrecta();
                     oModeloMedicoEspecialidad.clear();
                     oModeloMedico.clear();
@@ -701,7 +701,7 @@ public class JIF_AdministrarMedico extends javax.swing.JInternalFrame {
 
         } else if (banBoton == 2) {
             if (isDatosValidosActualizar()) {
-                if (actualizarPersona() == Variables.SUCCESS) {
+                if (actualizarPersona() == Constants.SUCCESS) {
                     Mensajes.msjActCorrecta();
                     resetPaintComponent();
                     oModeloMedico.clear();

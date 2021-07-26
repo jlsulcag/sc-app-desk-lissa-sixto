@@ -5,17 +5,20 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import lissa.be.Almacen;
+import lissa.be.AlmacenProducto;
 import lissa.be.Kardex;
 import lissa.be.Producto;
+import lissa.bl.AlmacenProductoBl;
 import lissa.bl.KardexBl;
 import lissa.bl.ProductoBl;
 import lissa.controller.AlmacenCtrl;
 import lissa.gui.JF_Principal;
+import lissa.table.ModeloAlmacenProducto;
 import lissa.table.ModeloKardexAlmacen;
 import lissa.table.ModeloProducto;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 
 public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
 
@@ -29,14 +32,18 @@ public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
     private Kardex oKardex;
     private KardexBl oKardexBl;
     private List<Kardex> listKardex;
+    private ModeloAlmacenProducto modeloAlmacenProducto;
+    private AlmacenProductoBl almacenProductoBl;
+    private List<AlmacenProducto> listProductoXAlmacen;
+    private AlmacenProducto almacenProducto;
 
     public JIF_KardexAlmacen(JF_Principal root) {
         initComponents();
         this.root = root;
         oModeloKardexAlmacen = new ModeloKardexAlmacen();
         tblKardex.setModel(oModeloKardexAlmacen);
-        oModeloProducto = new ModeloProducto();
-        tblProductos.setModel(oModeloProducto);
+        modeloAlmacenProducto = new ModeloAlmacenProducto();
+        tblProductos.setModel(modeloAlmacenProducto);
     }
 
     @SuppressWarnings("unchecked")
@@ -203,7 +210,7 @@ public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txfProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfProductoKeyReleased
-        buscarProducto();
+        buscarProductoXAlmacen();
     }//GEN-LAST:event_txfProductoKeyReleased
 
     private void tblProductosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseReleased
@@ -212,7 +219,7 @@ public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblProductosMouseReleased
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Constants declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbxAlmacen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -235,29 +242,10 @@ public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
         defaultAlmacen();
         txfProducto.setText("");
         oModeloKardexAlmacen.clear();
-        oModeloProducto.clear();
+        modeloAlmacenProducto.clear();
         personalizaTablas();
     }
-    /*
-     private void cargarCbxProducto() {
-     oProductoBl = new ProductoBl();
-     listProducto= oProductoBl.listar("");
-     cbxProducto.removeAllItems();
-     cbxProducto.addItem("<Seleccione>");
-     if(!listProducto.isEmpty()){
-     for (Producto oProducto : listProducto) {
-     oProducto.setOp(Producto.DATO);
-     cbxProducto.addItem(oProducto);
-     }
-     }
-     }
-     */
-    /*
-     private boolean isDatosValidos() {
-     return (cbxProducto.getSelectedIndex() > 0);
-     }
-     */
-
+    
     private void cargarCbxAlmacen() {
         oAlmacenCtrl = new AlmacenCtrl(root);
         oAlmacenCtrl.rellenaAlmacen(cbxAlmacen);
@@ -271,7 +259,7 @@ public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
     private void buscarProducto() {
         if (isDatosValidos()) {
             oProductoBl = new ProductoBl();
-            listProducto = oProductoBl.listRef(txfProducto.getText().trim().toUpperCase(), Variables.BUSQ_X_PRODUCTO);
+            listProducto = oProductoBl.listRef(txfProducto.getText().trim().toUpperCase(), Constants.BUSQ_X_PRODUCTO);
             oModeloProducto.clear();
             if(!listProducto.isEmpty()){
                 oModeloProducto.addAll(listProducto);
@@ -290,13 +278,14 @@ public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
     }
 
     private void personalizaTablas() {
-        Utilitarios.formateaColumna(0, tblProductos, 50);
+        Utilitarios.formateaColumna(0, tblProductos, 60);
         Utilitarios.formateaColumna(2, tblProductos, 80);
-        Utilitarios.formateaColumna(3, tblProductos, 120);
+        Utilitarios.formateaColumna(3, tblProductos, 80);
         Utilitarios.formateaColumna(4, tblProductos, 120);
         Utilitarios.formateaColumna(5, tblProductos, 120);
-        Utilitarios.formateaColumna(8, tblProductos, 50);
-        Utilitarios.alinearDatosColumnaTablaDerecha(8, tblProductos);
+        Utilitarios.formateaColumna(6, tblProductos, 120);
+        Utilitarios.formateaColumna(7, tblProductos, 60);
+        Utilitarios.alinearDatosColumnaTablaDerecha(7, tblProductos);
         
         Utilitarios.formateaColumna(0, tblKardex, 60);
         Utilitarios.formateaColumna(2, tblKardex, 60);
@@ -320,24 +309,41 @@ public class JIF_KardexAlmacen extends javax.swing.JInternalFrame {
         Utilitarios.alinearDatosColumnaTablaDerecha(10, tblKardex);
     }
 
-    private void cargarKardex() {        
+    private void cargarKardex() {
         oModeloKardexAlmacen.clear();
         oKardexBl = new KardexBl();
         listKardex = new LinkedList<>();
         if(tblProductos.getSelectedRow() != -1 && tblProductos.getRowSelectionAllowed()){
-            oProducto = oModeloProducto.get(tblProductos.getSelectedRow());
-            if(oProducto != null){
-                listKardex = oKardexBl.listarxProducto(oProducto.getIdproducto(), ((Almacen)cbxAlmacen.getSelectedItem()).getIdalmacen());
-                System.out.println("List kardex ... "+listKardex.size());
-                System.out.println("procuto ... "+oProducto.getIdproducto());
+            almacenProducto = modeloAlmacenProducto.get(tblProductos.getSelectedRow());
+            if(almacenProducto != null){
+                listKardex = oKardexBl.listarxProducto(almacenProducto.getIdalmacenproducto(), ((Almacen)cbxAlmacen.getSelectedItem()).getIdalmacen());
                 if(!listKardex.isEmpty()){
                     for (Kardex obj : listKardex) {
                         oModeloKardexAlmacen.add(obj);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "No existen movimientos par el producto con ID = "+oProducto.getIdproducto(), "Atención", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No existen movimientos par el producto con ID = "+almacenProducto.getProducto().getIdproducto(), "Atención", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
+    }
+    
+    private void buscarProductoXAlmacen() {
+        listProductoXAlmacen = new ArrayList<>();
+        if (isDatosValidos()) {
+            almacenProductoBl = new AlmacenProductoBl();
+            listProductoXAlmacen = almacenProductoBl.listByAlmacenAndRef(((Almacen)cbxAlmacen.getSelectedItem()),txfProducto.getText().toUpperCase().trim());            
+            modeloAlmacenProducto.clear();
+            if(!listProductoXAlmacen.isEmpty()){
+                for (AlmacenProducto almacenProducto : listProductoXAlmacen) {
+                    modeloAlmacenProducto.add(almacenProducto);
+                }
+            }
+        } else {
+            inicializar();
+        }
+        oModeloKardexAlmacen.clear();
+        personalizaTablas();
+
     }
 }

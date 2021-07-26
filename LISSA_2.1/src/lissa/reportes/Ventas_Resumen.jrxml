@@ -23,7 +23,7 @@ a.num_comprobante,
 from venta a left join persona b
 on a.id_clientepersonanatural = b.idpersona inner join far_comprobante c
 on a.id_farcomprobante = c.idfarcomprobante
-where a.fecha_venta BETWEEN $P{FECHA_INI} and $P{FECHA_FIN} and a.id_farcomprobante in (3,4,8,10,11) AND a.estado = 'ACT'
+where a.fecha_venta BETWEEN $P{FECHA_INI} and $P{FECHA_FIN} and a.id_farcomprobante in (3,4,8,10,11,12) AND a.estado = 'ACT'
 order by a.fecha_venta desc]]>
 	</queryString>
 	<field name="cliente" class="java.lang.String"/>

@@ -22,7 +22,7 @@ import lissa.util.AbstractDA;
 import lissa.util.HibernateUtil;
 import lissa.util.Mensajes;
 import lissa.util.Utilitarios;
-import lissa.util.Variables;
+import lissa.util.Constants;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -147,13 +147,17 @@ public class CompraDao extends AbstractDA<Compra> {
                 AlmacenProductoBl oAlmacenProductoBl = new AlmacenProductoBl();
                 oAlmacenProducto.setProducto(oDetalleCompra.getProducto());
                 oAlmacenProducto.setAlmacen(new AlmacenBl().buscar(1));
-                oAlmacenProducto.setStockActual(new BigDecimal(oDetalleCompra.getCantidad() * oDetalleCompra.getProducto().getFraccion()));
+                if(oDetalleCompra.getIsUnitario()){
+                    oAlmacenProducto.setStockActual(new BigDecimal(oDetalleCompra.getCantidad()));
+                }else{
+                    oAlmacenProducto.setStockActual(new BigDecimal(oDetalleCompra.getCantidad() * oDetalleCompra.getProducto().getFraccion()));
+                }                
                 oAlmacenProducto.setFechaRegistro(new Date());
                 oAlmacenProducto.setFechaUltAct(new Date());
                 oAlmacenProducto.setLote(oDetalleCompra.getLote());
                 oAlmacenProducto.setFechaVencimiento(oDetalleCompra.getFechaVencimiento());
                 oAlmacenProducto.setValorCompraUnitario(((oDetalleCompra.getValorCompraUnitario()).multiply(new BigDecimal(oDetalleCompra.getCantidad()))).divide(oAlmacenProducto.getStockActual(), 2, RoundingMode.HALF_UP));
-                oAlmacenProducto.setPrecioCompraUnitario(oAlmacenProducto.getValorCompraUnitario().multiply(Variables.CIEN_IGV));
+                oAlmacenProducto.setPrecioCompraUnitario(oAlmacenProducto.getValorCompraUnitario().multiply(Constants.CIEN_IGV));
                 //obtener el ultimo numero de orden de registro segun id de producto
                 int orden = oAlmacenProductoBl.buscarxAlmacenyIdproducto(oAlmacenProducto.getProducto().getIdproducto(), (new AlmacenBl().buscar(1)).getIdalmacen());
                 oAlmacenProducto.setOrdenRegistro(orden + 1);
@@ -208,7 +212,11 @@ public class CompraDao extends AbstractDA<Compra> {
         oKardex.setObservacion("");
         oKardex.setGrupoNumeracion(1);
         oKardex.setIdProducto(Long.parseLong(oDetalleCompra.getProducto().getIdproducto() + ""));
-        oKardex.setCantidad(new BigDecimal(oDetalleCompra.getCantidad()));
+        if(oDetalleCompra.getIsUnitario()){
+            oKardex.setCantidad(new BigDecimal(oDetalleCompra.getCantidad()));
+        }else{
+            oKardex.setCantidad(new BigDecimal(oDetalleCompra.getCantidad()).multiply(new BigDecimal(oDetalleCompra.getProducto().getFraccion())));
+        }        
         oKardex.setValorUnit(oDetalleCompra.getValorCompraUnitario());
         oKardex.setIdAlmacenproducto(oAlmacenProducto.getIdalmacenproducto());
         oKardex.setEstado(1);
@@ -226,6 +234,7 @@ public class CompraDao extends AbstractDA<Compra> {
         try {
             iniciarOperacion();
             sesion.update(oCompraTemp2);
+            /*Actualizar almacen stock y registrar kardex*/
             for (DetalleCompra detalleCompra : listDetalleCompra) {
                 /*ACTUALIZAR ALMACEN STOCK*/
                 AlmacenProducto oAlmacenProducto = new AlmacenProducto();
@@ -234,40 +243,26 @@ public class CompraDao extends AbstractDA<Compra> {
                 //Buscar por lote
                 oDetalleCompra = detalleCompra;
                 oAlmacenProducto = buscarAlmacenProductoXlote(oDetalleCompra.getLote().trim(), new AlmacenBl().buscar(1), oDetalleCompra.getProducto());
-                oAlmacenProducto.setStockActual(oAlmacenProducto.getStockActual().subtract(new BigDecimal(oDetalleCompra.getCantidad() * oDetalleCompra.getProducto().getFraccion())));
-                
-                sesion.update(oAlmacenProducto);
-                /*FIN ACTUALIZAR ALMACEN STOCK*/
-                /*REGISTRAR KARDEX PARA CADA ITEM*/
+                if(oAlmacenProducto != null){
+                    if(oDetalleCompra.getIsUnitario()){
+                        oAlmacenProducto.setStockActual(oAlmacenProducto.getStockActual().subtract(new BigDecimal(oDetalleCompra.getCantidad()))); 
+                    }else{
+                        oAlmacenProducto.setStockActual(oAlmacenProducto.getStockActual().subtract(new BigDecimal(oDetalleCompra.getCantidad() * oDetalleCompra.getProducto().getFraccion()))); 
+                    }                                   
+                    sesion.update(oAlmacenProducto);
+                }                
+                /*Registrar Kardex  para cada item*/
                 Integer almacenDestino = 0;
                 Integer almacenOrigen = 1;
-                int almacenAfectado = 1;
+                int almacenAfectado = 1;                
                 registrarKardex(detalleCompra, oAlmacenProducto, "SALIDA", "ANULACION DE COMPRA", almacenOrigen, almacenDestino, almacenAfectado);
-                /*
-                oKardex = new Kardex();
-                oKardexBl = new KardexBl();
-
-                //oKardex.setAlmacenByIdDestino(null); //destino = ninguno
-                oKardex.setIdAlmacenAfectado(((Almacen) cbxAlmacen.getSelectedItem()).getIdalmacen()); // afectado es almacen
-                oKardex.setTipoOperacion("SALIDA");
-                oKardex.setOperacion("ANULACIÓN DE COMPRA");
-                oKardex.setFechaMov(new Date());
-                oKardex.setHoraMov(Utilitarios.horaActual());
-                oKardex.setComprobante("");
-                oKardex.setNumSerie("");
-                oKardex.setNumComprobante(0);
-                oKardex.setOrigen("");
-                oKardex.setDestino("");
-                oKardex.setObservacion("");
-                //FIN KARDEX
-                /*FIN DE REGISTRAR KARDEX*/
+                
             }
             tx.commit();
             res = SUCCESS;
         } catch (HibernateException e) {
             res = ERROR;
-            e.printStackTrace();
-            //manejaExcepcion(e);
+            Mensajes.ErrorFatal(e);
         }
 
         return res;
@@ -292,28 +287,27 @@ public class CompraDao extends AbstractDA<Compra> {
         oKardex.setAlmacenByIdOrigen(new AlmacenBl().buscar(almacenOrigen));
         oKardex.setAlmacenByIdDestino(almacenDestino == 0?null:new AlmacenBl().buscar(almacenDestino));
         oKardex.setIdAlmacenAfectado((new AlmacenBl().buscar(almacenAfectado)).getIdalmacen());
-        oKardex.setIdFarcomprobante((oDetalleCompra.getCompra().getFarComprobante()).getIdfarcomprobante());
+        oKardex.setIdFarcomprobante((oDetalleCompraTemp.getCompra().getFarComprobante()).getIdfarcomprobante());
         oKardex.setTipoOperacion(tipoOperacion);//entrada y salida
         oKardex.setOperacion(operacion);
         oKardex.setFechaMov(new Date());
         oKardex.setHoraMov(Utilitarios.horaActual());
-        System.out.println("far comprobante "+(oDetalleCompra.getCompra().getFarComprobante()).getComprobante().trim());
-        oKardex.setComprobante((oDetalleCompra.getCompra().getFarComprobante()).getComprobante().trim());
-        oKardex.setNumSerie(oDetalleCompra.getCompra().getSerie().trim());
-        oKardex.setNumComprobante(Long.valueOf(oDetalleCompra.getCompra().getNumeroComprobante()));
-        oKardex.setOrigen(oDetalleCompra.getCompra().getPersonaProveedor().getRazonSocial());
+        oKardex.setComprobante((oDetalleCompraTemp.getCompra().getFarComprobante()).getComprobante().trim());
+        oKardex.setNumSerie(oDetalleCompraTemp.getCompra().getSerie().trim());
+        oKardex.setNumComprobante(Long.valueOf(oDetalleCompraTemp.getCompra().getNumeroComprobante()));
+        oKardex.setOrigen(oDetalleCompraTemp.getCompra().getPersonaProveedor()!=null?oDetalleCompraTemp.getCompra().getPersonaProveedor().getRazonSocial():"");
         oKardex.setDestino(almacenDestino == 0?"":(new AlmacenBl().buscar(almacenDestino)).getNombre());
         oKardex.setObservacion("");
         oKardex.setGrupoNumeracion(1);
-        oKardex.setIdProducto(Long.parseLong(oDetalleCompra.getProducto().getIdproducto() + ""));
-        oKardex.setCantidad(new BigDecimal(oDetalleCompra.getCantidad()));
-        oKardex.setValorUnit(oDetalleCompra.getValorCompraUnitario());
+        oKardex.setIdProducto(Long.parseLong(oDetalleCompraTemp.getProducto().getIdproducto() + ""));
+        oKardex.setCantidad(new BigDecimal(oDetalleCompraTemp.getCantidad()));
+        oKardex.setValorUnit(oDetalleCompraTemp.getValorCompraUnitario());
         oKardex.setIdAlmacenproducto(oAlmacenProducto.getIdalmacenproducto());
         oKardex.setEstado(1);
-        //Obntener el ultimo numero de orden de registro de kardex
+        //Obtener el ultimo numero de orden de registro de kardex
         long nro = oKardexBl.nroOrdenregistro(oKardex.getIdProducto());
         oKardex.setNroOrden(nro + 1);
-        oKardex.setStockActual(oAlmacenProducto.getStockActual().subtract(oKardex.getCantidad().multiply(new BigDecimal(oDetalleCompra.getProducto().getFraccion()))));
+        oKardex.setStockActual(oAlmacenProducto.getStockActual());
         
         sesion.save(oKardex);
         
